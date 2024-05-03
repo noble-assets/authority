@@ -25,7 +25,7 @@ func GetTxCmd() *cobra.Command {
 func NewCmdExecute() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "execute [path to underlying tx file]",
-		Short: "",
+		Short: "Execute arbitrary messages as authority module",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
