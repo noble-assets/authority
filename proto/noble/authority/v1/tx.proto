@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package noble.authority.v1;
+
+import "amino/amino.proto";
+import "cosmos/msg/v1/msg.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "google/protobuf/any.proto";
+
+option go_package = "github.com/noble-assets/authority/x/authority/types";
+
+service Msg {
+  option (cosmos.msg.v1.service) = true;
+
+  rpc Execute(MsgExecute) returns (MsgExecuteResponse);
+  rpc UpdateAuthority(MsgUpdateAuthority) returns (MsgUpdateAuthorityResponse);
+}
+
+//
+
+message MsgExecute {
+  option (cosmos.msg.v1.signer) = "signer";
+  option (amino.name) = "noble/authority/Execute";
+
+  option (gogoproto.equal) = false;
+  option (gogoproto.goproto_getters) = false;
+
+  string signer = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  repeated google.protobuf.Any messages = 2;
+}
+
+message MsgExecuteResponse {
+  repeated bytes results = 1;
+}
+
+message MsgUpdateAuthority {
+  option (cosmos.msg.v1.signer) = "signer";
+  option (amino.name) = "noble/authority/UpdateAuthority";
+
+  option (gogoproto.equal) = false;
+  option (gogoproto.goproto_getters) = false;
+
+  string signer = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  string new_authority = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+}
+
+message MsgUpdateAuthorityResponse {}
