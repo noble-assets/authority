@@ -70,7 +70,7 @@ func (k msgServer) Execute(ctx context.Context, msg *types.MsgExecute) (*types.M
 	return &types.MsgExecuteResponse{Results: results}, nil
 }
 
-func (k msgServer) UpdateAuthority(ctx context.Context, msg *types.MsgUpdateAuthority) (*types.MsgUpdateAuthorityResponse, error) {
+func (k msgServer) TransferAuthority(ctx context.Context, msg *types.MsgTransferAuthority) (*types.MsgTransferAuthorityResponse, error) {
 	authority, err := k.EnsureAuthoritySigner(ctx, msg.Signer)
 	if err != nil {
 		return nil, err
@@ -84,8 +84,34 @@ func (k msgServer) UpdateAuthority(ctx context.Context, msg *types.MsgUpdateAuth
 		return nil, types.ErrSameAuthority
 	}
 
-	err = k.Authority.Set(ctx, newAuthority)
-	return &types.MsgUpdateAuthorityResponse{}, err
+	err = k.PendingAuthority.Set(ctx, newAuthority)
+	return &types.MsgTransferAuthorityResponse{}, err
+}
+
+func (k msgServer) AcceptAuthority(ctx context.Context, msg *types.MsgAcceptAuthority) (*types.MsgAcceptAuthorityResponse, error) {
+	pendingAuthority, err := k.PendingAuthority.Get(ctx)
+	if err != nil {
+		return nil, errors.Wrap(err, "unable to retrieve pending authority from state")
+	}
+	signer, err := k.accountKeeper.AddressCodec().StringToBytes(msg.Signer)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to decode signer address")
+	}
+	if !bytes.Equal(signer, pendingAuthority) {
+		address, _ := k.accountKeeper.AddressCodec().BytesToString(pendingAuthority)
+		return nil, errors.Wrapf(types.ErrInvalidPendingAuthority, "expected %s, got %s", address, msg.Signer)
+	}
+
+	err = k.Authority.Set(ctx, pendingAuthority)
+	if err != nil {
+		return nil, errors.Wrap(err, "unable to set owner in state")
+	}
+	err = k.PendingAuthority.Remove(ctx)
+	if err != nil {
+		return nil, errors.Wrap(err, "unable to remove pending owner from state")
+	}
+
+	return &types.MsgAcceptAuthorityResponse{}, nil
 }
 
 //

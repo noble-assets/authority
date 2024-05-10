@@ -92,12 +92,12 @@ func TestExecute(t *testing.T) {
 	require.Nil(t, err)
 }
 
-func TestUpdateAuthority(t *testing.T) {
+func TestTransferAuthority(t *testing.T) {
 	k, ctx := mocks.AuthorityKeeper(t)
 	server := keeper.NewMsgServer(k)
 
 	// ACT: Attempt to update authority with no state.
-	_, err := server.UpdateAuthority(ctx, &types.MsgUpdateAuthority{})
+	_, err := server.TransferAuthority(ctx, &types.MsgTransferAuthority{})
 	// ASSERT: The action should've failed.
 	require.ErrorContains(t, err, "unable to retrieve authority from state")
 
@@ -106,21 +106,21 @@ func TestUpdateAuthority(t *testing.T) {
 	require.NoError(t, k.Authority.Set(ctx, authority.Bytes))
 
 	// ACT: Attempt to update authority with invalid signer address.
-	_, err = server.UpdateAuthority(ctx, &types.MsgUpdateAuthority{
+	_, err = server.TransferAuthority(ctx, &types.MsgTransferAuthority{
 		Signer: "cosmos10d07y265gmmuvt4z0w9aw880jnsr700j6zn9kn",
 	})
 	// ASSERT: The action should've failed due to invalid signer address.
 	require.ErrorContains(t, err, "failed to decode signer address")
 
 	// ACT: Attempt to update authority with invalid signer.
-	_, err = server.UpdateAuthority(ctx, &types.MsgUpdateAuthority{
+	_, err = server.TransferAuthority(ctx, &types.MsgTransferAuthority{
 		Signer: utils.TestAccount().Address,
 	})
 	// ASSERT: The action should've failed due to invalid signer.
 	require.ErrorContains(t, err, types.ErrInvalidAuthority.Error())
 
 	// ACT: Attempt to update authority with invalid new authority address.
-	_, err = server.UpdateAuthority(ctx, &types.MsgUpdateAuthority{
+	_, err = server.TransferAuthority(ctx, &types.MsgTransferAuthority{
 		Signer:       authority.Address,
 		NewAuthority: "cosmos10d07y265gmmuvt4z0w9aw880jnsr700j6zn9kn",
 	})
@@ -128,7 +128,7 @@ func TestUpdateAuthority(t *testing.T) {
 	require.ErrorContains(t, err, "failed to decode new authority address")
 
 	// ACT: Attempt to update authority with same authority.
-	_, err = server.UpdateAuthority(ctx, &types.MsgUpdateAuthority{
+	_, err = server.TransferAuthority(ctx, &types.MsgTransferAuthority{
 		Signer:       authority.Address,
 		NewAuthority: authority.Address,
 	})
@@ -139,13 +139,57 @@ func TestUpdateAuthority(t *testing.T) {
 	newAuthority := utils.TestAccount()
 
 	// ACT: Attempt to update authority.
-	_, err = server.UpdateAuthority(ctx, &types.MsgUpdateAuthority{
+	_, err = server.TransferAuthority(ctx, &types.MsgTransferAuthority{
 		Signer:       authority.Address,
 		NewAuthority: newAuthority.Address,
 	})
-	// ASSERT: The action should've succeeded, and updated authority.
+	// ASSERT: The action should've succeeded, and set a pending authority.
 	require.NoError(t, err)
 	res, err := k.Authority.Get(ctx)
 	require.NoError(t, err)
+	require.Equal(t, authority.Bytes, res)
+	res, err = k.PendingAuthority.Get(ctx)
+	require.NoError(t, err)
 	require.Equal(t, newAuthority.Bytes, res)
+}
+
+func TestAcceptAuthority(t *testing.T) {
+	k, ctx := mocks.AuthorityKeeper(t)
+	server := keeper.NewMsgServer(k)
+
+	// ACT: Attempt to accept authority with no pending authority set.
+	_, err := server.AcceptAuthority(ctx, &types.MsgAcceptAuthority{})
+	// ASSERT: The action should've failed.
+	require.ErrorContains(t, err, "unable to retrieve pending authority from state")
+
+	// ARRANGE: Set a pending authority in state.
+	pendingAuthority := utils.TestAccount()
+	require.NoError(t, k.PendingAuthority.Set(ctx, pendingAuthority.Bytes))
+
+	// ACT: Attempt to accept authority with invalid signer address.
+	_, err = server.AcceptAuthority(ctx, &types.MsgAcceptAuthority{
+		Signer: "cosmos10d07y265gmmuvt4z0w9aw880jnsr700j6zn9kn",
+	})
+	// ASSERT: The action should've failed due to invalid signer address.
+	require.ErrorContains(t, err, "failed to decode signer address")
+
+	// ACT: Attempt to accept authority with invalid signer.
+	_, err = server.AcceptAuthority(ctx, &types.MsgAcceptAuthority{
+		Signer: utils.TestAccount().Address,
+	})
+	// ASSERT: The action should've failed due to invalid signer.
+	require.ErrorContains(t, err, types.ErrInvalidPendingAuthority.Error())
+
+	// ACT: Attempt to accept authority.
+	_, err = server.AcceptAuthority(ctx, &types.MsgAcceptAuthority{
+		Signer: pendingAuthority.Address,
+	})
+	// ASSERT: The action should've succeeded, and updated authority.
+	require.NoError(t, err)
+	has, err := k.PendingAuthority.Has(ctx)
+	require.NoError(t, err)
+	require.False(t, has)
+	res, err := k.Authority.Get(ctx)
+	require.NoError(t, err)
+	require.Equal(t, pendingAuthority.Bytes, res)
 }

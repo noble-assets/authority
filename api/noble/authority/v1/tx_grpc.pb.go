@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Msg_Execute_FullMethodName         = "/noble.authority.v1.Msg/Execute"
-	Msg_UpdateAuthority_FullMethodName = "/noble.authority.v1.Msg/UpdateAuthority"
+	Msg_Execute_FullMethodName           = "/noble.authority.v1.Msg/Execute"
+	Msg_TransferAuthority_FullMethodName = "/noble.authority.v1.Msg/TransferAuthority"
+	Msg_AcceptAuthority_FullMethodName   = "/noble.authority.v1.Msg/AcceptAuthority"
 )
 
 // MsgClient is the client API for Msg service.
@@ -28,7 +29,8 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MsgClient interface {
 	Execute(ctx context.Context, in *MsgExecute, opts ...grpc.CallOption) (*MsgExecuteResponse, error)
-	UpdateAuthority(ctx context.Context, in *MsgUpdateAuthority, opts ...grpc.CallOption) (*MsgUpdateAuthorityResponse, error)
+	TransferAuthority(ctx context.Context, in *MsgTransferAuthority, opts ...grpc.CallOption) (*MsgTransferAuthorityResponse, error)
+	AcceptAuthority(ctx context.Context, in *MsgAcceptAuthority, opts ...grpc.CallOption) (*MsgAcceptAuthorityResponse, error)
 }
 
 type msgClient struct {
@@ -48,9 +50,18 @@ func (c *msgClient) Execute(ctx context.Context, in *MsgExecute, opts ...grpc.Ca
 	return out, nil
 }
 
-func (c *msgClient) UpdateAuthority(ctx context.Context, in *MsgUpdateAuthority, opts ...grpc.CallOption) (*MsgUpdateAuthorityResponse, error) {
-	out := new(MsgUpdateAuthorityResponse)
-	err := c.cc.Invoke(ctx, Msg_UpdateAuthority_FullMethodName, in, out, opts...)
+func (c *msgClient) TransferAuthority(ctx context.Context, in *MsgTransferAuthority, opts ...grpc.CallOption) (*MsgTransferAuthorityResponse, error) {
+	out := new(MsgTransferAuthorityResponse)
+	err := c.cc.Invoke(ctx, Msg_TransferAuthority_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) AcceptAuthority(ctx context.Context, in *MsgAcceptAuthority, opts ...grpc.CallOption) (*MsgAcceptAuthorityResponse, error) {
+	out := new(MsgAcceptAuthorityResponse)
+	err := c.cc.Invoke(ctx, Msg_AcceptAuthority_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +73,8 @@ func (c *msgClient) UpdateAuthority(ctx context.Context, in *MsgUpdateAuthority,
 // for forward compatibility
 type MsgServer interface {
 	Execute(context.Context, *MsgExecute) (*MsgExecuteResponse, error)
-	UpdateAuthority(context.Context, *MsgUpdateAuthority) (*MsgUpdateAuthorityResponse, error)
+	TransferAuthority(context.Context, *MsgTransferAuthority) (*MsgTransferAuthorityResponse, error)
+	AcceptAuthority(context.Context, *MsgAcceptAuthority) (*MsgAcceptAuthorityResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -73,8 +85,11 @@ type UnimplementedMsgServer struct {
 func (UnimplementedMsgServer) Execute(context.Context, *MsgExecute) (*MsgExecuteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Execute not implemented")
 }
-func (UnimplementedMsgServer) UpdateAuthority(context.Context, *MsgUpdateAuthority) (*MsgUpdateAuthorityResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateAuthority not implemented")
+func (UnimplementedMsgServer) TransferAuthority(context.Context, *MsgTransferAuthority) (*MsgTransferAuthorityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TransferAuthority not implemented")
+}
+func (UnimplementedMsgServer) AcceptAuthority(context.Context, *MsgAcceptAuthority) (*MsgAcceptAuthorityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AcceptAuthority not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -107,20 +122,38 @@ func _Msg_Execute_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_UpdateAuthority_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgUpdateAuthority)
+func _Msg_TransferAuthority_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgTransferAuthority)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).UpdateAuthority(ctx, in)
+		return srv.(MsgServer).TransferAuthority(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Msg_UpdateAuthority_FullMethodName,
+		FullMethod: Msg_TransferAuthority_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).UpdateAuthority(ctx, req.(*MsgUpdateAuthority))
+		return srv.(MsgServer).TransferAuthority(ctx, req.(*MsgTransferAuthority))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_AcceptAuthority_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgAcceptAuthority)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).AcceptAuthority(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_AcceptAuthority_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).AcceptAuthority(ctx, req.(*MsgAcceptAuthority))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -137,8 +170,12 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Msg_Execute_Handler,
 		},
 		{
-			MethodName: "UpdateAuthority",
-			Handler:    _Msg_UpdateAuthority_Handler,
+			MethodName: "TransferAuthority",
+			Handler:    _Msg_TransferAuthority_Handler,
+		},
+		{
+			MethodName: "AcceptAuthority",
+			Handler:    _Msg_AcceptAuthority_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

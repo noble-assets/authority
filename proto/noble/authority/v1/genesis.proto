@@ -8,4 +8,5 @@ option go_package = "github.com/noble-assets/authority/x/authority/types";
 
 message GenesisState {
   string address = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  string pending_address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
 }

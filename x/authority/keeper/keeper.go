@@ -20,8 +20,9 @@ type Keeper struct {
 	storeService store.KVStoreService
 	eventService event.Service
 
-	Schema    collections.Schema
-	Authority collections.Item[[]byte]
+	Schema           collections.Schema
+	Authority        collections.Item[[]byte]
+	PendingAuthority collections.Item[[]byte]
 
 	router        baseapp.MessageRouter
 	accountKeeper types.AccountKeeper
@@ -43,7 +44,8 @@ func NewKeeper(
 		storeService: storeService,
 		eventService: eventService,
 
-		Authority: collections.NewItem(builder, types.AuthorityKey, "authority", collections.BytesValue),
+		Authority:        collections.NewItem(builder, types.AuthorityKey, "authority", collections.BytesValue),
+		PendingAuthority: collections.NewItem(builder, types.PendingAuthorityKey, "pending_authority", collections.BytesValue),
 
 		router:        router,
 		accountKeeper: accountKeeper,

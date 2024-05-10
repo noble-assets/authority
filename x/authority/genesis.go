@@ -16,6 +16,17 @@ func InitGenesis(ctx context.Context, k *keeper.Keeper, accountKeeper types.Acco
 	if err != nil {
 		panic("failed to set authority in state")
 	}
+
+	if genesis.PendingAddress != "" {
+		pendingAuthority, err := accountKeeper.AddressCodec().StringToBytes(genesis.PendingAddress)
+		if err != nil {
+			panic("failed to decode pending authority address")
+		}
+		err = k.PendingAuthority.Set(ctx, pendingAuthority)
+		if err != nil {
+			panic("failed to set pending authority in state")
+		}
+	}
 }
 
 func ExportGenesis(ctx context.Context, k *keeper.Keeper, accountKeeper types.AccountKeeper) *types.GenesisState {
@@ -28,5 +39,14 @@ func ExportGenesis(ctx context.Context, k *keeper.Keeper, accountKeeper types.Ac
 		panic("failed to encode authority address")
 	}
 
-	return &types.GenesisState{Address: address}
+	pendingAddress := ""
+	pendingAuthority, err := k.PendingAuthority.Get(ctx)
+	if err == nil {
+		pendingAddress, err = accountKeeper.AddressCodec().BytesToString(pendingAuthority)
+		if err != nil {
+			panic("failed to encode pending authority address")
+		}
+	}
+
+	return &types.GenesisState{Address: address, PendingAddress: pendingAddress}
 }

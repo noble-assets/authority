@@ -34,4 +34,15 @@ func TestAddressQuery(t *testing.T) {
 	// ASSERT: The query should've succeeded, and returned address.
 	require.NoError(t, err)
 	require.Equal(t, authority.Address, res.Address)
+
+	// ARRANGE: Set a pending authority in state.
+	pendingAuthority := utils.TestAccount()
+	require.NoError(t, k.PendingAuthority.Set(ctx, pendingAuthority.Bytes))
+
+	// ACT: Attempt to query address.
+	res, err = server.Address(ctx, &types.QueryAddress{})
+	// ASSERT: The query should've succeeded, and returned address and pending address.
+	require.NoError(t, err)
+	require.Equal(t, authority.Address, res.Address)
+	require.Equal(t, pendingAuthority.Address, res.PendingAddress)
 }

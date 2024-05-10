@@ -32,5 +32,14 @@ func (k queryServer) Address(ctx context.Context, req *types.QueryAddress) (*typ
 		return nil, errors.Wrap(err, "failed to encode authority address")
 	}
 
-	return &types.QueryAddressResponse{Address: address}, nil
+	pendingAddress := ""
+	pendingAuthority, err := k.PendingAuthority.Get(ctx)
+	if err == nil {
+		pendingAddress, err = k.accountKeeper.AddressCodec().BytesToString(pendingAuthority)
+		if err != nil {
+			return nil, errors.Wrap(err, "failed to encode pending authority address")
+		}
+	}
+
+	return &types.QueryAddressResponse{Address: address, PendingAddress: pendingAddress}, nil
 }

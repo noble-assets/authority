@@ -47,11 +47,11 @@ However, the executed messages may contain state changes.
 
 This message emits no events.
 
-## Update Authority
+## Transfer Authority
 
-`noble.authority.v1.MsgUpdateAuthority`
+`noble.authority.v1.MsgTransferAuthority`
 
-A message that updates the underlying authority of this module.
+A message that initiates a transfer of the underlying authority of this module.
 
 ```shell
 auth_info:
@@ -66,7 +66,7 @@ body:
   extension_options: []
   memo: ""
   messages:
-  - '@type': /noble.authority.v1.MsgUpdateAuthority
+  - '@type': /noble.authority.v1.MsgTransferAuthority
     new_authority: noble1demo
     signer: noble1authority
   non_critical_extension_options: []
@@ -84,7 +84,50 @@ signatures: []
 
 ### State Changes
 
+- [`pending_authority`](./01_state.md#pending-authority)
+
+### Events Emitted
+
+This message emits no events.
+
+## Accept Authority
+
+`noble.authority.v1.MsgAcceptAuthority`
+
+A message that finalizes a transfer of the underlying authority of this module.
+
+```shell
+auth_info:
+  fee:
+    amount: []
+    gas_limit: "200000"
+    granter: ""
+    payer: ""
+  signer_infos: []
+  tip: null
+body:
+  extension_options: []
+  memo: ""
+  messages:
+  - '@type': /noble.authority.v1.MsgAcceptAuthority
+    signer: noble1signer
+  non_critical_extension_options: []
+  timeout_height: "0"
+signatures: []
+```
+
+### Arguments
+
+This message takes no arguments.
+
+### Requirements
+
+- Signer must be the current underlying [`pending_authority`](./01_state.md#pending-authority).
+
+### State Changes
+
 - [`authority`](./01_state.md#authority)
+- [`pending_authority`](./01_state.md#pending-authority)
 
 ### Events Emitted
 

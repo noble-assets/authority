@@ -124,10 +124,15 @@ func (AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
 				// NOTE: Execute is handled via a custom CLI command.
 				{
-					RpcMethod:      "UpdateAuthority",
-					Use:            "update [new-authority]",
-					Short:          "Update the underlying authority address",
+					RpcMethod:      "TransferAuthority",
+					Use:            "transfer [new-authority]",
+					Short:          "Transfer the underlying authority",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "new_authority"}},
+				},
+				{
+					RpcMethod: "AcceptAuthority",
+					Use:       "accept",
+					Short:     "Accept the underlying authority",
 				},
 			},
 			EnhanceCustomCommand: true,

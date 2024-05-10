@@ -114,23 +114,23 @@ func (m *MsgExecuteResponse) GetResults() [][]byte {
 	return nil
 }
 
-type MsgUpdateAuthority struct {
+type MsgTransferAuthority struct {
 	Signer       string `protobuf:"bytes,1,opt,name=signer,proto3" json:"signer,omitempty"`
 	NewAuthority string `protobuf:"bytes,2,opt,name=new_authority,json=newAuthority,proto3" json:"new_authority,omitempty"`
 }
 
-func (m *MsgUpdateAuthority) Reset()         { *m = MsgUpdateAuthority{} }
-func (m *MsgUpdateAuthority) String() string { return proto.CompactTextString(m) }
-func (*MsgUpdateAuthority) ProtoMessage()    {}
-func (*MsgUpdateAuthority) Descriptor() ([]byte, []int) {
+func (m *MsgTransferAuthority) Reset()         { *m = MsgTransferAuthority{} }
+func (m *MsgTransferAuthority) String() string { return proto.CompactTextString(m) }
+func (*MsgTransferAuthority) ProtoMessage()    {}
+func (*MsgTransferAuthority) Descriptor() ([]byte, []int) {
 	return fileDescriptor_a7f9675ad166e349, []int{2}
 }
-func (m *MsgUpdateAuthority) XXX_Unmarshal(b []byte) error {
+func (m *MsgTransferAuthority) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgUpdateAuthority) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgTransferAuthority) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgUpdateAuthority.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgTransferAuthority.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -140,33 +140,33 @@ func (m *MsgUpdateAuthority) XXX_Marshal(b []byte, deterministic bool) ([]byte, 
 		return b[:n], nil
 	}
 }
-func (m *MsgUpdateAuthority) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgUpdateAuthority.Merge(m, src)
+func (m *MsgTransferAuthority) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgTransferAuthority.Merge(m, src)
 }
-func (m *MsgUpdateAuthority) XXX_Size() int {
+func (m *MsgTransferAuthority) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgUpdateAuthority) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgUpdateAuthority.DiscardUnknown(m)
+func (m *MsgTransferAuthority) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgTransferAuthority.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgUpdateAuthority proto.InternalMessageInfo
+var xxx_messageInfo_MsgTransferAuthority proto.InternalMessageInfo
 
-type MsgUpdateAuthorityResponse struct {
+type MsgTransferAuthorityResponse struct {
 }
 
-func (m *MsgUpdateAuthorityResponse) Reset()         { *m = MsgUpdateAuthorityResponse{} }
-func (m *MsgUpdateAuthorityResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgUpdateAuthorityResponse) ProtoMessage()    {}
-func (*MsgUpdateAuthorityResponse) Descriptor() ([]byte, []int) {
+func (m *MsgTransferAuthorityResponse) Reset()         { *m = MsgTransferAuthorityResponse{} }
+func (m *MsgTransferAuthorityResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgTransferAuthorityResponse) ProtoMessage()    {}
+func (*MsgTransferAuthorityResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_a7f9675ad166e349, []int{3}
 }
-func (m *MsgUpdateAuthorityResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgTransferAuthorityResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgUpdateAuthorityResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgTransferAuthorityResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgUpdateAuthorityResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgTransferAuthorityResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -176,58 +176,136 @@ func (m *MsgUpdateAuthorityResponse) XXX_Marshal(b []byte, deterministic bool) (
 		return b[:n], nil
 	}
 }
-func (m *MsgUpdateAuthorityResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgUpdateAuthorityResponse.Merge(m, src)
+func (m *MsgTransferAuthorityResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgTransferAuthorityResponse.Merge(m, src)
 }
-func (m *MsgUpdateAuthorityResponse) XXX_Size() int {
+func (m *MsgTransferAuthorityResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgUpdateAuthorityResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgUpdateAuthorityResponse.DiscardUnknown(m)
+func (m *MsgTransferAuthorityResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgTransferAuthorityResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgUpdateAuthorityResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgTransferAuthorityResponse proto.InternalMessageInfo
+
+type MsgAcceptAuthority struct {
+	Signer string `protobuf:"bytes,1,opt,name=signer,proto3" json:"signer,omitempty"`
+}
+
+func (m *MsgAcceptAuthority) Reset()         { *m = MsgAcceptAuthority{} }
+func (m *MsgAcceptAuthority) String() string { return proto.CompactTextString(m) }
+func (*MsgAcceptAuthority) ProtoMessage()    {}
+func (*MsgAcceptAuthority) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a7f9675ad166e349, []int{4}
+}
+func (m *MsgAcceptAuthority) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgAcceptAuthority) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgAcceptAuthority.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgAcceptAuthority) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgAcceptAuthority.Merge(m, src)
+}
+func (m *MsgAcceptAuthority) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgAcceptAuthority) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgAcceptAuthority.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgAcceptAuthority proto.InternalMessageInfo
+
+type MsgAcceptAuthorityResponse struct {
+}
+
+func (m *MsgAcceptAuthorityResponse) Reset()         { *m = MsgAcceptAuthorityResponse{} }
+func (m *MsgAcceptAuthorityResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgAcceptAuthorityResponse) ProtoMessage()    {}
+func (*MsgAcceptAuthorityResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a7f9675ad166e349, []int{5}
+}
+func (m *MsgAcceptAuthorityResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgAcceptAuthorityResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgAcceptAuthorityResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgAcceptAuthorityResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgAcceptAuthorityResponse.Merge(m, src)
+}
+func (m *MsgAcceptAuthorityResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgAcceptAuthorityResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgAcceptAuthorityResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgAcceptAuthorityResponse proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*MsgExecute)(nil), "noble.authority.v1.MsgExecute")
 	proto.RegisterType((*MsgExecuteResponse)(nil), "noble.authority.v1.MsgExecuteResponse")
-	proto.RegisterType((*MsgUpdateAuthority)(nil), "noble.authority.v1.MsgUpdateAuthority")
-	proto.RegisterType((*MsgUpdateAuthorityResponse)(nil), "noble.authority.v1.MsgUpdateAuthorityResponse")
+	proto.RegisterType((*MsgTransferAuthority)(nil), "noble.authority.v1.MsgTransferAuthority")
+	proto.RegisterType((*MsgTransferAuthorityResponse)(nil), "noble.authority.v1.MsgTransferAuthorityResponse")
+	proto.RegisterType((*MsgAcceptAuthority)(nil), "noble.authority.v1.MsgAcceptAuthority")
+	proto.RegisterType((*MsgAcceptAuthorityResponse)(nil), "noble.authority.v1.MsgAcceptAuthorityResponse")
 }
 
 func init() { proto.RegisterFile("noble/authority/v1/tx.proto", fileDescriptor_a7f9675ad166e349) }
 
 var fileDescriptor_a7f9675ad166e349 = []byte{
-	// 451 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x52, 0xbf, 0x6f, 0xd3, 0x40,
-	0x14, 0xf6, 0x35, 0xa2, 0x85, 0xa3, 0x08, 0x61, 0x45, 0xaa, 0x31, 0xc8, 0x89, 0x3c, 0xa0, 0x28,
-	0x52, 0xef, 0xfa, 0x63, 0x40, 0xaa, 0xc4, 0x90, 0x4a, 0x8c, 0x19, 0x30, 0x62, 0x61, 0xa9, 0xec,
-	0xe4, 0x71, 0xb5, 0x14, 0xdf, 0x59, 0x7e, 0xe7, 0x36, 0xde, 0x10, 0x13, 0x62, 0xe2, 0x4f, 0x28,
-	0xff, 0x41, 0x06, 0x66, 0x66, 0xc4, 0x54, 0x31, 0x31, 0xa2, 0x64, 0x08, 0x7f, 0x06, 0xaa, 0x7f,
-	0xb5, 0x72, 0x14, 0x40, 0x2c, 0xd6, 0x3d, 0x7f, 0xef, 0x7b, 0xdf, 0xf7, 0xbe, 0x3b, 0xfa, 0x48,
-	0xaa, 0x60, 0x02, 0xdc, 0x4f, 0xf5, 0xa9, 0x4a, 0x42, 0x9d, 0xf1, 0xb3, 0x7d, 0xae, 0xa7, 0x2c,
-	0x4e, 0x94, 0x56, 0xa6, 0x99, 0x83, 0xac, 0x06, 0xd9, 0xd9, 0xbe, 0xfd, 0xc0, 0x8f, 0x42, 0xa9,
-	0x78, 0xfe, 0x2d, 0xda, 0xec, 0x9d, 0x91, 0xc2, 0x48, 0x21, 0x8f, 0x50, 0x5c, 0xd1, 0x23, 0x14,
-	0x25, 0xf0, 0xb0, 0x00, 0x4e, 0xf2, 0x8a, 0x17, 0x45, 0x09, 0xb5, 0x85, 0x12, 0xaa, 0xf8, 0x7f,
-	0x75, 0xaa, 0x08, 0x42, 0x29, 0x31, 0x01, 0x9e, 0x57, 0x41, 0xfa, 0x86, 0xfb, 0x32, 0x2b, 0x20,
-	0xf7, 0x13, 0xa1, 0x74, 0x88, 0xe2, 0xf9, 0x14, 0x46, 0xa9, 0x06, 0x73, 0x8f, 0x6e, 0x62, 0x28,
-	0x24, 0x24, 0x16, 0xe9, 0x92, 0xde, 0x9d, 0x63, 0xeb, 0xfb, 0xe7, 0xdd, 0x76, 0xa9, 0x30, 0x18,
-	0x8f, 0x13, 0x40, 0x7c, 0xa9, 0x93, 0x50, 0x0a, 0xaf, 0xec, 0x33, 0xf7, 0xe8, 0xed, 0x08, 0x10,
-	0x7d, 0x01, 0x68, 0x6d, 0x74, 0x5b, 0xbd, 0xbb, 0x07, 0x6d, 0x56, 0xc8, 0xb1, 0x4a, 0x8e, 0x0d,
-	0x64, 0xe6, 0xd5, 0x5d, 0x47, 0xfc, 0xfd, 0x45, 0xc7, 0xf8, 0x75, 0xd1, 0x31, 0xde, 0x2d, 0x67,
-	0xfd, 0x72, 0xcc, 0x87, 0xe5, 0xac, 0xbf, 0xd3, 0xcc, 0xac, 0x34, 0xe5, 0x32, 0x6a, 0x5e, 0x5b,
-	0xf4, 0x00, 0x63, 0x25, 0x11, 0x4c, 0x8b, 0x6e, 0x25, 0x80, 0xe9, 0x44, 0xa3, 0x45, 0xba, 0xad,
-	0xde, 0xb6, 0x57, 0x95, 0xee, 0x17, 0x92, 0x13, 0x5e, 0xc5, 0x63, 0x5f, 0xc3, 0xa0, 0x1a, 0xf7,
-	0x1f, 0xbb, 0x3d, 0xa3, 0xf7, 0x24, 0x9c, 0x9f, 0xd4, 0x8e, 0xac, 0x8d, 0xbf, 0x10, 0xb7, 0x25,
-	0x9c, 0xd7, 0x82, 0x47, 0x4f, 0xd7, 0x2c, 0xda, 0x69, 0x2e, 0xda, 0x70, 0xea, 0x3e, 0xa6, 0xf6,
-	0xaa, 0xff, 0x6a, 0xf1, 0x83, 0x6f, 0x84, 0xb6, 0x86, 0x28, 0xcc, 0x17, 0x74, 0xab, 0xba, 0x36,
-	0x87, 0xad, 0x3e, 0x29, 0x76, 0x9d, 0x99, 0xfd, 0xe4, 0xcf, 0x78, 0x9d, 0x69, 0x48, 0xef, 0x37,
-	0x53, 0x5b, 0x47, 0x6d, 0xf4, 0xd9, 0xec, 0xdf, 0xfa, 0x2a, 0x29, 0xfb, 0xd6, 0xdb, 0xe5, 0xac,
-	0x4f, 0x8e, 0x87, 0x5f, 0xe7, 0x0e, 0xb9, 0x9c, 0x3b, 0xe4, 0xe7, 0xdc, 0x21, 0x1f, 0x17, 0x8e,
-	0x71, 0xb9, 0x70, 0x8c, 0x1f, 0x0b, 0xc7, 0x78, 0x7d, 0x28, 0x42, 0x7d, 0x9a, 0x06, 0x6c, 0xa4,
-	0x22, 0x9e, 0x8f, 0xde, 0xf5, 0x11, 0x41, 0xe3, 0x8d, 0xdc, 0xa6, 0x37, 0xce, 0x3a, 0x8b, 0x01,
-	0x83, 0xcd, 0xfc, 0xcd, 0x1d, 0xfe, 0x0e, 0x00, 0x00, 0xff, 0xff, 0x95, 0x4e, 0x9a, 0x1e, 0x80,
-	0x03, 0x00, 0x00,
+	// 500 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x54, 0xbf, 0x6f, 0xd3, 0x40,
+	0x14, 0xb6, 0x13, 0xd1, 0xc2, 0xd1, 0x0a, 0xd5, 0x0a, 0xaa, 0x31, 0x95, 0x1b, 0x59, 0x02, 0x45,
+	0x91, 0x72, 0x97, 0xb6, 0x5b, 0x24, 0x86, 0x54, 0x62, 0xcc, 0x40, 0x60, 0x62, 0xa9, 0x1c, 0xf7,
+	0xf5, 0x6a, 0x29, 0xbe, 0x8b, 0xfc, 0xce, 0x6d, 0xb2, 0x21, 0x26, 0xc4, 0xc4, 0xc6, 0xda, 0x3f,
+	0x21, 0x03, 0x03, 0x12, 0xff, 0x00, 0x63, 0xc5, 0xc4, 0x88, 0x92, 0x21, 0xfc, 0x19, 0xa8, 0x3e,
+	0xdb, 0xad, 0x62, 0x02, 0x15, 0x2c, 0xd6, 0x3d, 0x7f, 0xdf, 0xbb, 0xef, 0x7b, 0x3f, 0x6c, 0xf2,
+	0x58, 0xc8, 0xc1, 0x10, 0x98, 0x9f, 0xa8, 0x53, 0x19, 0x87, 0x6a, 0xc2, 0xce, 0xf6, 0x98, 0x1a,
+	0xd3, 0x51, 0x2c, 0x95, 0xb4, 0xac, 0x14, 0xa4, 0x05, 0x48, 0xcf, 0xf6, 0x9c, 0x2d, 0x3f, 0x0a,
+	0x85, 0x64, 0xe9, 0x53, 0xd3, 0x9c, 0xed, 0x40, 0x62, 0x24, 0x91, 0x45, 0xc8, 0xaf, 0xd2, 0x23,
+	0xe4, 0x19, 0xf0, 0x48, 0x03, 0x47, 0x69, 0xc4, 0x74, 0x90, 0x41, 0x35, 0x2e, 0xb9, 0xd4, 0xef,
+	0xaf, 0x4e, 0x79, 0x02, 0x97, 0x92, 0x0f, 0x81, 0xa5, 0xd1, 0x20, 0x39, 0x61, 0xbe, 0x98, 0x68,
+	0xc8, 0xfb, 0x68, 0x12, 0xd2, 0x43, 0xfe, 0x7c, 0x0c, 0x41, 0xa2, 0xc0, 0x6a, 0x93, 0x35, 0x0c,
+	0xb9, 0x80, 0xd8, 0x36, 0xeb, 0x66, 0xe3, 0xde, 0xa1, 0xfd, 0xed, 0x53, 0xab, 0x96, 0x29, 0x74,
+	0x8f, 0x8f, 0x63, 0x40, 0x7c, 0xa9, 0xe2, 0x50, 0xf0, 0x7e, 0xc6, 0xb3, 0xda, 0xe4, 0x6e, 0x04,
+	0x88, 0x3e, 0x07, 0xb4, 0x2b, 0xf5, 0x6a, 0xe3, 0xfe, 0x7e, 0x8d, 0x6a, 0x39, 0x9a, 0xcb, 0xd1,
+	0xae, 0x98, 0xf4, 0x0b, 0x56, 0xe7, 0xc9, 0xbb, 0x8b, 0x5d, 0xe3, 0xe7, 0xc5, 0xae, 0xf1, 0x76,
+	0x31, 0x6d, 0x66, 0xd7, 0xbc, 0x5f, 0x4c, 0x9b, 0x9b, 0xba, 0x67, 0x99, 0x15, 0x8f, 0x12, 0xeb,
+	0xda, 0x58, 0x1f, 0x70, 0x24, 0x05, 0x82, 0x65, 0x93, 0xf5, 0x18, 0x30, 0x19, 0x2a, 0xb4, 0xcd,
+	0x7a, 0xb5, 0xb1, 0xd1, 0xcf, 0x43, 0xef, 0xb3, 0x49, 0x6a, 0x3d, 0xe4, 0xaf, 0x62, 0x5f, 0xe0,
+	0x09, 0xc4, 0xdd, 0xbc, 0xbb, 0xff, 0x50, 0xd3, 0x33, 0xb2, 0x29, 0xe0, 0xfc, 0xa8, 0x18, 0x90,
+	0x5d, 0xf9, 0x4b, 0xe2, 0x86, 0x80, 0xf3, 0x42, 0xb0, 0xc3, 0x56, 0x14, 0xb8, 0xad, 0x0b, 0x2c,
+	0x39, 0xf4, 0x5c, 0xb2, 0xf3, 0x3b, 0xe7, 0x79, 0xd1, 0x5e, 0x92, 0xb6, 0xa2, 0x1b, 0x04, 0x30,
+	0x52, 0xff, 0x51, 0x57, 0xa7, 0xb5, 0xc2, 0xd8, 0x43, 0x6d, 0x6c, 0x49, 0xc0, 0xdb, 0x21, 0x4e,
+	0x59, 0x36, 0x37, 0xb5, 0xff, 0xa5, 0x42, 0xaa, 0x3d, 0xe4, 0xd6, 0x0b, 0xb2, 0x9e, 0x6f, 0x8f,
+	0x4b, 0xcb, 0x9b, 0x4d, 0xaf, 0x87, 0xe8, 0x3c, 0xfd, 0x33, 0x5e, 0x0c, 0x59, 0x92, 0xad, 0xf2,
+	0x18, 0x1b, 0x2b, 0x92, 0x4b, 0x4c, 0xa7, 0x7d, 0x5b, 0x66, 0x21, 0x18, 0x92, 0x07, 0xcb, 0xdd,
+	0x5d, 0xe5, 0x75, 0x89, 0xe7, 0xd0, 0xdb, 0xf1, 0x72, 0x29, 0xe7, 0xce, 0x9b, 0xc5, 0xb4, 0x69,
+	0x1e, 0xf6, 0xbe, 0xce, 0x5c, 0xf3, 0x72, 0xe6, 0x9a, 0x3f, 0x66, 0xae, 0xf9, 0x61, 0xee, 0x1a,
+	0x97, 0x73, 0xd7, 0xf8, 0x3e, 0x77, 0x8d, 0xd7, 0x07, 0x3c, 0x54, 0xa7, 0xc9, 0x80, 0x06, 0x32,
+	0x62, 0xe9, 0xd5, 0x2d, 0x1f, 0x11, 0x14, 0xde, 0xf8, 0x99, 0x8c, 0x6f, 0x9c, 0xd5, 0x64, 0x04,
+	0x38, 0x58, 0x4b, 0xbf, 0xb5, 0x83, 0x5f, 0x01, 0x00, 0x00, 0xff, 0xff, 0x2a, 0x54, 0x52, 0x61,
+	0x78, 0x04, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -243,7 +321,8 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MsgClient interface {
 	Execute(ctx context.Context, in *MsgExecute, opts ...grpc.CallOption) (*MsgExecuteResponse, error)
-	UpdateAuthority(ctx context.Context, in *MsgUpdateAuthority, opts ...grpc.CallOption) (*MsgUpdateAuthorityResponse, error)
+	TransferAuthority(ctx context.Context, in *MsgTransferAuthority, opts ...grpc.CallOption) (*MsgTransferAuthorityResponse, error)
+	AcceptAuthority(ctx context.Context, in *MsgAcceptAuthority, opts ...grpc.CallOption) (*MsgAcceptAuthorityResponse, error)
 }
 
 type msgClient struct {
@@ -263,9 +342,18 @@ func (c *msgClient) Execute(ctx context.Context, in *MsgExecute, opts ...grpc.Ca
 	return out, nil
 }
 
-func (c *msgClient) UpdateAuthority(ctx context.Context, in *MsgUpdateAuthority, opts ...grpc.CallOption) (*MsgUpdateAuthorityResponse, error) {
-	out := new(MsgUpdateAuthorityResponse)
-	err := c.cc.Invoke(ctx, "/noble.authority.v1.Msg/UpdateAuthority", in, out, opts...)
+func (c *msgClient) TransferAuthority(ctx context.Context, in *MsgTransferAuthority, opts ...grpc.CallOption) (*MsgTransferAuthorityResponse, error) {
+	out := new(MsgTransferAuthorityResponse)
+	err := c.cc.Invoke(ctx, "/noble.authority.v1.Msg/TransferAuthority", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) AcceptAuthority(ctx context.Context, in *MsgAcceptAuthority, opts ...grpc.CallOption) (*MsgAcceptAuthorityResponse, error) {
+	out := new(MsgAcceptAuthorityResponse)
+	err := c.cc.Invoke(ctx, "/noble.authority.v1.Msg/AcceptAuthority", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -275,7 +363,8 @@ func (c *msgClient) UpdateAuthority(ctx context.Context, in *MsgUpdateAuthority,
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
 	Execute(context.Context, *MsgExecute) (*MsgExecuteResponse, error)
-	UpdateAuthority(context.Context, *MsgUpdateAuthority) (*MsgUpdateAuthorityResponse, error)
+	TransferAuthority(context.Context, *MsgTransferAuthority) (*MsgTransferAuthorityResponse, error)
+	AcceptAuthority(context.Context, *MsgAcceptAuthority) (*MsgAcceptAuthorityResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -285,8 +374,11 @@ type UnimplementedMsgServer struct {
 func (*UnimplementedMsgServer) Execute(ctx context.Context, req *MsgExecute) (*MsgExecuteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Execute not implemented")
 }
-func (*UnimplementedMsgServer) UpdateAuthority(ctx context.Context, req *MsgUpdateAuthority) (*MsgUpdateAuthorityResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateAuthority not implemented")
+func (*UnimplementedMsgServer) TransferAuthority(ctx context.Context, req *MsgTransferAuthority) (*MsgTransferAuthorityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TransferAuthority not implemented")
+}
+func (*UnimplementedMsgServer) AcceptAuthority(ctx context.Context, req *MsgAcceptAuthority) (*MsgAcceptAuthorityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AcceptAuthority not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
@@ -311,20 +403,38 @@ func _Msg_Execute_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_UpdateAuthority_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgUpdateAuthority)
+func _Msg_TransferAuthority_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgTransferAuthority)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).UpdateAuthority(ctx, in)
+		return srv.(MsgServer).TransferAuthority(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/noble.authority.v1.Msg/UpdateAuthority",
+		FullMethod: "/noble.authority.v1.Msg/TransferAuthority",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).UpdateAuthority(ctx, req.(*MsgUpdateAuthority))
+		return srv.(MsgServer).TransferAuthority(ctx, req.(*MsgTransferAuthority))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_AcceptAuthority_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgAcceptAuthority)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).AcceptAuthority(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/noble.authority.v1.Msg/AcceptAuthority",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).AcceptAuthority(ctx, req.(*MsgAcceptAuthority))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -338,8 +448,12 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Msg_Execute_Handler,
 		},
 		{
-			MethodName: "UpdateAuthority",
-			Handler:    _Msg_UpdateAuthority_Handler,
+			MethodName: "TransferAuthority",
+			Handler:    _Msg_TransferAuthority_Handler,
+		},
+		{
+			MethodName: "AcceptAuthority",
+			Handler:    _Msg_AcceptAuthority_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -422,7 +536,7 @@ func (m *MsgExecuteResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgUpdateAuthority) Marshal() (dAtA []byte, err error) {
+func (m *MsgTransferAuthority) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -432,12 +546,12 @@ func (m *MsgUpdateAuthority) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgUpdateAuthority) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgTransferAuthority) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgUpdateAuthority) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgTransferAuthority) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -459,7 +573,7 @@ func (m *MsgUpdateAuthority) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgUpdateAuthorityResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgTransferAuthorityResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -469,12 +583,65 @@ func (m *MsgUpdateAuthorityResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgUpdateAuthorityResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgTransferAuthorityResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgUpdateAuthorityResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgTransferAuthorityResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgAcceptAuthority) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgAcceptAuthority) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgAcceptAuthority) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Signer) > 0 {
+		i -= len(m.Signer)
+		copy(dAtA[i:], m.Signer)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Signer)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgAcceptAuthorityResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgAcceptAuthorityResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgAcceptAuthorityResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -527,7 +694,7 @@ func (m *MsgExecuteResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgUpdateAuthority) Size() (n int) {
+func (m *MsgTransferAuthority) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -544,7 +711,29 @@ func (m *MsgUpdateAuthority) Size() (n int) {
 	return n
 }
 
-func (m *MsgUpdateAuthorityResponse) Size() (n int) {
+func (m *MsgTransferAuthorityResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgAcceptAuthority) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Signer)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgAcceptAuthorityResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -757,7 +946,7 @@ func (m *MsgExecuteResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgUpdateAuthority) Unmarshal(dAtA []byte) error {
+func (m *MsgTransferAuthority) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -780,10 +969,10 @@ func (m *MsgUpdateAuthority) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgUpdateAuthority: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgTransferAuthority: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgUpdateAuthority: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgTransferAuthority: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -871,7 +1060,7 @@ func (m *MsgUpdateAuthority) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgUpdateAuthorityResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgTransferAuthorityResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -894,10 +1083,142 @@ func (m *MsgUpdateAuthorityResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgUpdateAuthorityResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgTransferAuthorityResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgUpdateAuthorityResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgTransferAuthorityResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgAcceptAuthority) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgAcceptAuthority: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgAcceptAuthority: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Signer", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Signer = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgAcceptAuthorityResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgAcceptAuthorityResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgAcceptAuthorityResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
