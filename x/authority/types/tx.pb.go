@@ -114,23 +114,23 @@ func (m *MsgExecuteResponse) GetResults() [][]byte {
 	return nil
 }
 
-type MsgTransferAuthority struct {
-	Signer       string `protobuf:"bytes,1,opt,name=signer,proto3" json:"signer,omitempty"`
-	NewAuthority string `protobuf:"bytes,2,opt,name=new_authority,json=newAuthority,proto3" json:"new_authority,omitempty"`
+type MsgTransferOwnership struct {
+	Signer   string `protobuf:"bytes,1,opt,name=signer,proto3" json:"signer,omitempty"`
+	NewOwner string `protobuf:"bytes,2,opt,name=new_owner,json=newOwner,proto3" json:"new_owner,omitempty"`
 }
 
-func (m *MsgTransferAuthority) Reset()         { *m = MsgTransferAuthority{} }
-func (m *MsgTransferAuthority) String() string { return proto.CompactTextString(m) }
-func (*MsgTransferAuthority) ProtoMessage()    {}
-func (*MsgTransferAuthority) Descriptor() ([]byte, []int) {
+func (m *MsgTransferOwnership) Reset()         { *m = MsgTransferOwnership{} }
+func (m *MsgTransferOwnership) String() string { return proto.CompactTextString(m) }
+func (*MsgTransferOwnership) ProtoMessage()    {}
+func (*MsgTransferOwnership) Descriptor() ([]byte, []int) {
 	return fileDescriptor_a7f9675ad166e349, []int{2}
 }
-func (m *MsgTransferAuthority) XXX_Unmarshal(b []byte) error {
+func (m *MsgTransferOwnership) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgTransferAuthority) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgTransferOwnership) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgTransferAuthority.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgTransferOwnership.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -140,33 +140,33 @@ func (m *MsgTransferAuthority) XXX_Marshal(b []byte, deterministic bool) ([]byte
 		return b[:n], nil
 	}
 }
-func (m *MsgTransferAuthority) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgTransferAuthority.Merge(m, src)
+func (m *MsgTransferOwnership) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgTransferOwnership.Merge(m, src)
 }
-func (m *MsgTransferAuthority) XXX_Size() int {
+func (m *MsgTransferOwnership) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgTransferAuthority) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgTransferAuthority.DiscardUnknown(m)
+func (m *MsgTransferOwnership) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgTransferOwnership.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgTransferAuthority proto.InternalMessageInfo
+var xxx_messageInfo_MsgTransferOwnership proto.InternalMessageInfo
 
-type MsgTransferAuthorityResponse struct {
+type MsgTransferOwnershipResponse struct {
 }
 
-func (m *MsgTransferAuthorityResponse) Reset()         { *m = MsgTransferAuthorityResponse{} }
-func (m *MsgTransferAuthorityResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgTransferAuthorityResponse) ProtoMessage()    {}
-func (*MsgTransferAuthorityResponse) Descriptor() ([]byte, []int) {
+func (m *MsgTransferOwnershipResponse) Reset()         { *m = MsgTransferOwnershipResponse{} }
+func (m *MsgTransferOwnershipResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgTransferOwnershipResponse) ProtoMessage()    {}
+func (*MsgTransferOwnershipResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_a7f9675ad166e349, []int{3}
 }
-func (m *MsgTransferAuthorityResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgTransferOwnershipResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgTransferAuthorityResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgTransferOwnershipResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgTransferAuthorityResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgTransferOwnershipResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -176,34 +176,34 @@ func (m *MsgTransferAuthorityResponse) XXX_Marshal(b []byte, deterministic bool)
 		return b[:n], nil
 	}
 }
-func (m *MsgTransferAuthorityResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgTransferAuthorityResponse.Merge(m, src)
+func (m *MsgTransferOwnershipResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgTransferOwnershipResponse.Merge(m, src)
 }
-func (m *MsgTransferAuthorityResponse) XXX_Size() int {
+func (m *MsgTransferOwnershipResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgTransferAuthorityResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgTransferAuthorityResponse.DiscardUnknown(m)
+func (m *MsgTransferOwnershipResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgTransferOwnershipResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgTransferAuthorityResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgTransferOwnershipResponse proto.InternalMessageInfo
 
-type MsgAcceptAuthority struct {
+type MsgAcceptOwnership struct {
 	Signer string `protobuf:"bytes,1,opt,name=signer,proto3" json:"signer,omitempty"`
 }
 
-func (m *MsgAcceptAuthority) Reset()         { *m = MsgAcceptAuthority{} }
-func (m *MsgAcceptAuthority) String() string { return proto.CompactTextString(m) }
-func (*MsgAcceptAuthority) ProtoMessage()    {}
-func (*MsgAcceptAuthority) Descriptor() ([]byte, []int) {
+func (m *MsgAcceptOwnership) Reset()         { *m = MsgAcceptOwnership{} }
+func (m *MsgAcceptOwnership) String() string { return proto.CompactTextString(m) }
+func (*MsgAcceptOwnership) ProtoMessage()    {}
+func (*MsgAcceptOwnership) Descriptor() ([]byte, []int) {
 	return fileDescriptor_a7f9675ad166e349, []int{4}
 }
-func (m *MsgAcceptAuthority) XXX_Unmarshal(b []byte) error {
+func (m *MsgAcceptOwnership) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgAcceptAuthority) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgAcceptOwnership) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgAcceptAuthority.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgAcceptOwnership.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -213,33 +213,33 @@ func (m *MsgAcceptAuthority) XXX_Marshal(b []byte, deterministic bool) ([]byte, 
 		return b[:n], nil
 	}
 }
-func (m *MsgAcceptAuthority) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgAcceptAuthority.Merge(m, src)
+func (m *MsgAcceptOwnership) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgAcceptOwnership.Merge(m, src)
 }
-func (m *MsgAcceptAuthority) XXX_Size() int {
+func (m *MsgAcceptOwnership) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgAcceptAuthority) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgAcceptAuthority.DiscardUnknown(m)
+func (m *MsgAcceptOwnership) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgAcceptOwnership.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgAcceptAuthority proto.InternalMessageInfo
+var xxx_messageInfo_MsgAcceptOwnership proto.InternalMessageInfo
 
-type MsgAcceptAuthorityResponse struct {
+type MsgAcceptOwnershipResponse struct {
 }
 
-func (m *MsgAcceptAuthorityResponse) Reset()         { *m = MsgAcceptAuthorityResponse{} }
-func (m *MsgAcceptAuthorityResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgAcceptAuthorityResponse) ProtoMessage()    {}
-func (*MsgAcceptAuthorityResponse) Descriptor() ([]byte, []int) {
+func (m *MsgAcceptOwnershipResponse) Reset()         { *m = MsgAcceptOwnershipResponse{} }
+func (m *MsgAcceptOwnershipResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgAcceptOwnershipResponse) ProtoMessage()    {}
+func (*MsgAcceptOwnershipResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_a7f9675ad166e349, []int{5}
 }
-func (m *MsgAcceptAuthorityResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgAcceptOwnershipResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgAcceptAuthorityResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgAcceptOwnershipResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgAcceptAuthorityResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgAcceptOwnershipResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -249,63 +249,63 @@ func (m *MsgAcceptAuthorityResponse) XXX_Marshal(b []byte, deterministic bool) (
 		return b[:n], nil
 	}
 }
-func (m *MsgAcceptAuthorityResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgAcceptAuthorityResponse.Merge(m, src)
+func (m *MsgAcceptOwnershipResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgAcceptOwnershipResponse.Merge(m, src)
 }
-func (m *MsgAcceptAuthorityResponse) XXX_Size() int {
+func (m *MsgAcceptOwnershipResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgAcceptAuthorityResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgAcceptAuthorityResponse.DiscardUnknown(m)
+func (m *MsgAcceptOwnershipResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgAcceptOwnershipResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgAcceptAuthorityResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgAcceptOwnershipResponse proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*MsgExecute)(nil), "noble.authority.v1.MsgExecute")
 	proto.RegisterType((*MsgExecuteResponse)(nil), "noble.authority.v1.MsgExecuteResponse")
-	proto.RegisterType((*MsgTransferAuthority)(nil), "noble.authority.v1.MsgTransferAuthority")
-	proto.RegisterType((*MsgTransferAuthorityResponse)(nil), "noble.authority.v1.MsgTransferAuthorityResponse")
-	proto.RegisterType((*MsgAcceptAuthority)(nil), "noble.authority.v1.MsgAcceptAuthority")
-	proto.RegisterType((*MsgAcceptAuthorityResponse)(nil), "noble.authority.v1.MsgAcceptAuthorityResponse")
+	proto.RegisterType((*MsgTransferOwnership)(nil), "noble.authority.v1.MsgTransferOwnership")
+	proto.RegisterType((*MsgTransferOwnershipResponse)(nil), "noble.authority.v1.MsgTransferOwnershipResponse")
+	proto.RegisterType((*MsgAcceptOwnership)(nil), "noble.authority.v1.MsgAcceptOwnership")
+	proto.RegisterType((*MsgAcceptOwnershipResponse)(nil), "noble.authority.v1.MsgAcceptOwnershipResponse")
 }
 
 func init() { proto.RegisterFile("noble/authority/v1/tx.proto", fileDescriptor_a7f9675ad166e349) }
 
 var fileDescriptor_a7f9675ad166e349 = []byte{
-	// 500 bytes of a gzipped FileDescriptorProto
+	// 503 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x54, 0xbf, 0x6f, 0xd3, 0x40,
-	0x14, 0xb6, 0x13, 0xd1, 0xc2, 0xd1, 0x0a, 0xd5, 0x0a, 0xaa, 0x31, 0x95, 0x1b, 0x59, 0x02, 0x45,
-	0x91, 0x72, 0x97, 0xb6, 0x5b, 0x24, 0x86, 0x54, 0x62, 0xcc, 0x40, 0x60, 0x62, 0xa9, 0x1c, 0xf7,
-	0xf5, 0x6a, 0x29, 0xbe, 0x8b, 0xfc, 0xce, 0x6d, 0xb2, 0x21, 0x26, 0xc4, 0xc4, 0xc6, 0xda, 0x3f,
-	0x21, 0x03, 0x03, 0x12, 0xff, 0x00, 0x63, 0xc5, 0xc4, 0x88, 0x92, 0x21, 0xfc, 0x19, 0xa8, 0x3e,
-	0xdb, 0xad, 0x62, 0x02, 0x15, 0x2c, 0xd6, 0x3d, 0x7f, 0xdf, 0xbb, 0xef, 0x7b, 0x3f, 0x6c, 0xf2,
-	0x58, 0xc8, 0xc1, 0x10, 0x98, 0x9f, 0xa8, 0x53, 0x19, 0x87, 0x6a, 0xc2, 0xce, 0xf6, 0x98, 0x1a,
-	0xd3, 0x51, 0x2c, 0x95, 0xb4, 0xac, 0x14, 0xa4, 0x05, 0x48, 0xcf, 0xf6, 0x9c, 0x2d, 0x3f, 0x0a,
-	0x85, 0x64, 0xe9, 0x53, 0xd3, 0x9c, 0xed, 0x40, 0x62, 0x24, 0x91, 0x45, 0xc8, 0xaf, 0xd2, 0x23,
-	0xe4, 0x19, 0xf0, 0x48, 0x03, 0x47, 0x69, 0xc4, 0x74, 0x90, 0x41, 0x35, 0x2e, 0xb9, 0xd4, 0xef,
-	0xaf, 0x4e, 0x79, 0x02, 0x97, 0x92, 0x0f, 0x81, 0xa5, 0xd1, 0x20, 0x39, 0x61, 0xbe, 0x98, 0x68,
-	0xc8, 0xfb, 0x68, 0x12, 0xd2, 0x43, 0xfe, 0x7c, 0x0c, 0x41, 0xa2, 0xc0, 0x6a, 0x93, 0x35, 0x0c,
-	0xb9, 0x80, 0xd8, 0x36, 0xeb, 0x66, 0xe3, 0xde, 0xa1, 0xfd, 0xed, 0x53, 0xab, 0x96, 0x29, 0x74,
-	0x8f, 0x8f, 0x63, 0x40, 0x7c, 0xa9, 0xe2, 0x50, 0xf0, 0x7e, 0xc6, 0xb3, 0xda, 0xe4, 0x6e, 0x04,
-	0x88, 0x3e, 0x07, 0xb4, 0x2b, 0xf5, 0x6a, 0xe3, 0xfe, 0x7e, 0x8d, 0x6a, 0x39, 0x9a, 0xcb, 0xd1,
-	0xae, 0x98, 0xf4, 0x0b, 0x56, 0xe7, 0xc9, 0xbb, 0x8b, 0x5d, 0xe3, 0xe7, 0xc5, 0xae, 0xf1, 0x76,
-	0x31, 0x6d, 0x66, 0xd7, 0xbc, 0x5f, 0x4c, 0x9b, 0x9b, 0xba, 0x67, 0x99, 0x15, 0x8f, 0x12, 0xeb,
-	0xda, 0x58, 0x1f, 0x70, 0x24, 0x05, 0x82, 0x65, 0x93, 0xf5, 0x18, 0x30, 0x19, 0x2a, 0xb4, 0xcd,
-	0x7a, 0xb5, 0xb1, 0xd1, 0xcf, 0x43, 0xef, 0xb3, 0x49, 0x6a, 0x3d, 0xe4, 0xaf, 0x62, 0x5f, 0xe0,
-	0x09, 0xc4, 0xdd, 0xbc, 0xbb, 0xff, 0x50, 0xd3, 0x33, 0xb2, 0x29, 0xe0, 0xfc, 0xa8, 0x18, 0x90,
-	0x5d, 0xf9, 0x4b, 0xe2, 0x86, 0x80, 0xf3, 0x42, 0xb0, 0xc3, 0x56, 0x14, 0xb8, 0xad, 0x0b, 0x2c,
-	0x39, 0xf4, 0x5c, 0xb2, 0xf3, 0x3b, 0xe7, 0x79, 0xd1, 0x5e, 0x92, 0xb6, 0xa2, 0x1b, 0x04, 0x30,
-	0x52, 0xff, 0x51, 0x57, 0xa7, 0xb5, 0xc2, 0xd8, 0x43, 0x6d, 0x6c, 0x49, 0xc0, 0xdb, 0x21, 0x4e,
-	0x59, 0x36, 0x37, 0xb5, 0xff, 0xa5, 0x42, 0xaa, 0x3d, 0xe4, 0xd6, 0x0b, 0xb2, 0x9e, 0x6f, 0x8f,
-	0x4b, 0xcb, 0x9b, 0x4d, 0xaf, 0x87, 0xe8, 0x3c, 0xfd, 0x33, 0x5e, 0x0c, 0x59, 0x92, 0xad, 0xf2,
-	0x18, 0x1b, 0x2b, 0x92, 0x4b, 0x4c, 0xa7, 0x7d, 0x5b, 0x66, 0x21, 0x18, 0x92, 0x07, 0xcb, 0xdd,
-	0x5d, 0xe5, 0x75, 0x89, 0xe7, 0xd0, 0xdb, 0xf1, 0x72, 0x29, 0xe7, 0xce, 0x9b, 0xc5, 0xb4, 0x69,
-	0x1e, 0xf6, 0xbe, 0xce, 0x5c, 0xf3, 0x72, 0xe6, 0x9a, 0x3f, 0x66, 0xae, 0xf9, 0x61, 0xee, 0x1a,
-	0x97, 0x73, 0xd7, 0xf8, 0x3e, 0x77, 0x8d, 0xd7, 0x07, 0x3c, 0x54, 0xa7, 0xc9, 0x80, 0x06, 0x32,
-	0x62, 0xe9, 0xd5, 0x2d, 0x1f, 0x11, 0x14, 0xde, 0xf8, 0x99, 0x8c, 0x6f, 0x9c, 0xd5, 0x64, 0x04,
-	0x38, 0x58, 0x4b, 0xbf, 0xb5, 0x83, 0x5f, 0x01, 0x00, 0x00, 0xff, 0xff, 0x2a, 0x54, 0x52, 0x61,
-	0x78, 0x04, 0x00, 0x00,
+	0x14, 0xb6, 0x13, 0xd1, 0x1f, 0x07, 0x08, 0xd5, 0x0a, 0xaa, 0x31, 0x95, 0x1b, 0x59, 0x02, 0x45,
+	0x91, 0x72, 0x97, 0xb6, 0x62, 0xc9, 0x96, 0x4a, 0x8c, 0x11, 0x22, 0x30, 0xb1, 0x54, 0x8e, 0xfb,
+	0x7a, 0xb1, 0x14, 0xdf, 0x59, 0x7e, 0xe7, 0x26, 0xd9, 0x10, 0x13, 0x62, 0x62, 0x63, 0xed, 0x9f,
+	0x90, 0x81, 0x8d, 0x7f, 0x80, 0xb1, 0x62, 0x62, 0x44, 0xc9, 0x10, 0xfe, 0x0c, 0x14, 0xff, 0x48,
+	0xab, 0x98, 0x40, 0x04, 0x8b, 0x75, 0xcf, 0xdf, 0xf7, 0xde, 0xf7, 0xbd, 0xf7, 0xce, 0x26, 0x8f,
+	0x85, 0xec, 0x0d, 0x80, 0xb9, 0xb1, 0xea, 0xcb, 0xc8, 0x57, 0x63, 0x76, 0x79, 0xc4, 0xd4, 0x88,
+	0x86, 0x91, 0x54, 0xd2, 0x30, 0x12, 0x90, 0x2e, 0x41, 0x7a, 0x79, 0x64, 0xed, 0xb9, 0x81, 0x2f,
+	0x24, 0x4b, 0x9e, 0x29, 0xcd, 0xda, 0xf7, 0x24, 0x06, 0x12, 0x59, 0x80, 0x7c, 0x91, 0x1e, 0x20,
+	0xcf, 0x80, 0x47, 0x29, 0x70, 0x96, 0x44, 0x2c, 0x0d, 0x32, 0xa8, 0xc2, 0x25, 0x97, 0xe9, 0xfb,
+	0xc5, 0x29, 0x4f, 0xe0, 0x52, 0xf2, 0x01, 0xb0, 0x24, 0xea, 0xc5, 0x17, 0xcc, 0x15, 0xe3, 0x14,
+	0x72, 0x3e, 0xe9, 0x84, 0x74, 0x90, 0x3f, 0x1f, 0x81, 0x17, 0x2b, 0x30, 0x9a, 0x64, 0x0b, 0x7d,
+	0x2e, 0x20, 0x32, 0xf5, 0xaa, 0x5e, 0xdb, 0x3d, 0x35, 0xbf, 0x7d, 0x6e, 0x54, 0x32, 0x85, 0xf6,
+	0xf9, 0x79, 0x04, 0x88, 0xaf, 0x54, 0xe4, 0x0b, 0xde, 0xcd, 0x78, 0x46, 0x93, 0xec, 0x04, 0x80,
+	0xe8, 0x72, 0x40, 0xb3, 0x54, 0x2d, 0xd7, 0xee, 0x1e, 0x57, 0x68, 0x2a, 0x47, 0x73, 0x39, 0xda,
+	0x16, 0xe3, 0xee, 0x92, 0xd5, 0x7a, 0xf2, 0xfe, 0xea, 0x50, 0xfb, 0x79, 0x75, 0xa8, 0xbd, 0x9b,
+	0x4f, 0xea, 0x59, 0x99, 0x0f, 0xf3, 0x49, 0xfd, 0x7e, 0x3a, 0xb3, 0xcc, 0x8a, 0x43, 0x89, 0x71,
+	0x63, 0xac, 0x0b, 0x18, 0x4a, 0x81, 0x60, 0x98, 0x64, 0x3b, 0x02, 0x8c, 0x07, 0x0a, 0x4d, 0xbd,
+	0x5a, 0xae, 0xdd, 0xeb, 0xe6, 0xa1, 0x33, 0xd1, 0x49, 0xa5, 0x83, 0xfc, 0x75, 0xe4, 0x0a, 0xbc,
+	0x80, 0xe8, 0xc5, 0x50, 0x40, 0x84, 0x7d, 0x3f, 0xfc, 0x87, 0x9e, 0x9e, 0x91, 0x5d, 0x01, 0xc3,
+	0x33, 0xb9, 0x28, 0x61, 0x96, 0xfe, 0x92, 0xb4, 0x23, 0x60, 0x98, 0x88, 0xb5, 0xd8, 0x9a, 0xc6,
+	0xf6, 0xd3, 0xc6, 0x0a, 0xce, 0x1c, 0x9b, 0x1c, 0xfc, 0xce, 0x71, 0xde, 0xac, 0x13, 0x27, 0x23,
+	0x68, 0x7b, 0x1e, 0x84, 0xea, 0x3f, 0xfa, 0x69, 0x35, 0xd6, 0x18, 0x7b, 0x98, 0x1a, 0x5b, 0x11,
+	0x70, 0x0e, 0x88, 0x55, 0x94, 0xcd, 0x4d, 0x1d, 0x7f, 0x29, 0x91, 0x72, 0x07, 0xb9, 0xf1, 0x92,
+	0x6c, 0xe7, 0xb7, 0xc6, 0xa6, 0xc5, 0x1b, 0x4d, 0x6f, 0x96, 0x67, 0x3d, 0xfd, 0x33, 0xbe, 0x5c,
+	0xae, 0x24, 0x7b, 0xc5, 0xf5, 0xd5, 0xd6, 0x24, 0x17, 0x98, 0x56, 0x73, 0x53, 0xe6, 0x52, 0xd0,
+	0x27, 0x0f, 0x56, 0xa7, 0xbb, 0xce, 0xeb, 0x0a, 0xcf, 0xa2, 0x9b, 0xf1, 0x72, 0x29, 0xeb, 0xce,
+	0xdb, 0xf9, 0xa4, 0xae, 0x9f, 0x76, 0xbe, 0x4e, 0x6d, 0xfd, 0x7a, 0x6a, 0xeb, 0x3f, 0xa6, 0xb6,
+	0xfe, 0x71, 0x66, 0x6b, 0xd7, 0x33, 0x5b, 0xfb, 0x3e, 0xb3, 0xb5, 0x37, 0x27, 0xdc, 0x57, 0xfd,
+	0xb8, 0x47, 0x3d, 0x19, 0xb0, 0xa4, 0x74, 0xc3, 0x45, 0x04, 0x85, 0xb7, 0x7e, 0x22, 0xa3, 0x5b,
+	0x67, 0x35, 0x0e, 0x01, 0x7b, 0x5b, 0xc9, 0x37, 0x76, 0xf2, 0x2b, 0x00, 0x00, 0xff, 0xff, 0x16,
+	0xc1, 0x13, 0x14, 0x70, 0x04, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -321,8 +321,8 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MsgClient interface {
 	Execute(ctx context.Context, in *MsgExecute, opts ...grpc.CallOption) (*MsgExecuteResponse, error)
-	TransferAuthority(ctx context.Context, in *MsgTransferAuthority, opts ...grpc.CallOption) (*MsgTransferAuthorityResponse, error)
-	AcceptAuthority(ctx context.Context, in *MsgAcceptAuthority, opts ...grpc.CallOption) (*MsgAcceptAuthorityResponse, error)
+	TransferOwnership(ctx context.Context, in *MsgTransferOwnership, opts ...grpc.CallOption) (*MsgTransferOwnershipResponse, error)
+	AcceptOwnership(ctx context.Context, in *MsgAcceptOwnership, opts ...grpc.CallOption) (*MsgAcceptOwnershipResponse, error)
 }
 
 type msgClient struct {
@@ -342,18 +342,18 @@ func (c *msgClient) Execute(ctx context.Context, in *MsgExecute, opts ...grpc.Ca
 	return out, nil
 }
 
-func (c *msgClient) TransferAuthority(ctx context.Context, in *MsgTransferAuthority, opts ...grpc.CallOption) (*MsgTransferAuthorityResponse, error) {
-	out := new(MsgTransferAuthorityResponse)
-	err := c.cc.Invoke(ctx, "/noble.authority.v1.Msg/TransferAuthority", in, out, opts...)
+func (c *msgClient) TransferOwnership(ctx context.Context, in *MsgTransferOwnership, opts ...grpc.CallOption) (*MsgTransferOwnershipResponse, error) {
+	out := new(MsgTransferOwnershipResponse)
+	err := c.cc.Invoke(ctx, "/noble.authority.v1.Msg/TransferOwnership", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *msgClient) AcceptAuthority(ctx context.Context, in *MsgAcceptAuthority, opts ...grpc.CallOption) (*MsgAcceptAuthorityResponse, error) {
-	out := new(MsgAcceptAuthorityResponse)
-	err := c.cc.Invoke(ctx, "/noble.authority.v1.Msg/AcceptAuthority", in, out, opts...)
+func (c *msgClient) AcceptOwnership(ctx context.Context, in *MsgAcceptOwnership, opts ...grpc.CallOption) (*MsgAcceptOwnershipResponse, error) {
+	out := new(MsgAcceptOwnershipResponse)
+	err := c.cc.Invoke(ctx, "/noble.authority.v1.Msg/AcceptOwnership", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -363,8 +363,8 @@ func (c *msgClient) AcceptAuthority(ctx context.Context, in *MsgAcceptAuthority,
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
 	Execute(context.Context, *MsgExecute) (*MsgExecuteResponse, error)
-	TransferAuthority(context.Context, *MsgTransferAuthority) (*MsgTransferAuthorityResponse, error)
-	AcceptAuthority(context.Context, *MsgAcceptAuthority) (*MsgAcceptAuthorityResponse, error)
+	TransferOwnership(context.Context, *MsgTransferOwnership) (*MsgTransferOwnershipResponse, error)
+	AcceptOwnership(context.Context, *MsgAcceptOwnership) (*MsgAcceptOwnershipResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -374,11 +374,11 @@ type UnimplementedMsgServer struct {
 func (*UnimplementedMsgServer) Execute(ctx context.Context, req *MsgExecute) (*MsgExecuteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Execute not implemented")
 }
-func (*UnimplementedMsgServer) TransferAuthority(ctx context.Context, req *MsgTransferAuthority) (*MsgTransferAuthorityResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method TransferAuthority not implemented")
+func (*UnimplementedMsgServer) TransferOwnership(ctx context.Context, req *MsgTransferOwnership) (*MsgTransferOwnershipResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TransferOwnership not implemented")
 }
-func (*UnimplementedMsgServer) AcceptAuthority(ctx context.Context, req *MsgAcceptAuthority) (*MsgAcceptAuthorityResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AcceptAuthority not implemented")
+func (*UnimplementedMsgServer) AcceptOwnership(ctx context.Context, req *MsgAcceptOwnership) (*MsgAcceptOwnershipResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AcceptOwnership not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
@@ -403,38 +403,38 @@ func _Msg_Execute_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_TransferAuthority_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgTransferAuthority)
+func _Msg_TransferOwnership_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgTransferOwnership)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).TransferAuthority(ctx, in)
+		return srv.(MsgServer).TransferOwnership(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/noble.authority.v1.Msg/TransferAuthority",
+		FullMethod: "/noble.authority.v1.Msg/TransferOwnership",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).TransferAuthority(ctx, req.(*MsgTransferAuthority))
+		return srv.(MsgServer).TransferOwnership(ctx, req.(*MsgTransferOwnership))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_AcceptAuthority_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgAcceptAuthority)
+func _Msg_AcceptOwnership_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgAcceptOwnership)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).AcceptAuthority(ctx, in)
+		return srv.(MsgServer).AcceptOwnership(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/noble.authority.v1.Msg/AcceptAuthority",
+		FullMethod: "/noble.authority.v1.Msg/AcceptOwnership",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).AcceptAuthority(ctx, req.(*MsgAcceptAuthority))
+		return srv.(MsgServer).AcceptOwnership(ctx, req.(*MsgAcceptOwnership))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -448,12 +448,12 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Msg_Execute_Handler,
 		},
 		{
-			MethodName: "TransferAuthority",
-			Handler:    _Msg_TransferAuthority_Handler,
+			MethodName: "TransferOwnership",
+			Handler:    _Msg_TransferOwnership_Handler,
 		},
 		{
-			MethodName: "AcceptAuthority",
-			Handler:    _Msg_AcceptAuthority_Handler,
+			MethodName: "AcceptOwnership",
+			Handler:    _Msg_AcceptOwnership_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -536,7 +536,7 @@ func (m *MsgExecuteResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgTransferAuthority) Marshal() (dAtA []byte, err error) {
+func (m *MsgTransferOwnership) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -546,20 +546,20 @@ func (m *MsgTransferAuthority) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgTransferAuthority) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgTransferOwnership) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgTransferAuthority) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgTransferOwnership) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.NewAuthority) > 0 {
-		i -= len(m.NewAuthority)
-		copy(dAtA[i:], m.NewAuthority)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.NewAuthority)))
+	if len(m.NewOwner) > 0 {
+		i -= len(m.NewOwner)
+		copy(dAtA[i:], m.NewOwner)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.NewOwner)))
 		i--
 		dAtA[i] = 0x12
 	}
@@ -573,7 +573,7 @@ func (m *MsgTransferAuthority) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgTransferAuthorityResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgTransferOwnershipResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -583,12 +583,12 @@ func (m *MsgTransferAuthorityResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgTransferAuthorityResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgTransferOwnershipResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgTransferAuthorityResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgTransferOwnershipResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -596,7 +596,7 @@ func (m *MsgTransferAuthorityResponse) MarshalToSizedBuffer(dAtA []byte) (int, e
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgAcceptAuthority) Marshal() (dAtA []byte, err error) {
+func (m *MsgAcceptOwnership) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -606,12 +606,12 @@ func (m *MsgAcceptAuthority) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgAcceptAuthority) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgAcceptOwnership) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgAcceptAuthority) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgAcceptOwnership) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -626,7 +626,7 @@ func (m *MsgAcceptAuthority) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgAcceptAuthorityResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgAcceptOwnershipResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -636,12 +636,12 @@ func (m *MsgAcceptAuthorityResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgAcceptAuthorityResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgAcceptOwnershipResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgAcceptAuthorityResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgAcceptOwnershipResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -694,7 +694,7 @@ func (m *MsgExecuteResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgTransferAuthority) Size() (n int) {
+func (m *MsgTransferOwnership) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -704,14 +704,14 @@ func (m *MsgTransferAuthority) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
-	l = len(m.NewAuthority)
+	l = len(m.NewOwner)
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
 	return n
 }
 
-func (m *MsgTransferAuthorityResponse) Size() (n int) {
+func (m *MsgTransferOwnershipResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -720,7 +720,7 @@ func (m *MsgTransferAuthorityResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgAcceptAuthority) Size() (n int) {
+func (m *MsgAcceptOwnership) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -733,7 +733,7 @@ func (m *MsgAcceptAuthority) Size() (n int) {
 	return n
 }
 
-func (m *MsgAcceptAuthorityResponse) Size() (n int) {
+func (m *MsgAcceptOwnershipResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -946,7 +946,7 @@ func (m *MsgExecuteResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgTransferAuthority) Unmarshal(dAtA []byte) error {
+func (m *MsgTransferOwnership) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -969,10 +969,10 @@ func (m *MsgTransferAuthority) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgTransferAuthority: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgTransferOwnership: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgTransferAuthority: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgTransferOwnership: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1009,7 +1009,7 @@ func (m *MsgTransferAuthority) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field NewAuthority", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field NewOwner", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -1037,7 +1037,7 @@ func (m *MsgTransferAuthority) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.NewAuthority = string(dAtA[iNdEx:postIndex])
+			m.NewOwner = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -1060,7 +1060,7 @@ func (m *MsgTransferAuthority) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgTransferAuthorityResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgTransferOwnershipResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1083,10 +1083,10 @@ func (m *MsgTransferAuthorityResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgTransferAuthorityResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgTransferOwnershipResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgTransferAuthorityResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgTransferOwnershipResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
@@ -1110,7 +1110,7 @@ func (m *MsgTransferAuthorityResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgAcceptAuthority) Unmarshal(dAtA []byte) error {
+func (m *MsgAcceptOwnership) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1133,10 +1133,10 @@ func (m *MsgAcceptAuthority) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgAcceptAuthority: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgAcceptOwnership: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgAcceptAuthority: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgAcceptOwnership: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1192,7 +1192,7 @@ func (m *MsgAcceptAuthority) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgAcceptAuthorityResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgAcceptOwnershipResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1215,10 +1215,10 @@ func (m *MsgAcceptAuthorityResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgAcceptAuthorityResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgAcceptOwnershipResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgAcceptAuthorityResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgAcceptOwnershipResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:

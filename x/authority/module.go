@@ -124,15 +124,15 @@ func (AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
 				// NOTE: Execute is handled via a custom CLI command.
 				{
-					RpcMethod:      "TransferAuthority",
-					Use:            "transfer [new-authority]",
-					Short:          "Transfer the underlying authority",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "new_authority"}},
+					RpcMethod:      "TransferOwnership",
+					Use:            "transfer-ownership [new-owner]",
+					Short:          "Transfer ownership of the module",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "new_owner"}},
 				},
 				{
-					RpcMethod: "AcceptAuthority",
-					Use:       "accept",
-					Short:     "Accept the underlying authority",
+					RpcMethod: "AcceptOwnership",
+					Use:       "accept-ownership",
+					Short:     "Accept ownership of the module",
 				},
 			},
 			EnhanceCustomCommand: true,
@@ -141,9 +141,14 @@ func (AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			Service: authorityv1.Query_ServiceDesc.ServiceName,
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
 				{
-					RpcMethod: "Address",
-					Use:       "address",
-					Short:     "Query underlying authority address",
+					RpcMethod: "Owner",
+					Use:       "owner",
+					Short:     "Query owner of the module",
+				},
+				{
+					RpcMethod: "PendingOwner",
+					Use:       "pending-owner",
+					Short:     "Query pending owner of the module",
 				},
 			},
 		},

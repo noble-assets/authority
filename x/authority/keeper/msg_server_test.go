@@ -19,26 +19,19 @@ func TestExecute(t *testing.T) {
 	k, ctx := mocks.AuthorityKeeper(t)
 	server := keeper.NewMsgServer(k)
 
-	// ARRANGE: Set an authority in state.
-	authority := utils.TestAccount()
-	require.NoError(t, k.Authority.Set(ctx, authority.Bytes))
-
-	// ACT: Attempt to execute with invalid signer address.
-	_, err := server.Execute(ctx, &types.MsgExecute{
-		Signer: "cosmos10d07y265gmmuvt4z0w9aw880jnsr700j6zn9kn",
-	})
-	// ASSERT: The action should've failed due to invalid signer address.
-	require.ErrorContains(t, err, "failed to decode signer address")
+	// ARRANGE: Set an owner in state.
+	owner := utils.TestAccount()
+	require.NoError(t, k.Owner.Set(ctx, owner.Address))
 
 	// ACT: Attempt to execute with invalid signer.
-	_, err = server.Execute(ctx, &types.MsgExecute{
+	_, err := server.Execute(ctx, &types.MsgExecute{
 		Signer: utils.TestAccount().Address,
 	})
 	// ASSERT: The action should've failed due to invalid signer.
-	require.ErrorContains(t, err, types.ErrInvalidAuthority.Error())
+	require.ErrorContains(t, err, types.ErrInvalidOwner.Error())
 
 	// ACT: Attempt to execute with an invalid message signer address.
-	msg := types.NewMsgExecute(authority.Address, []sdk.Msg{
+	msg := types.NewMsgExecute(owner.Address, []sdk.Msg{
 		&banktypes.MsgUpdateParams{
 			Authority: "",
 			Params:    banktypes.Params{},
@@ -49,7 +42,7 @@ func TestExecute(t *testing.T) {
 	require.ErrorContains(t, err, "unable to extract signers")
 
 	// ACT: Attempt to execute with an invalid message signer.
-	msg = types.NewMsgExecute(authority.Address, []sdk.Msg{
+	msg = types.NewMsgExecute(owner.Address, []sdk.Msg{
 		&banktypes.MsgUpdateParams{
 			Authority: "noble10d07y265gmmuvt4z0w9aw880jnsr700jjpxdwa",
 			Params:    banktypes.Params{},
@@ -57,10 +50,10 @@ func TestExecute(t *testing.T) {
 	})
 	_, err = server.Execute(ctx, msg)
 	// ASSERT: The action should've failed due to invalid message signer.
-	require.ErrorContains(t, err, types.ErrInvalidAuthority.Error())
+	require.ErrorContains(t, err, types.ErrInvalidOwner.Error())
 
 	// ACT: Attempt to execute an invalid message.
-	msg = types.NewMsgExecute(authority.Address, []sdk.Msg{
+	msg = types.NewMsgExecute(owner.Address, []sdk.Msg{
 		&banktypes.MsgUpdateParams{
 			Authority: MODULE,
 			Params:    banktypes.Params{},
@@ -71,7 +64,7 @@ func TestExecute(t *testing.T) {
 	require.ErrorContains(t, err, types.ErrInvalidMessage.Error())
 
 	// ACT: Attempt to execute a valid message that fails.
-	msg = types.NewMsgExecute(authority.Address, []sdk.Msg{
+	msg = types.NewMsgExecute(owner.Address, []sdk.Msg{
 		&upgradetypes.MsgCancelUpgrade{
 			Authority: MODULE,
 		},
@@ -81,7 +74,7 @@ func TestExecute(t *testing.T) {
 	require.ErrorContains(t, err, "failed to execute message")
 
 	// ACT: Attempt to execute.
-	msg = types.NewMsgExecute(authority.Address, []sdk.Msg{
+	msg = types.NewMsgExecute(owner.Address, []sdk.Msg{
 		&upgradetypes.MsgSoftwareUpgrade{
 			Authority: MODULE,
 			Plan:      upgradetypes.Plan{},
@@ -92,104 +85,85 @@ func TestExecute(t *testing.T) {
 	require.Nil(t, err)
 }
 
-func TestTransferAuthority(t *testing.T) {
+func TestTransferOwnership(t *testing.T) {
 	k, ctx := mocks.AuthorityKeeper(t)
 	server := keeper.NewMsgServer(k)
 
-	// ACT: Attempt to update authority with no state.
-	_, err := server.TransferAuthority(ctx, &types.MsgTransferAuthority{})
-	// ASSERT: The action should've failed.
-	require.ErrorContains(t, err, "unable to retrieve authority from state")
+	// ARRANGE: Set an owner in state.
+	owner := utils.TestAccount()
+	require.NoError(t, k.Owner.Set(ctx, owner.Address))
 
-	// ARRANGE: Set an authority in state.
-	authority := utils.TestAccount()
-	require.NoError(t, k.Authority.Set(ctx, authority.Bytes))
-
-	// ACT: Attempt to update authority with invalid signer address.
-	_, err = server.TransferAuthority(ctx, &types.MsgTransferAuthority{
-		Signer: "cosmos10d07y265gmmuvt4z0w9aw880jnsr700j6zn9kn",
-	})
-	// ASSERT: The action should've failed due to invalid signer address.
-	require.ErrorContains(t, err, "failed to decode signer address")
-
-	// ACT: Attempt to update authority with invalid signer.
-	_, err = server.TransferAuthority(ctx, &types.MsgTransferAuthority{
+	// ACT: Attempt to tranfer ownership with invalid signer.
+	_, err := server.TransferOwnership(ctx, &types.MsgTransferOwnership{
 		Signer: utils.TestAccount().Address,
 	})
 	// ASSERT: The action should've failed due to invalid signer.
-	require.ErrorContains(t, err, types.ErrInvalidAuthority.Error())
+	require.ErrorContains(t, err, types.ErrInvalidOwner.Error())
 
-	// ACT: Attempt to update authority with invalid new authority address.
-	_, err = server.TransferAuthority(ctx, &types.MsgTransferAuthority{
-		Signer:       authority.Address,
-		NewAuthority: "cosmos10d07y265gmmuvt4z0w9aw880jnsr700j6zn9kn",
+	// ACT: Attempt to transfer ownership with invalid new owner address.
+	_, err = server.TransferOwnership(ctx, &types.MsgTransferOwnership{
+		Signer:   owner.Address,
+		NewOwner: "cosmos10d07y265gmmuvt4z0w9aw880jnsr700j6zn9kn",
 	})
-	// ASSERT: The action should've failed due to invalid new authority address.
-	require.ErrorContains(t, err, "failed to decode new authority address")
+	// ASSERT: The action should've failed due to invalid new owner address.
+	require.ErrorContains(t, err, "failed to decode new owner address")
 
-	// ACT: Attempt to update authority with same authority.
-	_, err = server.TransferAuthority(ctx, &types.MsgTransferAuthority{
-		Signer:       authority.Address,
-		NewAuthority: authority.Address,
+	// ACT: Attempt to transfer ownership with same owner.
+	_, err = server.TransferOwnership(ctx, &types.MsgTransferOwnership{
+		Signer:   owner.Address,
+		NewOwner: owner.Address,
 	})
-	// ASSERT: The action should've failed due to same authority.
-	require.ErrorContains(t, err, types.ErrSameAuthority.Error())
+	// ASSERT: The action should've failed due to same owner.
+	require.ErrorContains(t, err, types.ErrSameOwner.Error())
 
-	// ARRANGE: Generate a new authority.
-	newAuthority := utils.TestAccount()
+	// ARRANGE: Generate a new owner.
+	newOwner := utils.TestAccount()
 
-	// ACT: Attempt to update authority.
-	_, err = server.TransferAuthority(ctx, &types.MsgTransferAuthority{
-		Signer:       authority.Address,
-		NewAuthority: newAuthority.Address,
+	// ACT: Attempt to transfer ownership.
+	_, err = server.TransferOwnership(ctx, &types.MsgTransferOwnership{
+		Signer:   owner.Address,
+		NewOwner: newOwner.Address,
 	})
-	// ASSERT: The action should've succeeded, and set a pending authority.
+	// ASSERT: The action should've succeeded, and set a pending owner.
 	require.NoError(t, err)
-	res, err := k.Authority.Get(ctx)
+	res, err := k.Owner.Get(ctx)
 	require.NoError(t, err)
-	require.Equal(t, authority.Bytes, res)
-	res, err = k.PendingAuthority.Get(ctx)
+	require.Equal(t, owner.Address, res)
+	res, err = k.PendingOwner.Get(ctx)
 	require.NoError(t, err)
-	require.Equal(t, newAuthority.Bytes, res)
+	require.Equal(t, newOwner.Address, res)
 }
 
-func TestAcceptAuthority(t *testing.T) {
+func TestAcceptOwnership(t *testing.T) {
 	k, ctx := mocks.AuthorityKeeper(t)
 	server := keeper.NewMsgServer(k)
 
-	// ACT: Attempt to accept authority with no pending authority set.
-	_, err := server.AcceptAuthority(ctx, &types.MsgAcceptAuthority{})
+	// ACT: Attempt to accept ownership with no pending owner set.
+	_, err := server.AcceptOwnership(ctx, &types.MsgAcceptOwnership{})
 	// ASSERT: The action should've failed.
-	require.ErrorContains(t, err, "unable to retrieve pending authority from state")
+	require.ErrorIs(t, err, types.ErrNoPendingOwner)
 
-	// ARRANGE: Set a pending authority in state.
-	pendingAuthority := utils.TestAccount()
-	require.NoError(t, k.PendingAuthority.Set(ctx, pendingAuthority.Bytes))
+	// ARRANGE: Set a pending owner in state.
+	pendingOwner := utils.TestAccount()
+	require.NoError(t, k.PendingOwner.Set(ctx, pendingOwner.Address))
 
-	// ACT: Attempt to accept authority with invalid signer address.
-	_, err = server.AcceptAuthority(ctx, &types.MsgAcceptAuthority{
-		Signer: "cosmos10d07y265gmmuvt4z0w9aw880jnsr700j6zn9kn",
-	})
-	// ASSERT: The action should've failed due to invalid signer address.
-	require.ErrorContains(t, err, "failed to decode signer address")
-
-	// ACT: Attempt to accept authority with invalid signer.
-	_, err = server.AcceptAuthority(ctx, &types.MsgAcceptAuthority{
+	// ACT: Attempt to accept ownership with invalid signer.
+	_, err = server.AcceptOwnership(ctx, &types.MsgAcceptOwnership{
 		Signer: utils.TestAccount().Address,
 	})
 	// ASSERT: The action should've failed due to invalid signer.
-	require.ErrorContains(t, err, types.ErrInvalidPendingAuthority.Error())
+	require.ErrorContains(t, err, types.ErrInvalidPendingOwner.Error())
 
-	// ACT: Attempt to accept authority.
-	_, err = server.AcceptAuthority(ctx, &types.MsgAcceptAuthority{
-		Signer: pendingAuthority.Address,
+	// ACT: Attempt to accept ownership.
+	_, err = server.AcceptOwnership(ctx, &types.MsgAcceptOwnership{
+		Signer: pendingOwner.Address,
 	})
-	// ASSERT: The action should've succeeded, and updated authority.
+	// ASSERT: The action should've succeeded, and updated owner.
 	require.NoError(t, err)
-	has, err := k.PendingAuthority.Has(ctx)
+	has, err := k.PendingOwner.Has(ctx)
 	require.NoError(t, err)
 	require.False(t, has)
-	res, err := k.Authority.Get(ctx)
+	res, err := k.Owner.Get(ctx)
 	require.NoError(t, err)
-	require.Equal(t, pendingAuthority.Bytes, res)
+	require.Equal(t, pendingOwner.Address, res)
 }

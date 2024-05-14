@@ -1056,27 +1056,27 @@ func (x *fastReflection_MsgExecuteResponse) ProtoMethods() *protoiface.Methods {
 }
 
 var (
-	md_MsgTransferAuthority               protoreflect.MessageDescriptor
-	fd_MsgTransferAuthority_signer        protoreflect.FieldDescriptor
-	fd_MsgTransferAuthority_new_authority protoreflect.FieldDescriptor
+	md_MsgTransferOwnership           protoreflect.MessageDescriptor
+	fd_MsgTransferOwnership_signer    protoreflect.FieldDescriptor
+	fd_MsgTransferOwnership_new_owner protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_noble_authority_v1_tx_proto_init()
-	md_MsgTransferAuthority = File_noble_authority_v1_tx_proto.Messages().ByName("MsgTransferAuthority")
-	fd_MsgTransferAuthority_signer = md_MsgTransferAuthority.Fields().ByName("signer")
-	fd_MsgTransferAuthority_new_authority = md_MsgTransferAuthority.Fields().ByName("new_authority")
+	md_MsgTransferOwnership = File_noble_authority_v1_tx_proto.Messages().ByName("MsgTransferOwnership")
+	fd_MsgTransferOwnership_signer = md_MsgTransferOwnership.Fields().ByName("signer")
+	fd_MsgTransferOwnership_new_owner = md_MsgTransferOwnership.Fields().ByName("new_owner")
 }
 
-var _ protoreflect.Message = (*fastReflection_MsgTransferAuthority)(nil)
+var _ protoreflect.Message = (*fastReflection_MsgTransferOwnership)(nil)
 
-type fastReflection_MsgTransferAuthority MsgTransferAuthority
+type fastReflection_MsgTransferOwnership MsgTransferOwnership
 
-func (x *MsgTransferAuthority) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_MsgTransferAuthority)(x)
+func (x *MsgTransferOwnership) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_MsgTransferOwnership)(x)
 }
 
-func (x *MsgTransferAuthority) slowProtoReflect() protoreflect.Message {
+func (x *MsgTransferOwnership) slowProtoReflect() protoreflect.Message {
 	mi := &file_noble_authority_v1_tx_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1088,43 +1088,43 @@ func (x *MsgTransferAuthority) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_MsgTransferAuthority_messageType fastReflection_MsgTransferAuthority_messageType
-var _ protoreflect.MessageType = fastReflection_MsgTransferAuthority_messageType{}
+var _fastReflection_MsgTransferOwnership_messageType fastReflection_MsgTransferOwnership_messageType
+var _ protoreflect.MessageType = fastReflection_MsgTransferOwnership_messageType{}
 
-type fastReflection_MsgTransferAuthority_messageType struct{}
+type fastReflection_MsgTransferOwnership_messageType struct{}
 
-func (x fastReflection_MsgTransferAuthority_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_MsgTransferAuthority)(nil)
+func (x fastReflection_MsgTransferOwnership_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_MsgTransferOwnership)(nil)
 }
-func (x fastReflection_MsgTransferAuthority_messageType) New() protoreflect.Message {
-	return new(fastReflection_MsgTransferAuthority)
+func (x fastReflection_MsgTransferOwnership_messageType) New() protoreflect.Message {
+	return new(fastReflection_MsgTransferOwnership)
 }
-func (x fastReflection_MsgTransferAuthority_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_MsgTransferAuthority
+func (x fastReflection_MsgTransferOwnership_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgTransferOwnership
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_MsgTransferAuthority) Descriptor() protoreflect.MessageDescriptor {
-	return md_MsgTransferAuthority
+func (x *fastReflection_MsgTransferOwnership) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgTransferOwnership
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_MsgTransferAuthority) Type() protoreflect.MessageType {
-	return _fastReflection_MsgTransferAuthority_messageType
+func (x *fastReflection_MsgTransferOwnership) Type() protoreflect.MessageType {
+	return _fastReflection_MsgTransferOwnership_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_MsgTransferAuthority) New() protoreflect.Message {
-	return new(fastReflection_MsgTransferAuthority)
+func (x *fastReflection_MsgTransferOwnership) New() protoreflect.Message {
+	return new(fastReflection_MsgTransferOwnership)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_MsgTransferAuthority) Interface() protoreflect.ProtoMessage {
-	return (*MsgTransferAuthority)(x)
+func (x *fastReflection_MsgTransferOwnership) Interface() protoreflect.ProtoMessage {
+	return (*MsgTransferOwnership)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -1132,16 +1132,16 @@ func (x *fastReflection_MsgTransferAuthority) Interface() protoreflect.ProtoMess
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_MsgTransferAuthority) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+func (x *fastReflection_MsgTransferOwnership) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
 	if x.Signer != "" {
 		value := protoreflect.ValueOfString(x.Signer)
-		if !f(fd_MsgTransferAuthority_signer, value) {
+		if !f(fd_MsgTransferOwnership_signer, value) {
 			return
 		}
 	}
-	if x.NewAuthority != "" {
-		value := protoreflect.ValueOfString(x.NewAuthority)
-		if !f(fd_MsgTransferAuthority_new_authority, value) {
+	if x.NewOwner != "" {
+		value := protoreflect.ValueOfString(x.NewOwner)
+		if !f(fd_MsgTransferOwnership_new_owner, value) {
 			return
 		}
 	}
@@ -1158,17 +1158,17 @@ func (x *fastReflection_MsgTransferAuthority) Range(f func(protoreflect.FieldDes
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_MsgTransferAuthority) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_MsgTransferOwnership) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "noble.authority.v1.MsgTransferAuthority.signer":
+	case "noble.authority.v1.MsgTransferOwnership.signer":
 		return x.Signer != ""
-	case "noble.authority.v1.MsgTransferAuthority.new_authority":
-		return x.NewAuthority != ""
+	case "noble.authority.v1.MsgTransferOwnership.new_owner":
+		return x.NewOwner != ""
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferAuthority"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferOwnership"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgTransferAuthority does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgTransferOwnership does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1178,17 +1178,17 @@ func (x *fastReflection_MsgTransferAuthority) Has(fd protoreflect.FieldDescripto
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgTransferAuthority) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_MsgTransferOwnership) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "noble.authority.v1.MsgTransferAuthority.signer":
+	case "noble.authority.v1.MsgTransferOwnership.signer":
 		x.Signer = ""
-	case "noble.authority.v1.MsgTransferAuthority.new_authority":
-		x.NewAuthority = ""
+	case "noble.authority.v1.MsgTransferOwnership.new_owner":
+		x.NewOwner = ""
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferAuthority"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferOwnership"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgTransferAuthority does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgTransferOwnership does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1198,19 +1198,19 @@ func (x *fastReflection_MsgTransferAuthority) Clear(fd protoreflect.FieldDescrip
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_MsgTransferAuthority) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_MsgTransferOwnership) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "noble.authority.v1.MsgTransferAuthority.signer":
+	case "noble.authority.v1.MsgTransferOwnership.signer":
 		value := x.Signer
 		return protoreflect.ValueOfString(value)
-	case "noble.authority.v1.MsgTransferAuthority.new_authority":
-		value := x.NewAuthority
+	case "noble.authority.v1.MsgTransferOwnership.new_owner":
+		value := x.NewOwner
 		return protoreflect.ValueOfString(value)
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferAuthority"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferOwnership"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgTransferAuthority does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgTransferOwnership does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -1224,17 +1224,17 @@ func (x *fastReflection_MsgTransferAuthority) Get(descriptor protoreflect.FieldD
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgTransferAuthority) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_MsgTransferOwnership) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "noble.authority.v1.MsgTransferAuthority.signer":
+	case "noble.authority.v1.MsgTransferOwnership.signer":
 		x.Signer = value.Interface().(string)
-	case "noble.authority.v1.MsgTransferAuthority.new_authority":
-		x.NewAuthority = value.Interface().(string)
+	case "noble.authority.v1.MsgTransferOwnership.new_owner":
+		x.NewOwner = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferAuthority"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferOwnership"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgTransferAuthority does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgTransferOwnership does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1248,44 +1248,44 @@ func (x *fastReflection_MsgTransferAuthority) Set(fd protoreflect.FieldDescripto
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgTransferAuthority) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_MsgTransferOwnership) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "noble.authority.v1.MsgTransferAuthority.signer":
-		panic(fmt.Errorf("field signer of message noble.authority.v1.MsgTransferAuthority is not mutable"))
-	case "noble.authority.v1.MsgTransferAuthority.new_authority":
-		panic(fmt.Errorf("field new_authority of message noble.authority.v1.MsgTransferAuthority is not mutable"))
+	case "noble.authority.v1.MsgTransferOwnership.signer":
+		panic(fmt.Errorf("field signer of message noble.authority.v1.MsgTransferOwnership is not mutable"))
+	case "noble.authority.v1.MsgTransferOwnership.new_owner":
+		panic(fmt.Errorf("field new_owner of message noble.authority.v1.MsgTransferOwnership is not mutable"))
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferAuthority"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferOwnership"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgTransferAuthority does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgTransferOwnership does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_MsgTransferAuthority) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_MsgTransferOwnership) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "noble.authority.v1.MsgTransferAuthority.signer":
+	case "noble.authority.v1.MsgTransferOwnership.signer":
 		return protoreflect.ValueOfString("")
-	case "noble.authority.v1.MsgTransferAuthority.new_authority":
+	case "noble.authority.v1.MsgTransferOwnership.new_owner":
 		return protoreflect.ValueOfString("")
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferAuthority"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferOwnership"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgTransferAuthority does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgTransferOwnership does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_MsgTransferAuthority) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_MsgTransferOwnership) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in noble.authority.v1.MsgTransferAuthority", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in noble.authority.v1.MsgTransferOwnership", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -1293,7 +1293,7 @@ func (x *fastReflection_MsgTransferAuthority) WhichOneof(d protoreflect.OneofDes
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_MsgTransferAuthority) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_MsgTransferOwnership) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -1304,7 +1304,7 @@ func (x *fastReflection_MsgTransferAuthority) GetUnknown() protoreflect.RawField
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgTransferAuthority) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_MsgTransferOwnership) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -1316,7 +1316,7 @@ func (x *fastReflection_MsgTransferAuthority) SetUnknown(fields protoreflect.Raw
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_MsgTransferAuthority) IsValid() bool {
+func (x *fastReflection_MsgTransferOwnership) IsValid() bool {
 	return x != nil
 }
 
@@ -1326,9 +1326,9 @@ func (x *fastReflection_MsgTransferAuthority) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_MsgTransferAuthority) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_MsgTransferOwnership) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*MsgTransferAuthority)
+		x := input.Message.Interface().(*MsgTransferOwnership)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1344,7 +1344,7 @@ func (x *fastReflection_MsgTransferAuthority) ProtoMethods() *protoiface.Methods
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		l = len(x.NewAuthority)
+		l = len(x.NewOwner)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
@@ -1358,7 +1358,7 @@ func (x *fastReflection_MsgTransferAuthority) ProtoMethods() *protoiface.Methods
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*MsgTransferAuthority)
+		x := input.Message.Interface().(*MsgTransferOwnership)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1377,10 +1377,10 @@ func (x *fastReflection_MsgTransferAuthority) ProtoMethods() *protoiface.Methods
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.NewAuthority) > 0 {
-			i -= len(x.NewAuthority)
-			copy(dAtA[i:], x.NewAuthority)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.NewAuthority)))
+		if len(x.NewOwner) > 0 {
+			i -= len(x.NewOwner)
+			copy(dAtA[i:], x.NewOwner)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.NewOwner)))
 			i--
 			dAtA[i] = 0x12
 		}
@@ -1402,7 +1402,7 @@ func (x *fastReflection_MsgTransferAuthority) ProtoMethods() *protoiface.Methods
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*MsgTransferAuthority)
+		x := input.Message.Interface().(*MsgTransferOwnership)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1434,10 +1434,10 @@ func (x *fastReflection_MsgTransferAuthority) ProtoMethods() *protoiface.Methods
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgTransferAuthority: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgTransferOwnership: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgTransferAuthority: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgTransferOwnership: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
@@ -1474,7 +1474,7 @@ func (x *fastReflection_MsgTransferAuthority) ProtoMethods() *protoiface.Methods
 				iNdEx = postIndex
 			case 2:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field NewAuthority", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field NewOwner", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -1502,7 +1502,7 @@ func (x *fastReflection_MsgTransferAuthority) ProtoMethods() *protoiface.Methods
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.NewAuthority = string(dAtA[iNdEx:postIndex])
+				x.NewOwner = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -1540,23 +1540,23 @@ func (x *fastReflection_MsgTransferAuthority) ProtoMethods() *protoiface.Methods
 }
 
 var (
-	md_MsgTransferAuthorityResponse protoreflect.MessageDescriptor
+	md_MsgTransferOwnershipResponse protoreflect.MessageDescriptor
 )
 
 func init() {
 	file_noble_authority_v1_tx_proto_init()
-	md_MsgTransferAuthorityResponse = File_noble_authority_v1_tx_proto.Messages().ByName("MsgTransferAuthorityResponse")
+	md_MsgTransferOwnershipResponse = File_noble_authority_v1_tx_proto.Messages().ByName("MsgTransferOwnershipResponse")
 }
 
-var _ protoreflect.Message = (*fastReflection_MsgTransferAuthorityResponse)(nil)
+var _ protoreflect.Message = (*fastReflection_MsgTransferOwnershipResponse)(nil)
 
-type fastReflection_MsgTransferAuthorityResponse MsgTransferAuthorityResponse
+type fastReflection_MsgTransferOwnershipResponse MsgTransferOwnershipResponse
 
-func (x *MsgTransferAuthorityResponse) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_MsgTransferAuthorityResponse)(x)
+func (x *MsgTransferOwnershipResponse) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_MsgTransferOwnershipResponse)(x)
 }
 
-func (x *MsgTransferAuthorityResponse) slowProtoReflect() protoreflect.Message {
+func (x *MsgTransferOwnershipResponse) slowProtoReflect() protoreflect.Message {
 	mi := &file_noble_authority_v1_tx_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1568,43 +1568,43 @@ func (x *MsgTransferAuthorityResponse) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_MsgTransferAuthorityResponse_messageType fastReflection_MsgTransferAuthorityResponse_messageType
-var _ protoreflect.MessageType = fastReflection_MsgTransferAuthorityResponse_messageType{}
+var _fastReflection_MsgTransferOwnershipResponse_messageType fastReflection_MsgTransferOwnershipResponse_messageType
+var _ protoreflect.MessageType = fastReflection_MsgTransferOwnershipResponse_messageType{}
 
-type fastReflection_MsgTransferAuthorityResponse_messageType struct{}
+type fastReflection_MsgTransferOwnershipResponse_messageType struct{}
 
-func (x fastReflection_MsgTransferAuthorityResponse_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_MsgTransferAuthorityResponse)(nil)
+func (x fastReflection_MsgTransferOwnershipResponse_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_MsgTransferOwnershipResponse)(nil)
 }
-func (x fastReflection_MsgTransferAuthorityResponse_messageType) New() protoreflect.Message {
-	return new(fastReflection_MsgTransferAuthorityResponse)
+func (x fastReflection_MsgTransferOwnershipResponse_messageType) New() protoreflect.Message {
+	return new(fastReflection_MsgTransferOwnershipResponse)
 }
-func (x fastReflection_MsgTransferAuthorityResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_MsgTransferAuthorityResponse
+func (x fastReflection_MsgTransferOwnershipResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgTransferOwnershipResponse
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_MsgTransferAuthorityResponse) Descriptor() protoreflect.MessageDescriptor {
-	return md_MsgTransferAuthorityResponse
+func (x *fastReflection_MsgTransferOwnershipResponse) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgTransferOwnershipResponse
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_MsgTransferAuthorityResponse) Type() protoreflect.MessageType {
-	return _fastReflection_MsgTransferAuthorityResponse_messageType
+func (x *fastReflection_MsgTransferOwnershipResponse) Type() protoreflect.MessageType {
+	return _fastReflection_MsgTransferOwnershipResponse_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_MsgTransferAuthorityResponse) New() protoreflect.Message {
-	return new(fastReflection_MsgTransferAuthorityResponse)
+func (x *fastReflection_MsgTransferOwnershipResponse) New() protoreflect.Message {
+	return new(fastReflection_MsgTransferOwnershipResponse)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_MsgTransferAuthorityResponse) Interface() protoreflect.ProtoMessage {
-	return (*MsgTransferAuthorityResponse)(x)
+func (x *fastReflection_MsgTransferOwnershipResponse) Interface() protoreflect.ProtoMessage {
+	return (*MsgTransferOwnershipResponse)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -1612,7 +1612,7 @@ func (x *fastReflection_MsgTransferAuthorityResponse) Interface() protoreflect.P
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_MsgTransferAuthorityResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+func (x *fastReflection_MsgTransferOwnershipResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
 }
 
 // Has reports whether a field is populated.
@@ -1626,13 +1626,13 @@ func (x *fastReflection_MsgTransferAuthorityResponse) Range(f func(protoreflect.
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_MsgTransferAuthorityResponse) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_MsgTransferOwnershipResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferAuthorityResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferOwnershipResponse"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgTransferAuthorityResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgTransferOwnershipResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1642,13 +1642,13 @@ func (x *fastReflection_MsgTransferAuthorityResponse) Has(fd protoreflect.FieldD
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgTransferAuthorityResponse) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_MsgTransferOwnershipResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferAuthorityResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferOwnershipResponse"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgTransferAuthorityResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgTransferOwnershipResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1658,13 +1658,13 @@ func (x *fastReflection_MsgTransferAuthorityResponse) Clear(fd protoreflect.Fiel
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_MsgTransferAuthorityResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_MsgTransferOwnershipResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferAuthorityResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferOwnershipResponse"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgTransferAuthorityResponse does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgTransferOwnershipResponse does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -1678,13 +1678,13 @@ func (x *fastReflection_MsgTransferAuthorityResponse) Get(descriptor protoreflec
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgTransferAuthorityResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_MsgTransferOwnershipResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferAuthorityResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferOwnershipResponse"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgTransferAuthorityResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgTransferOwnershipResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1698,36 +1698,36 @@ func (x *fastReflection_MsgTransferAuthorityResponse) Set(fd protoreflect.FieldD
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgTransferAuthorityResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_MsgTransferOwnershipResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferAuthorityResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferOwnershipResponse"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgTransferAuthorityResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgTransferOwnershipResponse does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_MsgTransferAuthorityResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_MsgTransferOwnershipResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferAuthorityResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgTransferOwnershipResponse"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgTransferAuthorityResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgTransferOwnershipResponse does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_MsgTransferAuthorityResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_MsgTransferOwnershipResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in noble.authority.v1.MsgTransferAuthorityResponse", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in noble.authority.v1.MsgTransferOwnershipResponse", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -1735,7 +1735,7 @@ func (x *fastReflection_MsgTransferAuthorityResponse) WhichOneof(d protoreflect.
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_MsgTransferAuthorityResponse) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_MsgTransferOwnershipResponse) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -1746,7 +1746,7 @@ func (x *fastReflection_MsgTransferAuthorityResponse) GetUnknown() protoreflect.
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgTransferAuthorityResponse) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_MsgTransferOwnershipResponse) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -1758,7 +1758,7 @@ func (x *fastReflection_MsgTransferAuthorityResponse) SetUnknown(fields protoref
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_MsgTransferAuthorityResponse) IsValid() bool {
+func (x *fastReflection_MsgTransferOwnershipResponse) IsValid() bool {
 	return x != nil
 }
 
@@ -1768,9 +1768,9 @@ func (x *fastReflection_MsgTransferAuthorityResponse) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_MsgTransferAuthorityResponse) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_MsgTransferOwnershipResponse) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*MsgTransferAuthorityResponse)
+		x := input.Message.Interface().(*MsgTransferOwnershipResponse)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1792,7 +1792,7 @@ func (x *fastReflection_MsgTransferAuthorityResponse) ProtoMethods() *protoiface
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*MsgTransferAuthorityResponse)
+		x := input.Message.Interface().(*MsgTransferOwnershipResponse)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1822,7 +1822,7 @@ func (x *fastReflection_MsgTransferAuthorityResponse) ProtoMethods() *protoiface
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*MsgTransferAuthorityResponse)
+		x := input.Message.Interface().(*MsgTransferOwnershipResponse)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1854,10 +1854,10 @@ func (x *fastReflection_MsgTransferAuthorityResponse) ProtoMethods() *protoiface
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgTransferAuthorityResponse: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgTransferOwnershipResponse: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgTransferAuthorityResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgTransferOwnershipResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			default:
@@ -1896,25 +1896,25 @@ func (x *fastReflection_MsgTransferAuthorityResponse) ProtoMethods() *protoiface
 }
 
 var (
-	md_MsgAcceptAuthority        protoreflect.MessageDescriptor
-	fd_MsgAcceptAuthority_signer protoreflect.FieldDescriptor
+	md_MsgAcceptOwnership        protoreflect.MessageDescriptor
+	fd_MsgAcceptOwnership_signer protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_noble_authority_v1_tx_proto_init()
-	md_MsgAcceptAuthority = File_noble_authority_v1_tx_proto.Messages().ByName("MsgAcceptAuthority")
-	fd_MsgAcceptAuthority_signer = md_MsgAcceptAuthority.Fields().ByName("signer")
+	md_MsgAcceptOwnership = File_noble_authority_v1_tx_proto.Messages().ByName("MsgAcceptOwnership")
+	fd_MsgAcceptOwnership_signer = md_MsgAcceptOwnership.Fields().ByName("signer")
 }
 
-var _ protoreflect.Message = (*fastReflection_MsgAcceptAuthority)(nil)
+var _ protoreflect.Message = (*fastReflection_MsgAcceptOwnership)(nil)
 
-type fastReflection_MsgAcceptAuthority MsgAcceptAuthority
+type fastReflection_MsgAcceptOwnership MsgAcceptOwnership
 
-func (x *MsgAcceptAuthority) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_MsgAcceptAuthority)(x)
+func (x *MsgAcceptOwnership) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_MsgAcceptOwnership)(x)
 }
 
-func (x *MsgAcceptAuthority) slowProtoReflect() protoreflect.Message {
+func (x *MsgAcceptOwnership) slowProtoReflect() protoreflect.Message {
 	mi := &file_noble_authority_v1_tx_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1926,43 +1926,43 @@ func (x *MsgAcceptAuthority) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_MsgAcceptAuthority_messageType fastReflection_MsgAcceptAuthority_messageType
-var _ protoreflect.MessageType = fastReflection_MsgAcceptAuthority_messageType{}
+var _fastReflection_MsgAcceptOwnership_messageType fastReflection_MsgAcceptOwnership_messageType
+var _ protoreflect.MessageType = fastReflection_MsgAcceptOwnership_messageType{}
 
-type fastReflection_MsgAcceptAuthority_messageType struct{}
+type fastReflection_MsgAcceptOwnership_messageType struct{}
 
-func (x fastReflection_MsgAcceptAuthority_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_MsgAcceptAuthority)(nil)
+func (x fastReflection_MsgAcceptOwnership_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_MsgAcceptOwnership)(nil)
 }
-func (x fastReflection_MsgAcceptAuthority_messageType) New() protoreflect.Message {
-	return new(fastReflection_MsgAcceptAuthority)
+func (x fastReflection_MsgAcceptOwnership_messageType) New() protoreflect.Message {
+	return new(fastReflection_MsgAcceptOwnership)
 }
-func (x fastReflection_MsgAcceptAuthority_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_MsgAcceptAuthority
+func (x fastReflection_MsgAcceptOwnership_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgAcceptOwnership
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_MsgAcceptAuthority) Descriptor() protoreflect.MessageDescriptor {
-	return md_MsgAcceptAuthority
+func (x *fastReflection_MsgAcceptOwnership) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgAcceptOwnership
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_MsgAcceptAuthority) Type() protoreflect.MessageType {
-	return _fastReflection_MsgAcceptAuthority_messageType
+func (x *fastReflection_MsgAcceptOwnership) Type() protoreflect.MessageType {
+	return _fastReflection_MsgAcceptOwnership_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_MsgAcceptAuthority) New() protoreflect.Message {
-	return new(fastReflection_MsgAcceptAuthority)
+func (x *fastReflection_MsgAcceptOwnership) New() protoreflect.Message {
+	return new(fastReflection_MsgAcceptOwnership)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_MsgAcceptAuthority) Interface() protoreflect.ProtoMessage {
-	return (*MsgAcceptAuthority)(x)
+func (x *fastReflection_MsgAcceptOwnership) Interface() protoreflect.ProtoMessage {
+	return (*MsgAcceptOwnership)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -1970,10 +1970,10 @@ func (x *fastReflection_MsgAcceptAuthority) Interface() protoreflect.ProtoMessag
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_MsgAcceptAuthority) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+func (x *fastReflection_MsgAcceptOwnership) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
 	if x.Signer != "" {
 		value := protoreflect.ValueOfString(x.Signer)
-		if !f(fd_MsgAcceptAuthority_signer, value) {
+		if !f(fd_MsgAcceptOwnership_signer, value) {
 			return
 		}
 	}
@@ -1990,15 +1990,15 @@ func (x *fastReflection_MsgAcceptAuthority) Range(f func(protoreflect.FieldDescr
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_MsgAcceptAuthority) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_MsgAcceptOwnership) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "noble.authority.v1.MsgAcceptAuthority.signer":
+	case "noble.authority.v1.MsgAcceptOwnership.signer":
 		return x.Signer != ""
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptAuthority"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptOwnership"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptAuthority does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptOwnership does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -2008,15 +2008,15 @@ func (x *fastReflection_MsgAcceptAuthority) Has(fd protoreflect.FieldDescriptor)
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgAcceptAuthority) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_MsgAcceptOwnership) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "noble.authority.v1.MsgAcceptAuthority.signer":
+	case "noble.authority.v1.MsgAcceptOwnership.signer":
 		x.Signer = ""
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptAuthority"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptOwnership"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptAuthority does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptOwnership does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -2026,16 +2026,16 @@ func (x *fastReflection_MsgAcceptAuthority) Clear(fd protoreflect.FieldDescripto
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_MsgAcceptAuthority) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_MsgAcceptOwnership) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "noble.authority.v1.MsgAcceptAuthority.signer":
+	case "noble.authority.v1.MsgAcceptOwnership.signer":
 		value := x.Signer
 		return protoreflect.ValueOfString(value)
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptAuthority"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptOwnership"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptAuthority does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptOwnership does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -2049,15 +2049,15 @@ func (x *fastReflection_MsgAcceptAuthority) Get(descriptor protoreflect.FieldDes
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgAcceptAuthority) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_MsgAcceptOwnership) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "noble.authority.v1.MsgAcceptAuthority.signer":
+	case "noble.authority.v1.MsgAcceptOwnership.signer":
 		x.Signer = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptAuthority"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptOwnership"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptAuthority does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptOwnership does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -2071,40 +2071,40 @@ func (x *fastReflection_MsgAcceptAuthority) Set(fd protoreflect.FieldDescriptor,
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgAcceptAuthority) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_MsgAcceptOwnership) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "noble.authority.v1.MsgAcceptAuthority.signer":
-		panic(fmt.Errorf("field signer of message noble.authority.v1.MsgAcceptAuthority is not mutable"))
+	case "noble.authority.v1.MsgAcceptOwnership.signer":
+		panic(fmt.Errorf("field signer of message noble.authority.v1.MsgAcceptOwnership is not mutable"))
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptAuthority"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptOwnership"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptAuthority does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptOwnership does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_MsgAcceptAuthority) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_MsgAcceptOwnership) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "noble.authority.v1.MsgAcceptAuthority.signer":
+	case "noble.authority.v1.MsgAcceptOwnership.signer":
 		return protoreflect.ValueOfString("")
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptAuthority"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptOwnership"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptAuthority does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptOwnership does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_MsgAcceptAuthority) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_MsgAcceptOwnership) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in noble.authority.v1.MsgAcceptAuthority", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in noble.authority.v1.MsgAcceptOwnership", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -2112,7 +2112,7 @@ func (x *fastReflection_MsgAcceptAuthority) WhichOneof(d protoreflect.OneofDescr
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_MsgAcceptAuthority) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_MsgAcceptOwnership) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -2123,7 +2123,7 @@ func (x *fastReflection_MsgAcceptAuthority) GetUnknown() protoreflect.RawFields 
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgAcceptAuthority) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_MsgAcceptOwnership) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -2135,7 +2135,7 @@ func (x *fastReflection_MsgAcceptAuthority) SetUnknown(fields protoreflect.RawFi
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_MsgAcceptAuthority) IsValid() bool {
+func (x *fastReflection_MsgAcceptOwnership) IsValid() bool {
 	return x != nil
 }
 
@@ -2145,9 +2145,9 @@ func (x *fastReflection_MsgAcceptAuthority) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_MsgAcceptAuthority) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_MsgAcceptOwnership) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*MsgAcceptAuthority)
+		x := input.Message.Interface().(*MsgAcceptOwnership)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -2173,7 +2173,7 @@ func (x *fastReflection_MsgAcceptAuthority) ProtoMethods() *protoiface.Methods {
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*MsgAcceptAuthority)
+		x := input.Message.Interface().(*MsgAcceptOwnership)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -2210,7 +2210,7 @@ func (x *fastReflection_MsgAcceptAuthority) ProtoMethods() *protoiface.Methods {
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*MsgAcceptAuthority)
+		x := input.Message.Interface().(*MsgAcceptOwnership)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -2242,10 +2242,10 @@ func (x *fastReflection_MsgAcceptAuthority) ProtoMethods() *protoiface.Methods {
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgAcceptAuthority: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgAcceptOwnership: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgAcceptAuthority: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgAcceptOwnership: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
@@ -2316,23 +2316,23 @@ func (x *fastReflection_MsgAcceptAuthority) ProtoMethods() *protoiface.Methods {
 }
 
 var (
-	md_MsgAcceptAuthorityResponse protoreflect.MessageDescriptor
+	md_MsgAcceptOwnershipResponse protoreflect.MessageDescriptor
 )
 
 func init() {
 	file_noble_authority_v1_tx_proto_init()
-	md_MsgAcceptAuthorityResponse = File_noble_authority_v1_tx_proto.Messages().ByName("MsgAcceptAuthorityResponse")
+	md_MsgAcceptOwnershipResponse = File_noble_authority_v1_tx_proto.Messages().ByName("MsgAcceptOwnershipResponse")
 }
 
-var _ protoreflect.Message = (*fastReflection_MsgAcceptAuthorityResponse)(nil)
+var _ protoreflect.Message = (*fastReflection_MsgAcceptOwnershipResponse)(nil)
 
-type fastReflection_MsgAcceptAuthorityResponse MsgAcceptAuthorityResponse
+type fastReflection_MsgAcceptOwnershipResponse MsgAcceptOwnershipResponse
 
-func (x *MsgAcceptAuthorityResponse) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_MsgAcceptAuthorityResponse)(x)
+func (x *MsgAcceptOwnershipResponse) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_MsgAcceptOwnershipResponse)(x)
 }
 
-func (x *MsgAcceptAuthorityResponse) slowProtoReflect() protoreflect.Message {
+func (x *MsgAcceptOwnershipResponse) slowProtoReflect() protoreflect.Message {
 	mi := &file_noble_authority_v1_tx_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2344,43 +2344,43 @@ func (x *MsgAcceptAuthorityResponse) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_MsgAcceptAuthorityResponse_messageType fastReflection_MsgAcceptAuthorityResponse_messageType
-var _ protoreflect.MessageType = fastReflection_MsgAcceptAuthorityResponse_messageType{}
+var _fastReflection_MsgAcceptOwnershipResponse_messageType fastReflection_MsgAcceptOwnershipResponse_messageType
+var _ protoreflect.MessageType = fastReflection_MsgAcceptOwnershipResponse_messageType{}
 
-type fastReflection_MsgAcceptAuthorityResponse_messageType struct{}
+type fastReflection_MsgAcceptOwnershipResponse_messageType struct{}
 
-func (x fastReflection_MsgAcceptAuthorityResponse_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_MsgAcceptAuthorityResponse)(nil)
+func (x fastReflection_MsgAcceptOwnershipResponse_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_MsgAcceptOwnershipResponse)(nil)
 }
-func (x fastReflection_MsgAcceptAuthorityResponse_messageType) New() protoreflect.Message {
-	return new(fastReflection_MsgAcceptAuthorityResponse)
+func (x fastReflection_MsgAcceptOwnershipResponse_messageType) New() protoreflect.Message {
+	return new(fastReflection_MsgAcceptOwnershipResponse)
 }
-func (x fastReflection_MsgAcceptAuthorityResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_MsgAcceptAuthorityResponse
+func (x fastReflection_MsgAcceptOwnershipResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgAcceptOwnershipResponse
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_MsgAcceptAuthorityResponse) Descriptor() protoreflect.MessageDescriptor {
-	return md_MsgAcceptAuthorityResponse
+func (x *fastReflection_MsgAcceptOwnershipResponse) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgAcceptOwnershipResponse
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_MsgAcceptAuthorityResponse) Type() protoreflect.MessageType {
-	return _fastReflection_MsgAcceptAuthorityResponse_messageType
+func (x *fastReflection_MsgAcceptOwnershipResponse) Type() protoreflect.MessageType {
+	return _fastReflection_MsgAcceptOwnershipResponse_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_MsgAcceptAuthorityResponse) New() protoreflect.Message {
-	return new(fastReflection_MsgAcceptAuthorityResponse)
+func (x *fastReflection_MsgAcceptOwnershipResponse) New() protoreflect.Message {
+	return new(fastReflection_MsgAcceptOwnershipResponse)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_MsgAcceptAuthorityResponse) Interface() protoreflect.ProtoMessage {
-	return (*MsgAcceptAuthorityResponse)(x)
+func (x *fastReflection_MsgAcceptOwnershipResponse) Interface() protoreflect.ProtoMessage {
+	return (*MsgAcceptOwnershipResponse)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -2388,7 +2388,7 @@ func (x *fastReflection_MsgAcceptAuthorityResponse) Interface() protoreflect.Pro
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_MsgAcceptAuthorityResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+func (x *fastReflection_MsgAcceptOwnershipResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
 }
 
 // Has reports whether a field is populated.
@@ -2402,13 +2402,13 @@ func (x *fastReflection_MsgAcceptAuthorityResponse) Range(f func(protoreflect.Fi
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_MsgAcceptAuthorityResponse) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_MsgAcceptOwnershipResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptAuthorityResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptOwnershipResponse"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptAuthorityResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptOwnershipResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -2418,13 +2418,13 @@ func (x *fastReflection_MsgAcceptAuthorityResponse) Has(fd protoreflect.FieldDes
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgAcceptAuthorityResponse) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_MsgAcceptOwnershipResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptAuthorityResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptOwnershipResponse"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptAuthorityResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptOwnershipResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -2434,13 +2434,13 @@ func (x *fastReflection_MsgAcceptAuthorityResponse) Clear(fd protoreflect.FieldD
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_MsgAcceptAuthorityResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_MsgAcceptOwnershipResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptAuthorityResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptOwnershipResponse"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptAuthorityResponse does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptOwnershipResponse does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -2454,13 +2454,13 @@ func (x *fastReflection_MsgAcceptAuthorityResponse) Get(descriptor protoreflect.
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgAcceptAuthorityResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_MsgAcceptOwnershipResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptAuthorityResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptOwnershipResponse"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptAuthorityResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptOwnershipResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -2474,36 +2474,36 @@ func (x *fastReflection_MsgAcceptAuthorityResponse) Set(fd protoreflect.FieldDes
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgAcceptAuthorityResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_MsgAcceptOwnershipResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptAuthorityResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptOwnershipResponse"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptAuthorityResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptOwnershipResponse does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_MsgAcceptAuthorityResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_MsgAcceptOwnershipResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptAuthorityResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.MsgAcceptOwnershipResponse"))
 		}
-		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptAuthorityResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message noble.authority.v1.MsgAcceptOwnershipResponse does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_MsgAcceptAuthorityResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_MsgAcceptOwnershipResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in noble.authority.v1.MsgAcceptAuthorityResponse", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in noble.authority.v1.MsgAcceptOwnershipResponse", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -2511,7 +2511,7 @@ func (x *fastReflection_MsgAcceptAuthorityResponse) WhichOneof(d protoreflect.On
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_MsgAcceptAuthorityResponse) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_MsgAcceptOwnershipResponse) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -2522,7 +2522,7 @@ func (x *fastReflection_MsgAcceptAuthorityResponse) GetUnknown() protoreflect.Ra
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_MsgAcceptAuthorityResponse) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_MsgAcceptOwnershipResponse) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -2534,7 +2534,7 @@ func (x *fastReflection_MsgAcceptAuthorityResponse) SetUnknown(fields protorefle
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_MsgAcceptAuthorityResponse) IsValid() bool {
+func (x *fastReflection_MsgAcceptOwnershipResponse) IsValid() bool {
 	return x != nil
 }
 
@@ -2544,9 +2544,9 @@ func (x *fastReflection_MsgAcceptAuthorityResponse) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_MsgAcceptAuthorityResponse) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_MsgAcceptOwnershipResponse) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*MsgAcceptAuthorityResponse)
+		x := input.Message.Interface().(*MsgAcceptOwnershipResponse)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -2568,7 +2568,7 @@ func (x *fastReflection_MsgAcceptAuthorityResponse) ProtoMethods() *protoiface.M
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*MsgAcceptAuthorityResponse)
+		x := input.Message.Interface().(*MsgAcceptOwnershipResponse)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -2598,7 +2598,7 @@ func (x *fastReflection_MsgAcceptAuthorityResponse) ProtoMethods() *protoiface.M
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*MsgAcceptAuthorityResponse)
+		x := input.Message.Interface().(*MsgAcceptOwnershipResponse)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -2630,10 +2630,10 @@ func (x *fastReflection_MsgAcceptAuthorityResponse) ProtoMethods() *protoiface.M
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgAcceptAuthorityResponse: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgAcceptOwnershipResponse: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgAcceptAuthorityResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgAcceptOwnershipResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			default:
@@ -2762,17 +2762,17 @@ func (x *MsgExecuteResponse) GetResults() [][]byte {
 	return nil
 }
 
-type MsgTransferAuthority struct {
+type MsgTransferOwnership struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Signer       string `protobuf:"bytes,1,opt,name=signer,proto3" json:"signer,omitempty"`
-	NewAuthority string `protobuf:"bytes,2,opt,name=new_authority,json=newAuthority,proto3" json:"new_authority,omitempty"`
+	Signer   string `protobuf:"bytes,1,opt,name=signer,proto3" json:"signer,omitempty"`
+	NewOwner string `protobuf:"bytes,2,opt,name=new_owner,json=newOwner,proto3" json:"new_owner,omitempty"`
 }
 
-func (x *MsgTransferAuthority) Reset() {
-	*x = MsgTransferAuthority{}
+func (x *MsgTransferOwnership) Reset() {
+	*x = MsgTransferOwnership{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_noble_authority_v1_tx_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2780,39 +2780,39 @@ func (x *MsgTransferAuthority) Reset() {
 	}
 }
 
-func (x *MsgTransferAuthority) String() string {
+func (x *MsgTransferOwnership) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MsgTransferAuthority) ProtoMessage() {}
+func (*MsgTransferOwnership) ProtoMessage() {}
 
-// Deprecated: Use MsgTransferAuthority.ProtoReflect.Descriptor instead.
-func (*MsgTransferAuthority) Descriptor() ([]byte, []int) {
+// Deprecated: Use MsgTransferOwnership.ProtoReflect.Descriptor instead.
+func (*MsgTransferOwnership) Descriptor() ([]byte, []int) {
 	return file_noble_authority_v1_tx_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *MsgTransferAuthority) GetSigner() string {
+func (x *MsgTransferOwnership) GetSigner() string {
 	if x != nil {
 		return x.Signer
 	}
 	return ""
 }
 
-func (x *MsgTransferAuthority) GetNewAuthority() string {
+func (x *MsgTransferOwnership) GetNewOwner() string {
 	if x != nil {
-		return x.NewAuthority
+		return x.NewOwner
 	}
 	return ""
 }
 
-type MsgTransferAuthorityResponse struct {
+type MsgTransferOwnershipResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *MsgTransferAuthorityResponse) Reset() {
-	*x = MsgTransferAuthorityResponse{}
+func (x *MsgTransferOwnershipResponse) Reset() {
+	*x = MsgTransferOwnershipResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_noble_authority_v1_tx_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2820,18 +2820,18 @@ func (x *MsgTransferAuthorityResponse) Reset() {
 	}
 }
 
-func (x *MsgTransferAuthorityResponse) String() string {
+func (x *MsgTransferOwnershipResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MsgTransferAuthorityResponse) ProtoMessage() {}
+func (*MsgTransferOwnershipResponse) ProtoMessage() {}
 
-// Deprecated: Use MsgTransferAuthorityResponse.ProtoReflect.Descriptor instead.
-func (*MsgTransferAuthorityResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use MsgTransferOwnershipResponse.ProtoReflect.Descriptor instead.
+func (*MsgTransferOwnershipResponse) Descriptor() ([]byte, []int) {
 	return file_noble_authority_v1_tx_proto_rawDescGZIP(), []int{3}
 }
 
-type MsgAcceptAuthority struct {
+type MsgAcceptOwnership struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -2839,8 +2839,8 @@ type MsgAcceptAuthority struct {
 	Signer string `protobuf:"bytes,1,opt,name=signer,proto3" json:"signer,omitempty"`
 }
 
-func (x *MsgAcceptAuthority) Reset() {
-	*x = MsgAcceptAuthority{}
+func (x *MsgAcceptOwnership) Reset() {
+	*x = MsgAcceptOwnership{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_noble_authority_v1_tx_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2848,32 +2848,32 @@ func (x *MsgAcceptAuthority) Reset() {
 	}
 }
 
-func (x *MsgAcceptAuthority) String() string {
+func (x *MsgAcceptOwnership) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MsgAcceptAuthority) ProtoMessage() {}
+func (*MsgAcceptOwnership) ProtoMessage() {}
 
-// Deprecated: Use MsgAcceptAuthority.ProtoReflect.Descriptor instead.
-func (*MsgAcceptAuthority) Descriptor() ([]byte, []int) {
+// Deprecated: Use MsgAcceptOwnership.ProtoReflect.Descriptor instead.
+func (*MsgAcceptOwnership) Descriptor() ([]byte, []int) {
 	return file_noble_authority_v1_tx_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *MsgAcceptAuthority) GetSigner() string {
+func (x *MsgAcceptOwnership) GetSigner() string {
 	if x != nil {
 		return x.Signer
 	}
 	return ""
 }
 
-type MsgAcceptAuthorityResponse struct {
+type MsgAcceptOwnershipResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *MsgAcceptAuthorityResponse) Reset() {
-	*x = MsgAcceptAuthorityResponse{}
+func (x *MsgAcceptOwnershipResponse) Reset() {
+	*x = MsgAcceptOwnershipResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_noble_authority_v1_tx_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2881,14 +2881,14 @@ func (x *MsgAcceptAuthorityResponse) Reset() {
 	}
 }
 
-func (x *MsgAcceptAuthorityResponse) String() string {
+func (x *MsgAcceptOwnershipResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MsgAcceptAuthorityResponse) ProtoMessage() {}
+func (*MsgAcceptOwnershipResponse) ProtoMessage() {}
 
-// Deprecated: Use MsgAcceptAuthorityResponse.ProtoReflect.Descriptor instead.
-func (*MsgAcceptAuthorityResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use MsgAcceptOwnershipResponse.ProtoReflect.Descriptor instead.
+func (*MsgAcceptOwnershipResponse) Descriptor() ([]byte, []int) {
 	return file_noble_authority_v1_tx_proto_rawDescGZIP(), []int{5}
 }
 
@@ -2918,63 +2918,63 @@ var file_noble_authority_v1_tx_proto_rawDesc = []byte{
 	0x75, 0x74, 0x65, 0x22, 0x2e, 0x0a, 0x12, 0x4d, 0x73, 0x67, 0x45, 0x78, 0x65, 0x63, 0x75, 0x74,
 	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x72, 0x65, 0x73,
 	0x75, 0x6c, 0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0c, 0x52, 0x07, 0x72, 0x65, 0x73, 0x75,
-	0x6c, 0x74, 0x73, 0x22, 0xb8, 0x01, 0x0a, 0x14, 0x4d, 0x73, 0x67, 0x54, 0x72, 0x61, 0x6e, 0x73,
-	0x66, 0x65, 0x72, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x12, 0x30, 0x0a, 0x06,
+	0x6c, 0x74, 0x73, 0x22, 0xb0, 0x01, 0x0a, 0x14, 0x4d, 0x73, 0x67, 0x54, 0x72, 0x61, 0x6e, 0x73,
+	0x66, 0x65, 0x72, 0x4f, 0x77, 0x6e, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x12, 0x30, 0x0a, 0x06,
 	0x73, 0x69, 0x67, 0x6e, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4,
 	0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
-	0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x06, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x72, 0x12, 0x3d,
-	0x0a, 0x0d, 0x6e, 0x65, 0x77, 0x5f, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f,
-	0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52,
-	0x0c, 0x6e, 0x65, 0x77, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x3a, 0x2f, 0x88,
-	0xa0, 0x1f, 0x00, 0xe8, 0xa0, 0x1f, 0x00, 0x82, 0xe7, 0xb0, 0x2a, 0x06, 0x73, 0x69, 0x67, 0x6e,
-	0x65, 0x72, 0x8a, 0xe7, 0xb0, 0x2a, 0x17, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2f, 0x54, 0x72, 0x61,
-	0x6e, 0x73, 0x66, 0x65, 0x72, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x22, 0x1e,
-	0x0a, 0x1c, 0x4d, 0x73, 0x67, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x41, 0x75, 0x74,
-	0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x75,
-	0x0a, 0x12, 0x4d, 0x73, 0x67, 0x41, 0x63, 0x63, 0x65, 0x70, 0x74, 0x41, 0x75, 0x74, 0x68, 0x6f,
-	0x72, 0x69, 0x74, 0x79, 0x12, 0x30, 0x0a, 0x06, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x72, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73,
-	0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x06,
-	0x73, 0x69, 0x67, 0x6e, 0x65, 0x72, 0x3a, 0x2d, 0x88, 0xa0, 0x1f, 0x00, 0xe8, 0xa0, 0x1f, 0x00,
-	0x82, 0xe7, 0xb0, 0x2a, 0x06, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x72, 0x8a, 0xe7, 0xb0, 0x2a, 0x15,
-	0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2f, 0x41, 0x63, 0x63, 0x65, 0x70, 0x74, 0x41, 0x75, 0x74, 0x68,
-	0x6f, 0x72, 0x69, 0x74, 0x79, 0x22, 0x1c, 0x0a, 0x1a, 0x4d, 0x73, 0x67, 0x41, 0x63, 0x63, 0x65,
-	0x70, 0x74, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x32, 0xbb, 0x02, 0x0a, 0x03, 0x4d, 0x73, 0x67, 0x12, 0x51, 0x0a, 0x07, 0x45,
-	0x78, 0x65, 0x63, 0x75, 0x74, 0x65, 0x12, 0x1e, 0x2e, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2e, 0x61,
-	0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x45,
-	0x78, 0x65, 0x63, 0x75, 0x74, 0x65, 0x1a, 0x26, 0x2e, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2e, 0x61,
-	0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x45,
-	0x78, 0x65, 0x63, 0x75, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x6f,
-	0x0a, 0x11, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72,
-	0x69, 0x74, 0x79, 0x12, 0x28, 0x2e, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2e, 0x61, 0x75, 0x74, 0x68,
-	0x6f, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x54, 0x72, 0x61, 0x6e,
-	0x73, 0x66, 0x65, 0x72, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x1a, 0x30, 0x2e,
-	0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x2e,
-	0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x41, 0x75,
-	0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
-	0x69, 0x0a, 0x0f, 0x41, 0x63, 0x63, 0x65, 0x70, 0x74, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69,
-	0x74, 0x79, 0x12, 0x26, 0x2e, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x6f,
-	0x72, 0x69, 0x74, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x41, 0x63, 0x63, 0x65, 0x70,
-	0x74, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x1a, 0x2e, 0x2e, 0x6e, 0x6f, 0x62,
+	0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x06, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x72, 0x12, 0x35,
+	0x0a, 0x09, 0x6e, 0x65, 0x77, 0x5f, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64,
+	0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x08, 0x6e, 0x65, 0x77,
+	0x4f, 0x77, 0x6e, 0x65, 0x72, 0x3a, 0x2f, 0x88, 0xa0, 0x1f, 0x00, 0xe8, 0xa0, 0x1f, 0x00, 0x82,
+	0xe7, 0xb0, 0x2a, 0x06, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x72, 0x8a, 0xe7, 0xb0, 0x2a, 0x17, 0x6e,
+	0x6f, 0x62, 0x6c, 0x65, 0x2f, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x4f, 0x77, 0x6e,
+	0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x22, 0x1e, 0x0a, 0x1c, 0x4d, 0x73, 0x67, 0x54, 0x72, 0x61,
+	0x6e, 0x73, 0x66, 0x65, 0x72, 0x4f, 0x77, 0x6e, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x75, 0x0a, 0x12, 0x4d, 0x73, 0x67, 0x41, 0x63, 0x63,
+	0x65, 0x70, 0x74, 0x4f, 0x77, 0x6e, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x12, 0x30, 0x0a, 0x06,
+	0x73, 0x69, 0x67, 0x6e, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4,
+	0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x06, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x72, 0x3a, 0x2d,
+	0x88, 0xa0, 0x1f, 0x00, 0xe8, 0xa0, 0x1f, 0x00, 0x82, 0xe7, 0xb0, 0x2a, 0x06, 0x73, 0x69, 0x67,
+	0x6e, 0x65, 0x72, 0x8a, 0xe7, 0xb0, 0x2a, 0x15, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2f, 0x41, 0x63,
+	0x63, 0x65, 0x70, 0x74, 0x4f, 0x77, 0x6e, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x22, 0x1c, 0x0a,
+	0x1a, 0x4d, 0x73, 0x67, 0x41, 0x63, 0x63, 0x65, 0x70, 0x74, 0x4f, 0x77, 0x6e, 0x65, 0x72, 0x73,
+	0x68, 0x69, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0xbb, 0x02, 0x0a, 0x03,
+	0x4d, 0x73, 0x67, 0x12, 0x51, 0x0a, 0x07, 0x45, 0x78, 0x65, 0x63, 0x75, 0x74, 0x65, 0x12, 0x1e,
+	0x2e, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79,
+	0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x45, 0x78, 0x65, 0x63, 0x75, 0x74, 0x65, 0x1a, 0x26,
+	0x2e, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79,
+	0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x45, 0x78, 0x65, 0x63, 0x75, 0x74, 0x65, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x6f, 0x0a, 0x11, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66,
+	0x65, 0x72, 0x4f, 0x77, 0x6e, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x12, 0x28, 0x2e, 0x6e, 0x6f,
+	0x62, 0x6c, 0x65, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x76, 0x31,
+	0x2e, 0x4d, 0x73, 0x67, 0x54, 0x72, 0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x4f, 0x77, 0x6e, 0x65,
+	0x72, 0x73, 0x68, 0x69, 0x70, 0x1a, 0x30, 0x2e, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2e, 0x61, 0x75,
+	0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x54, 0x72,
+	0x61, 0x6e, 0x73, 0x66, 0x65, 0x72, 0x4f, 0x77, 0x6e, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x69, 0x0a, 0x0f, 0x41, 0x63, 0x63, 0x65, 0x70,
+	0x74, 0x4f, 0x77, 0x6e, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x12, 0x26, 0x2e, 0x6e, 0x6f, 0x62,
 	0x6c, 0x65, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x76, 0x31, 0x2e,
-	0x4d, 0x73, 0x67, 0x41, 0x63, 0x63, 0x65, 0x70, 0x74, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69,
-	0x74, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x1a, 0x05, 0x80, 0xe7, 0xb0, 0x2a,
-	0x01, 0x42, 0xd1, 0x01, 0x0a, 0x16, 0x63, 0x6f, 0x6d, 0x2e, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2e,
-	0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x76, 0x31, 0x42, 0x07, 0x54, 0x78,
-	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x44, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
-	0x63, 0x6f, 0x6d, 0x2f, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2d, 0x61, 0x73, 0x73, 0x65, 0x74, 0x73,
-	0x2f, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e,
-	0x6f, 0x62, 0x6c, 0x65, 0x2f, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x2f, 0x76,
-	0x31, 0x3b, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x76, 0x31, 0xa2, 0x02, 0x03,
-	0x4e, 0x41, 0x58, 0xaa, 0x02, 0x12, 0x4e, 0x6f, 0x62, 0x6c, 0x65, 0x2e, 0x41, 0x75, 0x74, 0x68,
-	0x6f, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x12, 0x4e, 0x6f, 0x62, 0x6c, 0x65,
-	0x5c, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x1e,
-	0x4e, 0x6f, 0x62, 0x6c, 0x65, 0x5c, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x5c,
-	0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02,
-	0x14, 0x4e, 0x6f, 0x62, 0x6c, 0x65, 0x3a, 0x3a, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74,
-	0x79, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x4d, 0x73, 0x67, 0x41, 0x63, 0x63, 0x65, 0x70, 0x74, 0x4f, 0x77, 0x6e, 0x65, 0x72, 0x73, 0x68,
+	0x69, 0x70, 0x1a, 0x2e, 0x2e, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x6f,
+	0x72, 0x69, 0x74, 0x79, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x41, 0x63, 0x63, 0x65, 0x70,
+	0x74, 0x4f, 0x77, 0x6e, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x1a, 0x05, 0x80, 0xe7, 0xb0, 0x2a, 0x01, 0x42, 0xd1, 0x01, 0x0a, 0x16, 0x63, 0x6f,
+	0x6d, 0x2e, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74,
+	0x79, 0x2e, 0x76, 0x31, 0x42, 0x07, 0x54, 0x78, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a,
+	0x44, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6e, 0x6f, 0x62, 0x6c,
+	0x65, 0x2d, 0x61, 0x73, 0x73, 0x65, 0x74, 0x73, 0x2f, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69,
+	0x74, 0x79, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2f, 0x61, 0x75, 0x74,
+	0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x2f, 0x76, 0x31, 0x3b, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72,
+	0x69, 0x74, 0x79, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4e, 0x41, 0x58, 0xaa, 0x02, 0x12, 0x4e, 0x6f,
+	0x62, 0x6c, 0x65, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x56, 0x31,
+	0xca, 0x02, 0x12, 0x4e, 0x6f, 0x62, 0x6c, 0x65, 0x5c, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69,
+	0x74, 0x79, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x1e, 0x4e, 0x6f, 0x62, 0x6c, 0x65, 0x5c, 0x41, 0x75,
+	0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65,
+	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x14, 0x4e, 0x6f, 0x62, 0x6c, 0x65, 0x3a, 0x3a,
+	0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2993,20 +2993,20 @@ var file_noble_authority_v1_tx_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_noble_authority_v1_tx_proto_goTypes = []interface{}{
 	(*MsgExecute)(nil),                   // 0: noble.authority.v1.MsgExecute
 	(*MsgExecuteResponse)(nil),           // 1: noble.authority.v1.MsgExecuteResponse
-	(*MsgTransferAuthority)(nil),         // 2: noble.authority.v1.MsgTransferAuthority
-	(*MsgTransferAuthorityResponse)(nil), // 3: noble.authority.v1.MsgTransferAuthorityResponse
-	(*MsgAcceptAuthority)(nil),           // 4: noble.authority.v1.MsgAcceptAuthority
-	(*MsgAcceptAuthorityResponse)(nil),   // 5: noble.authority.v1.MsgAcceptAuthorityResponse
+	(*MsgTransferOwnership)(nil),         // 2: noble.authority.v1.MsgTransferOwnership
+	(*MsgTransferOwnershipResponse)(nil), // 3: noble.authority.v1.MsgTransferOwnershipResponse
+	(*MsgAcceptOwnership)(nil),           // 4: noble.authority.v1.MsgAcceptOwnership
+	(*MsgAcceptOwnershipResponse)(nil),   // 5: noble.authority.v1.MsgAcceptOwnershipResponse
 	(*anypb.Any)(nil),                    // 6: google.protobuf.Any
 }
 var file_noble_authority_v1_tx_proto_depIdxs = []int32{
 	6, // 0: noble.authority.v1.MsgExecute.messages:type_name -> google.protobuf.Any
 	0, // 1: noble.authority.v1.Msg.Execute:input_type -> noble.authority.v1.MsgExecute
-	2, // 2: noble.authority.v1.Msg.TransferAuthority:input_type -> noble.authority.v1.MsgTransferAuthority
-	4, // 3: noble.authority.v1.Msg.AcceptAuthority:input_type -> noble.authority.v1.MsgAcceptAuthority
+	2, // 2: noble.authority.v1.Msg.TransferOwnership:input_type -> noble.authority.v1.MsgTransferOwnership
+	4, // 3: noble.authority.v1.Msg.AcceptOwnership:input_type -> noble.authority.v1.MsgAcceptOwnership
 	1, // 4: noble.authority.v1.Msg.Execute:output_type -> noble.authority.v1.MsgExecuteResponse
-	3, // 5: noble.authority.v1.Msg.TransferAuthority:output_type -> noble.authority.v1.MsgTransferAuthorityResponse
-	5, // 6: noble.authority.v1.Msg.AcceptAuthority:output_type -> noble.authority.v1.MsgAcceptAuthorityResponse
+	3, // 5: noble.authority.v1.Msg.TransferOwnership:output_type -> noble.authority.v1.MsgTransferOwnershipResponse
+	5, // 6: noble.authority.v1.Msg.AcceptOwnership:output_type -> noble.authority.v1.MsgAcceptOwnershipResponse
 	4, // [4:7] is the sub-list for method output_type
 	1, // [1:4] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -3045,7 +3045,7 @@ func file_noble_authority_v1_tx_proto_init() {
 			}
 		}
 		file_noble_authority_v1_tx_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MsgTransferAuthority); i {
+			switch v := v.(*MsgTransferOwnership); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3057,7 +3057,7 @@ func file_noble_authority_v1_tx_proto_init() {
 			}
 		}
 		file_noble_authority_v1_tx_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MsgTransferAuthorityResponse); i {
+			switch v := v.(*MsgTransferOwnershipResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3069,7 +3069,7 @@ func file_noble_authority_v1_tx_proto_init() {
 			}
 		}
 		file_noble_authority_v1_tx_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MsgAcceptAuthority); i {
+			switch v := v.(*MsgAcceptOwnership); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3081,7 +3081,7 @@ func file_noble_authority_v1_tx_proto_init() {
 			}
 		}
 		file_noble_authority_v1_tx_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MsgAcceptAuthorityResponse); i {
+			switch v := v.(*MsgAcceptOwnershipResponse); i {
 			case 0:
 				return &v.state
 			case 1:

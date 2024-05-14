@@ -14,8 +14,9 @@ service Msg {
   option (cosmos.msg.v1.service) = true;
 
   rpc Execute(MsgExecute) returns (MsgExecuteResponse);
-  rpc TransferAuthority(MsgTransferAuthority) returns (MsgTransferAuthorityResponse);
-  rpc AcceptAuthority(MsgAcceptAuthority) returns (MsgAcceptAuthorityResponse);
+
+  rpc TransferOwnership(MsgTransferOwnership) returns (MsgTransferOwnershipResponse);
+  rpc AcceptOwnership(MsgAcceptOwnership) returns (MsgAcceptOwnershipResponse);
 }
 
 //
@@ -35,22 +36,22 @@ message MsgExecuteResponse {
   repeated bytes results = 1;
 }
 
-message MsgTransferAuthority {
+message MsgTransferOwnership {
   option (cosmos.msg.v1.signer) = "signer";
-  option (amino.name) = "noble/TransferAuthority";
+  option (amino.name) = "noble/TransferOwnership";
 
   option (gogoproto.equal) = false;
   option (gogoproto.goproto_getters) = false;
 
   string signer = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  string new_authority = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  string new_owner = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
 }
 
-message MsgTransferAuthorityResponse {}
+message MsgTransferOwnershipResponse {}
 
-message MsgAcceptAuthority {
+message MsgAcceptOwnership {
   option (cosmos.msg.v1.signer) = "signer";
-  option (amino.name) = "noble/AcceptAuthority";
+  option (amino.name) = "noble/AcceptOwnership";
 
   option (gogoproto.equal) = false;
   option (gogoproto.goproto_getters) = false;
@@ -58,4 +59,4 @@ message MsgAcceptAuthority {
   string signer = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
 }
 
-message MsgAcceptAuthorityResponse {}
+message MsgAcceptOwnershipResponse {}

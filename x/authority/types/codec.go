@@ -9,15 +9,15 @@ import (
 
 func RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgExecute{}, "noble/Execute", nil)
-	cdc.RegisterConcrete(&MsgTransferAuthority{}, "noble/TransferAuthority", nil)
-	cdc.RegisterConcrete(&MsgAcceptAuthority{}, "noble/AcceptAuthority", nil)
+	cdc.RegisterConcrete(&MsgTransferOwnership{}, "noble/TransferOwnership", nil)
+	cdc.RegisterConcrete(&MsgAcceptOwnership{}, "noble/AcceptOwnership", nil)
 }
 
 func RegisterInterfaces(registry codectypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgExecute{},
-		&MsgTransferAuthority{},
-		&MsgAcceptAuthority{},
+		&MsgTransferOwnership{},
+		&MsgAcceptOwnership{},
 	)
 
 	msgservice.RegisterMsgServiceDesc(registry, &_Msg_serviceDesc)

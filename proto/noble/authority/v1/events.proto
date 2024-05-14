@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package noble.authority.v1;
+
+import "cosmos_proto/cosmos.proto";
+
+option go_package = "github.com/noble-assets/authority/x/authority/types";
+
+// OwnershipTransferStarted is emitted whenever an ownership transfer is started.
+message OwnershipTransferStarted {
+  // previous_owner is the address of the previous owner.
+  string previous_owner = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  // new_owner is the address of the new owner.
+  string new_owner = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+}
+
+// OwnershipTransferStarted is emitted whenever an ownership transfer is finalized.
+message OwnershipTransferred {
+  // previous_owner is the address of the previous owner.
+  string previous_owner = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  // new_owner is the address of the new owner.
+  string new_owner = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+}

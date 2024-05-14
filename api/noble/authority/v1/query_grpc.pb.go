@@ -19,14 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Query_Address_FullMethodName = "/noble.authority.v1.Query/Address"
+	Query_Owner_FullMethodName        = "/noble.authority.v1.Query/Owner"
+	Query_PendingOwner_FullMethodName = "/noble.authority.v1.Query/PendingOwner"
 )
 
 // QueryClient is the client API for Query service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type QueryClient interface {
-	Address(ctx context.Context, in *QueryAddress, opts ...grpc.CallOption) (*QueryAddressResponse, error)
+	Owner(ctx context.Context, in *QueryOwner, opts ...grpc.CallOption) (*QueryOwnerResponse, error)
+	PendingOwner(ctx context.Context, in *QueryPendingOwner, opts ...grpc.CallOption) (*QueryPendingOwnerResponse, error)
 }
 
 type queryClient struct {
@@ -37,9 +39,18 @@ func NewQueryClient(cc grpc.ClientConnInterface) QueryClient {
 	return &queryClient{cc}
 }
 
-func (c *queryClient) Address(ctx context.Context, in *QueryAddress, opts ...grpc.CallOption) (*QueryAddressResponse, error) {
-	out := new(QueryAddressResponse)
-	err := c.cc.Invoke(ctx, Query_Address_FullMethodName, in, out, opts...)
+func (c *queryClient) Owner(ctx context.Context, in *QueryOwner, opts ...grpc.CallOption) (*QueryOwnerResponse, error) {
+	out := new(QueryOwnerResponse)
+	err := c.cc.Invoke(ctx, Query_Owner_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) PendingOwner(ctx context.Context, in *QueryPendingOwner, opts ...grpc.CallOption) (*QueryPendingOwnerResponse, error) {
+	out := new(QueryPendingOwnerResponse)
+	err := c.cc.Invoke(ctx, Query_PendingOwner_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +61,8 @@ func (c *queryClient) Address(ctx context.Context, in *QueryAddress, opts ...grp
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
 type QueryServer interface {
-	Address(context.Context, *QueryAddress) (*QueryAddressResponse, error)
+	Owner(context.Context, *QueryOwner) (*QueryOwnerResponse, error)
+	PendingOwner(context.Context, *QueryPendingOwner) (*QueryPendingOwnerResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -58,8 +70,11 @@ type QueryServer interface {
 type UnimplementedQueryServer struct {
 }
 
-func (UnimplementedQueryServer) Address(context.Context, *QueryAddress) (*QueryAddressResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Address not implemented")
+func (UnimplementedQueryServer) Owner(context.Context, *QueryOwner) (*QueryOwnerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Owner not implemented")
+}
+func (UnimplementedQueryServer) PendingOwner(context.Context, *QueryPendingOwner) (*QueryPendingOwnerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PendingOwner not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -74,20 +89,38 @@ func RegisterQueryServer(s grpc.ServiceRegistrar, srv QueryServer) {
 	s.RegisterService(&Query_ServiceDesc, srv)
 }
 
-func _Query_Address_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryAddress)
+func _Query_Owner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryOwner)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).Address(ctx, in)
+		return srv.(QueryServer).Owner(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Query_Address_FullMethodName,
+		FullMethod: Query_Owner_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).Address(ctx, req.(*QueryAddress))
+		return srv.(QueryServer).Owner(ctx, req.(*QueryOwner))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_PendingOwner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryPendingOwner)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).PendingOwner(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_PendingOwner_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).PendingOwner(ctx, req.(*QueryPendingOwner))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -100,8 +133,12 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*QueryServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Address",
-			Handler:    _Query_Address_Handler,
+			MethodName: "Owner",
+			Handler:    _Query_Owner_Handler,
+		},
+		{
+			MethodName: "PendingOwner",
+			Handler:    _Query_PendingOwner_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

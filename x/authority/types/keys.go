@@ -7,6 +7,6 @@ const ModuleName = "authority"
 var ModuleAddress = authtypes.NewModuleAddress(ModuleName)
 
 var (
-	AuthorityKey        = []byte("authority")
-	PendingAuthorityKey = []byte("pending_authority")
+	OwnerKey        = []byte("owner")
+	PendingOwnerKey = []byte("pending_owner")
 )

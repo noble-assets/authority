@@ -3,8 +3,9 @@ package types
 import "cosmossdk.io/errors"
 
 var (
-	ErrInvalidAuthority        = errors.Register(ModuleName, 1, "signer is not authority")
-	ErrSameAuthority           = errors.Register(ModuleName, 2, "provided authority is the current authority")
-	ErrInvalidPendingAuthority = errors.Register(ModuleName, 3, "signer is not pending authority")
-	ErrInvalidMessage          = errors.Register(ModuleName, 4, "message is invalid")
+	ErrInvalidOwner        = errors.Register(ModuleName, 1, "signer is not authority")
+	ErrSameOwner           = errors.Register(ModuleName, 2, "provided owner is the current owner")
+	ErrNoPendingOwner      = errors.Register(ModuleName, 3, "no pending owner found")
+	ErrInvalidPendingOwner = errors.Register(ModuleName, 4, "signer is not pending owner")
+	ErrInvalidMessage      = errors.Register(ModuleName, 5, "message is invalid")
 )

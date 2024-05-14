@@ -3,6 +3,7 @@ package keeper_test
 import (
 	"testing"
 
+	"cosmossdk.io/collections"
 	"github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/noble-assets/authority/utils"
 	"github.com/noble-assets/authority/utils/mocks"
@@ -11,38 +12,53 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestAddressQuery(t *testing.T) {
+func TestOwnerQuery(t *testing.T) {
 	k, ctx := mocks.AuthorityKeeper(t)
 	server := keeper.NewQueryServer(k)
 
-	// ACT: Attempt to query address with invalid request.
-	_, err := server.Address(ctx, nil)
+	// ACT: Attempt to query owner with invalid request.
+	_, err := server.Owner(ctx, nil)
 	// ASSERT: The query should've failed due to invalid request.
 	require.ErrorContains(t, err, errors.ErrInvalidRequest.Error())
 
-	// ACT: Attempt to query address with no state.
-	_, err = server.Address(ctx, &types.QueryAddress{})
+	// ACT: Attempt to query owner with no state.
+	_, err = server.Owner(ctx, &types.QueryOwner{})
 	// ASSERT: The query should've failed.
-	require.ErrorContains(t, err, "unable to retrieve authority from state")
+	require.ErrorIs(t, err, collections.ErrNotFound)
 
-	// ARRANGE: Set an authority in state.
-	authority := utils.TestAccount()
-	require.NoError(t, k.Authority.Set(ctx, authority.Bytes))
+	// ARRANGE: Set an owner in state.
+	owner := utils.TestAccount()
+	require.NoError(t, k.Owner.Set(ctx, owner.Address))
 
-	// ACT: Attempt to query address.
-	res, err := server.Address(ctx, &types.QueryAddress{})
-	// ASSERT: The query should've succeeded, and returned address.
+	// ACT: Attempt to query owner.
+	res, err := server.Owner(ctx, &types.QueryOwner{})
+	// ASSERT: The query should've succeeded.
 	require.NoError(t, err)
-	require.Equal(t, authority.Address, res.Address)
+	require.Equal(t, owner.Address, res.Owner)
+}
 
-	// ARRANGE: Set a pending authority in state.
-	pendingAuthority := utils.TestAccount()
-	require.NoError(t, k.PendingAuthority.Set(ctx, pendingAuthority.Bytes))
+func TestPendingOwnerQuery(t *testing.T) {
+	k, ctx := mocks.AuthorityKeeper(t)
+	server := keeper.NewQueryServer(k)
 
-	// ACT: Attempt to query address.
-	res, err = server.Address(ctx, &types.QueryAddress{})
-	// ASSERT: The query should've succeeded, and returned address and pending address.
+	// ACT: Attempt to query pending owner with invalid request.
+	_, err := server.PendingOwner(ctx, nil)
+	// ASSERT: The query should've failed due to invalid request.
+	require.ErrorContains(t, err, errors.ErrInvalidRequest.Error())
+
+	// ACT: Attempt to query pending owner with no state.
+	res, err := server.PendingOwner(ctx, &types.QueryPendingOwner{})
+	// ASSERT: The query should've succeeded.
 	require.NoError(t, err)
-	require.Equal(t, authority.Address, res.Address)
-	require.Equal(t, pendingAuthority.Address, res.PendingAddress)
+	require.Empty(t, res.PendingOwner)
+
+	// ARRANGE: Set a pending owner in state.
+	pendingOwner := utils.TestAccount()
+	require.NoError(t, k.PendingOwner.Set(ctx, pendingOwner.Address))
+
+	// ACT: Attempt to query pending owner.
+	res, err = server.PendingOwner(ctx, &types.QueryPendingOwner{})
+	// ASSERT: The query should've succeeded.
+	require.NoError(t, err)
+	require.Equal(t, pendingOwner.Address, res.PendingOwner)
 }

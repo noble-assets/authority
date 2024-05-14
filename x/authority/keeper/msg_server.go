@@ -21,9 +21,9 @@ func NewMsgServer(keeper *Keeper) types.MsgServer {
 }
 
 func (k msgServer) Execute(ctx context.Context, msg *types.MsgExecute) (*types.MsgExecuteResponse, error) {
-	_, err := k.EnsureAuthoritySigner(ctx, msg.Signer)
-	if err != nil {
-		return nil, err
+	owner, _ := k.Owner.Get(ctx)
+	if msg.Signer != owner {
+		return nil, errors.Wrapf(types.ErrInvalidOwner, "expected %s, got %s", owner, msg.Signer)
 	}
 
 	msgs, err := msg.GetMessages(k.cdc)
@@ -48,7 +48,7 @@ func (k msgServer) Execute(ctx context.Context, msg *types.MsgExecute) (*types.M
 		if len(signers) != 1 || !bytes.Equal(types.ModuleAddress, signers[0]) {
 			module, _ := k.accountKeeper.AddressCodec().BytesToString(types.ModuleAddress)
 			signer, _ := k.accountKeeper.AddressCodec().BytesToString(signers[0])
-			return nil, errors.Wrapf(types.ErrInvalidAuthority, "message %d; expected %s, got %s", i, module, signer)
+			return nil, errors.Wrapf(types.ErrInvalidOwner, "message %d; expected %s, got %s", i, module, signer)
 		}
 
 		handler := k.router.Handler(msg)
@@ -70,48 +70,55 @@ func (k msgServer) Execute(ctx context.Context, msg *types.MsgExecute) (*types.M
 	return &types.MsgExecuteResponse{Results: results}, nil
 }
 
-func (k msgServer) TransferAuthority(ctx context.Context, msg *types.MsgTransferAuthority) (*types.MsgTransferAuthorityResponse, error) {
-	authority, err := k.EnsureAuthoritySigner(ctx, msg.Signer)
-	if err != nil {
-		return nil, err
+func (k msgServer) TransferOwnership(ctx context.Context, msg *types.MsgTransferOwnership) (*types.MsgTransferOwnershipResponse, error) {
+	owner, _ := k.Owner.Get(ctx)
+	if msg.Signer != owner {
+		return nil, errors.Wrapf(types.ErrInvalidOwner, "expected %s, got %s", owner, msg.Signer)
 	}
 
-	newAuthority, err := k.accountKeeper.AddressCodec().StringToBytes(msg.NewAuthority)
+	_, err := k.accountKeeper.AddressCodec().StringToBytes(msg.NewOwner)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to decode new authority address")
+		return nil, errors.Wrap(err, "failed to decode new owner address")
 	}
-	if bytes.Equal(newAuthority, authority) {
-		return nil, types.ErrSameAuthority
+	if msg.NewOwner == owner {
+		return nil, types.ErrSameOwner
 	}
 
-	err = k.PendingAuthority.Set(ctx, newAuthority)
-	return &types.MsgTransferAuthorityResponse{}, err
+	err = k.PendingOwner.Set(ctx, msg.NewOwner)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to set pending owner in state")
+	}
+
+	return &types.MsgTransferOwnershipResponse{}, k.eventService.EventManager(ctx).Emit(ctx, &types.OwnershipTransferStarted{
+		PreviousOwner: owner,
+		NewOwner:      msg.NewOwner,
+	})
 }
 
-func (k msgServer) AcceptAuthority(ctx context.Context, msg *types.MsgAcceptAuthority) (*types.MsgAcceptAuthorityResponse, error) {
-	pendingAuthority, err := k.PendingAuthority.Get(ctx)
-	if err != nil {
-		return nil, errors.Wrap(err, "unable to retrieve pending authority from state")
+func (k msgServer) AcceptOwnership(ctx context.Context, msg *types.MsgAcceptOwnership) (*types.MsgAcceptOwnershipResponse, error) {
+	pendingOwner, _ := k.PendingOwner.Get(ctx)
+	if pendingOwner == "" {
+		return nil, types.ErrNoPendingOwner
 	}
-	signer, err := k.accountKeeper.AddressCodec().StringToBytes(msg.Signer)
-	if err != nil {
-		return nil, errors.Wrap(err, "failed to decode signer address")
-	}
-	if !bytes.Equal(signer, pendingAuthority) {
-		address, _ := k.accountKeeper.AddressCodec().BytesToString(pendingAuthority)
-		return nil, errors.Wrapf(types.ErrInvalidPendingAuthority, "expected %s, got %s", address, msg.Signer)
+	if msg.Signer != pendingOwner {
+		return nil, errors.Wrapf(types.ErrInvalidPendingOwner, "expected %s, got %s", pendingOwner, msg.Signer)
 	}
 
-	err = k.Authority.Set(ctx, pendingAuthority)
+	owner, _ := k.Owner.Get(ctx)
+
+	err := k.Owner.Set(ctx, pendingOwner)
 	if err != nil {
-		return nil, errors.Wrap(err, "unable to set owner in state")
+		return nil, errors.Wrap(err, "failed to set owner in state")
 	}
-	err = k.PendingAuthority.Remove(ctx)
+	err = k.PendingOwner.Remove(ctx)
 	if err != nil {
-		return nil, errors.Wrap(err, "unable to remove pending owner from state")
+		return nil, errors.Wrap(err, "failed to remove pending owner from state")
 	}
 
-	return &types.MsgAcceptAuthorityResponse{}, nil
+	return &types.MsgAcceptOwnershipResponse{}, k.eventService.EventManager(ctx).Emit(ctx, &types.OwnershipTransferred{
+		PreviousOwner: owner,
+		NewOwner:      msg.Signer,
+	})
 }
 
 //

@@ -14,16 +14,16 @@ import (
 )
 
 var (
-	md_GenesisState                 protoreflect.MessageDescriptor
-	fd_GenesisState_address         protoreflect.FieldDescriptor
-	fd_GenesisState_pending_address protoreflect.FieldDescriptor
+	md_GenesisState               protoreflect.MessageDescriptor
+	fd_GenesisState_owner         protoreflect.FieldDescriptor
+	fd_GenesisState_pending_owner protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_noble_authority_v1_genesis_proto_init()
 	md_GenesisState = File_noble_authority_v1_genesis_proto.Messages().ByName("GenesisState")
-	fd_GenesisState_address = md_GenesisState.Fields().ByName("address")
-	fd_GenesisState_pending_address = md_GenesisState.Fields().ByName("pending_address")
+	fd_GenesisState_owner = md_GenesisState.Fields().ByName("owner")
+	fd_GenesisState_pending_owner = md_GenesisState.Fields().ByName("pending_owner")
 }
 
 var _ protoreflect.Message = (*fastReflection_GenesisState)(nil)
@@ -91,15 +91,15 @@ func (x *fastReflection_GenesisState) Interface() protoreflect.ProtoMessage {
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_GenesisState) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.Address != "" {
-		value := protoreflect.ValueOfString(x.Address)
-		if !f(fd_GenesisState_address, value) {
+	if x.Owner != "" {
+		value := protoreflect.ValueOfString(x.Owner)
+		if !f(fd_GenesisState_owner, value) {
 			return
 		}
 	}
-	if x.PendingAddress != "" {
-		value := protoreflect.ValueOfString(x.PendingAddress)
-		if !f(fd_GenesisState_pending_address, value) {
+	if x.PendingOwner != "" {
+		value := protoreflect.ValueOfString(x.PendingOwner)
+		if !f(fd_GenesisState_pending_owner, value) {
 			return
 		}
 	}
@@ -118,10 +118,10 @@ func (x *fastReflection_GenesisState) Range(f func(protoreflect.FieldDescriptor,
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_GenesisState) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "noble.authority.v1.GenesisState.address":
-		return x.Address != ""
-	case "noble.authority.v1.GenesisState.pending_address":
-		return x.PendingAddress != ""
+	case "noble.authority.v1.GenesisState.owner":
+		return x.Owner != ""
+	case "noble.authority.v1.GenesisState.pending_owner":
+		return x.PendingOwner != ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.GenesisState"))
@@ -138,10 +138,10 @@ func (x *fastReflection_GenesisState) Has(fd protoreflect.FieldDescriptor) bool 
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_GenesisState) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "noble.authority.v1.GenesisState.address":
-		x.Address = ""
-	case "noble.authority.v1.GenesisState.pending_address":
-		x.PendingAddress = ""
+	case "noble.authority.v1.GenesisState.owner":
+		x.Owner = ""
+	case "noble.authority.v1.GenesisState.pending_owner":
+		x.PendingOwner = ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.GenesisState"))
@@ -158,11 +158,11 @@ func (x *fastReflection_GenesisState) Clear(fd protoreflect.FieldDescriptor) {
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_GenesisState) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "noble.authority.v1.GenesisState.address":
-		value := x.Address
+	case "noble.authority.v1.GenesisState.owner":
+		value := x.Owner
 		return protoreflect.ValueOfString(value)
-	case "noble.authority.v1.GenesisState.pending_address":
-		value := x.PendingAddress
+	case "noble.authority.v1.GenesisState.pending_owner":
+		value := x.PendingOwner
 		return protoreflect.ValueOfString(value)
 	default:
 		if descriptor.IsExtension() {
@@ -184,10 +184,10 @@ func (x *fastReflection_GenesisState) Get(descriptor protoreflect.FieldDescripto
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_GenesisState) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "noble.authority.v1.GenesisState.address":
-		x.Address = value.Interface().(string)
-	case "noble.authority.v1.GenesisState.pending_address":
-		x.PendingAddress = value.Interface().(string)
+	case "noble.authority.v1.GenesisState.owner":
+		x.Owner = value.Interface().(string)
+	case "noble.authority.v1.GenesisState.pending_owner":
+		x.PendingOwner = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.GenesisState"))
@@ -208,10 +208,10 @@ func (x *fastReflection_GenesisState) Set(fd protoreflect.FieldDescriptor, value
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_GenesisState) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "noble.authority.v1.GenesisState.address":
-		panic(fmt.Errorf("field address of message noble.authority.v1.GenesisState is not mutable"))
-	case "noble.authority.v1.GenesisState.pending_address":
-		panic(fmt.Errorf("field pending_address of message noble.authority.v1.GenesisState is not mutable"))
+	case "noble.authority.v1.GenesisState.owner":
+		panic(fmt.Errorf("field owner of message noble.authority.v1.GenesisState is not mutable"))
+	case "noble.authority.v1.GenesisState.pending_owner":
+		panic(fmt.Errorf("field pending_owner of message noble.authority.v1.GenesisState is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: noble.authority.v1.GenesisState"))
@@ -225,9 +225,9 @@ func (x *fastReflection_GenesisState) Mutable(fd protoreflect.FieldDescriptor) p
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_GenesisState) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "noble.authority.v1.GenesisState.address":
+	case "noble.authority.v1.GenesisState.owner":
 		return protoreflect.ValueOfString("")
-	case "noble.authority.v1.GenesisState.pending_address":
+	case "noble.authority.v1.GenesisState.pending_owner":
 		return protoreflect.ValueOfString("")
 	default:
 		if fd.IsExtension() {
@@ -298,11 +298,11 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
-		l = len(x.Address)
+		l = len(x.Owner)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		l = len(x.PendingAddress)
+		l = len(x.PendingOwner)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
@@ -335,17 +335,17 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.PendingAddress) > 0 {
-			i -= len(x.PendingAddress)
-			copy(dAtA[i:], x.PendingAddress)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.PendingAddress)))
+		if len(x.PendingOwner) > 0 {
+			i -= len(x.PendingOwner)
+			copy(dAtA[i:], x.PendingOwner)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.PendingOwner)))
 			i--
 			dAtA[i] = 0x12
 		}
-		if len(x.Address) > 0 {
-			i -= len(x.Address)
-			copy(dAtA[i:], x.Address)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Address)))
+		if len(x.Owner) > 0 {
+			i -= len(x.Owner)
+			copy(dAtA[i:], x.Owner)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Owner)))
 			i--
 			dAtA[i] = 0xa
 		}
@@ -400,7 +400,7 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 			switch fieldNum {
 			case 1:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Owner", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -428,11 +428,11 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.Address = string(dAtA[iNdEx:postIndex])
+				x.Owner = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 2:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field PendingAddress", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field PendingOwner", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -460,7 +460,7 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.PendingAddress = string(dAtA[iNdEx:postIndex])
+				x.PendingOwner = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -515,8 +515,8 @@ type GenesisState struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Address        string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
-	PendingAddress string `protobuf:"bytes,2,opt,name=pending_address,json=pendingAddress,proto3" json:"pending_address,omitempty"`
+	Owner        string `protobuf:"bytes,1,opt,name=owner,proto3" json:"owner,omitempty"`
+	PendingOwner string `protobuf:"bytes,2,opt,name=pending_owner,json=pendingOwner,proto3" json:"pending_owner,omitempty"`
 }
 
 func (x *GenesisState) Reset() {
@@ -539,16 +539,16 @@ func (*GenesisState) Descriptor() ([]byte, []int) {
 	return file_noble_authority_v1_genesis_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *GenesisState) GetAddress() string {
+func (x *GenesisState) GetOwner() string {
 	if x != nil {
-		return x.Address
+		return x.Owner
 	}
 	return ""
 }
 
-func (x *GenesisState) GetPendingAddress() string {
+func (x *GenesisState) GetPendingOwner() string {
 	if x != nil {
-		return x.PendingAddress
+		return x.PendingOwner
 	}
 	return ""
 }
@@ -561,29 +561,29 @@ var file_noble_authority_v1_genesis_proto_rawDesc = []byte{
 	0x74, 0x6f, 0x12, 0x12, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72,
 	0x69, 0x74, 0x79, 0x2e, 0x76, 0x31, 0x1a, 0x19, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x5f, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x22, 0x85, 0x01, 0x0a, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x53, 0x74, 0x61,
-	0x74, 0x65, 0x12, 0x32, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e,
-	0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x61,
-	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x41, 0x0a, 0x0f, 0x70, 0x65, 0x6e, 0x64, 0x69, 0x6e,
-	0x67, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42,
-	0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72,
-	0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x0e, 0x70, 0x65, 0x6e, 0x64, 0x69,
-	0x6e, 0x67, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x42, 0xd6, 0x01, 0x0a, 0x16, 0x63, 0x6f,
-	0x6d, 0x2e, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74,
-	0x79, 0x2e, 0x76, 0x31, 0x42, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x50, 0x72, 0x6f,
-	0x74, 0x6f, 0x50, 0x01, 0x5a, 0x44, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
-	0x2f, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2d, 0x61, 0x73, 0x73, 0x65, 0x74, 0x73, 0x2f, 0x61, 0x75,
-	0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e, 0x6f, 0x62, 0x6c,
-	0x65, 0x2f, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x2f, 0x76, 0x31, 0x3b, 0x61,
-	0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4e, 0x41, 0x58,
-	0xaa, 0x02, 0x12, 0x4e, 0x6f, 0x62, 0x6c, 0x65, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69,
-	0x74, 0x79, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x12, 0x4e, 0x6f, 0x62, 0x6c, 0x65, 0x5c, 0x41, 0x75,
-	0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x1e, 0x4e, 0x6f, 0x62,
-	0x6c, 0x65, 0x5c, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x5c, 0x56, 0x31, 0x5c,
-	0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x14, 0x4e, 0x6f,
-	0x62, 0x6c, 0x65, 0x3a, 0x3a, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x3a, 0x3a,
-	0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6f, 0x22, 0x7d, 0x0a, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x53, 0x74, 0x61, 0x74,
+	0x65, 0x12, 0x2e, 0x0a, 0x05, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64,
+	0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x05, 0x6f, 0x77, 0x6e, 0x65,
+	0x72, 0x12, 0x3d, 0x0a, 0x0d, 0x70, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x5f, 0x6f, 0x77, 0x6e,
+	0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f,
+	0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69,
+	0x6e, 0x67, 0x52, 0x0c, 0x70, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x4f, 0x77, 0x6e, 0x65, 0x72,
+	0x42, 0xd6, 0x01, 0x0a, 0x16, 0x63, 0x6f, 0x6d, 0x2e, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2e, 0x61,
+	0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x76, 0x31, 0x42, 0x0c, 0x47, 0x65, 0x6e,
+	0x65, 0x73, 0x69, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x44, 0x67, 0x69, 0x74,
+	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2d, 0x61, 0x73,
+	0x73, 0x65, 0x74, 0x73, 0x2f, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x2f, 0x61,
+	0x70, 0x69, 0x2f, 0x6e, 0x6f, 0x62, 0x6c, 0x65, 0x2f, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69,
+	0x74, 0x79, 0x2f, 0x76, 0x31, 0x3b, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x76,
+	0x31, 0xa2, 0x02, 0x03, 0x4e, 0x41, 0x58, 0xaa, 0x02, 0x12, 0x4e, 0x6f, 0x62, 0x6c, 0x65, 0x2e,
+	0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x12, 0x4e,
+	0x6f, 0x62, 0x6c, 0x65, 0x5c, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x5c, 0x56,
+	0x31, 0xe2, 0x02, 0x1e, 0x4e, 0x6f, 0x62, 0x6c, 0x65, 0x5c, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72,
+	0x69, 0x74, 0x79, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61,
+	0x74, 0x61, 0xea, 0x02, 0x14, 0x4e, 0x6f, 0x62, 0x6c, 0x65, 0x3a, 0x3a, 0x41, 0x75, 0x74, 0x68,
+	0x6f, 0x72, 0x69, 0x74, 0x79, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (

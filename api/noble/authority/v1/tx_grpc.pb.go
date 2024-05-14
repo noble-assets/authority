@@ -20,8 +20,8 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	Msg_Execute_FullMethodName           = "/noble.authority.v1.Msg/Execute"
-	Msg_TransferAuthority_FullMethodName = "/noble.authority.v1.Msg/TransferAuthority"
-	Msg_AcceptAuthority_FullMethodName   = "/noble.authority.v1.Msg/AcceptAuthority"
+	Msg_TransferOwnership_FullMethodName = "/noble.authority.v1.Msg/TransferOwnership"
+	Msg_AcceptOwnership_FullMethodName   = "/noble.authority.v1.Msg/AcceptOwnership"
 )
 
 // MsgClient is the client API for Msg service.
@@ -29,8 +29,8 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MsgClient interface {
 	Execute(ctx context.Context, in *MsgExecute, opts ...grpc.CallOption) (*MsgExecuteResponse, error)
-	TransferAuthority(ctx context.Context, in *MsgTransferAuthority, opts ...grpc.CallOption) (*MsgTransferAuthorityResponse, error)
-	AcceptAuthority(ctx context.Context, in *MsgAcceptAuthority, opts ...grpc.CallOption) (*MsgAcceptAuthorityResponse, error)
+	TransferOwnership(ctx context.Context, in *MsgTransferOwnership, opts ...grpc.CallOption) (*MsgTransferOwnershipResponse, error)
+	AcceptOwnership(ctx context.Context, in *MsgAcceptOwnership, opts ...grpc.CallOption) (*MsgAcceptOwnershipResponse, error)
 }
 
 type msgClient struct {
@@ -50,18 +50,18 @@ func (c *msgClient) Execute(ctx context.Context, in *MsgExecute, opts ...grpc.Ca
 	return out, nil
 }
 
-func (c *msgClient) TransferAuthority(ctx context.Context, in *MsgTransferAuthority, opts ...grpc.CallOption) (*MsgTransferAuthorityResponse, error) {
-	out := new(MsgTransferAuthorityResponse)
-	err := c.cc.Invoke(ctx, Msg_TransferAuthority_FullMethodName, in, out, opts...)
+func (c *msgClient) TransferOwnership(ctx context.Context, in *MsgTransferOwnership, opts ...grpc.CallOption) (*MsgTransferOwnershipResponse, error) {
+	out := new(MsgTransferOwnershipResponse)
+	err := c.cc.Invoke(ctx, Msg_TransferOwnership_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *msgClient) AcceptAuthority(ctx context.Context, in *MsgAcceptAuthority, opts ...grpc.CallOption) (*MsgAcceptAuthorityResponse, error) {
-	out := new(MsgAcceptAuthorityResponse)
-	err := c.cc.Invoke(ctx, Msg_AcceptAuthority_FullMethodName, in, out, opts...)
+func (c *msgClient) AcceptOwnership(ctx context.Context, in *MsgAcceptOwnership, opts ...grpc.CallOption) (*MsgAcceptOwnershipResponse, error) {
+	out := new(MsgAcceptOwnershipResponse)
+	err := c.cc.Invoke(ctx, Msg_AcceptOwnership_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -73,8 +73,8 @@ func (c *msgClient) AcceptAuthority(ctx context.Context, in *MsgAcceptAuthority,
 // for forward compatibility
 type MsgServer interface {
 	Execute(context.Context, *MsgExecute) (*MsgExecuteResponse, error)
-	TransferAuthority(context.Context, *MsgTransferAuthority) (*MsgTransferAuthorityResponse, error)
-	AcceptAuthority(context.Context, *MsgAcceptAuthority) (*MsgAcceptAuthorityResponse, error)
+	TransferOwnership(context.Context, *MsgTransferOwnership) (*MsgTransferOwnershipResponse, error)
+	AcceptOwnership(context.Context, *MsgAcceptOwnership) (*MsgAcceptOwnershipResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -85,11 +85,11 @@ type UnimplementedMsgServer struct {
 func (UnimplementedMsgServer) Execute(context.Context, *MsgExecute) (*MsgExecuteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Execute not implemented")
 }
-func (UnimplementedMsgServer) TransferAuthority(context.Context, *MsgTransferAuthority) (*MsgTransferAuthorityResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method TransferAuthority not implemented")
+func (UnimplementedMsgServer) TransferOwnership(context.Context, *MsgTransferOwnership) (*MsgTransferOwnershipResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TransferOwnership not implemented")
 }
-func (UnimplementedMsgServer) AcceptAuthority(context.Context, *MsgAcceptAuthority) (*MsgAcceptAuthorityResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AcceptAuthority not implemented")
+func (UnimplementedMsgServer) AcceptOwnership(context.Context, *MsgAcceptOwnership) (*MsgAcceptOwnershipResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AcceptOwnership not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -122,38 +122,38 @@ func _Msg_Execute_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_TransferAuthority_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgTransferAuthority)
+func _Msg_TransferOwnership_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgTransferOwnership)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).TransferAuthority(ctx, in)
+		return srv.(MsgServer).TransferOwnership(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Msg_TransferAuthority_FullMethodName,
+		FullMethod: Msg_TransferOwnership_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).TransferAuthority(ctx, req.(*MsgTransferAuthority))
+		return srv.(MsgServer).TransferOwnership(ctx, req.(*MsgTransferOwnership))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_AcceptAuthority_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgAcceptAuthority)
+func _Msg_AcceptOwnership_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgAcceptOwnership)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).AcceptAuthority(ctx, in)
+		return srv.(MsgServer).AcceptOwnership(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Msg_AcceptAuthority_FullMethodName,
+		FullMethod: Msg_AcceptOwnership_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).AcceptAuthority(ctx, req.(*MsgAcceptAuthority))
+		return srv.(MsgServer).AcceptOwnership(ctx, req.(*MsgAcceptOwnership))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -170,12 +170,12 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Msg_Execute_Handler,
 		},
 		{
-			MethodName: "TransferAuthority",
-			Handler:    _Msg_TransferAuthority_Handler,
+			MethodName: "TransferOwnership",
+			Handler:    _Msg_TransferOwnership_Handler,
 		},
 		{
-			MethodName: "AcceptAuthority",
-			Handler:    _Msg_AcceptAuthority_Handler,
+			MethodName: "AcceptOwnership",
+			Handler:    _Msg_AcceptOwnership_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

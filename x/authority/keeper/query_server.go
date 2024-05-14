@@ -3,8 +3,7 @@ package keeper
 import (
 	"context"
 
-	"cosmossdk.io/errors"
-	errorstypes "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/noble-assets/authority/x/authority/types"
 )
 
@@ -18,28 +17,22 @@ func NewQueryServer(keeper *Keeper) types.QueryServer {
 	return &queryServer{Keeper: keeper}
 }
 
-func (k queryServer) Address(ctx context.Context, req *types.QueryAddress) (*types.QueryAddressResponse, error) {
+func (k queryServer) Owner(ctx context.Context, req *types.QueryOwner) (*types.QueryOwnerResponse, error) {
 	if req == nil {
-		return nil, errorstypes.ErrInvalidRequest
+		return nil, errors.ErrInvalidRequest
 	}
 
-	authority, err := k.Authority.Get(ctx)
-	if err != nil {
-		return nil, errors.Wrap(err, "unable to retrieve authority from state")
-	}
-	address, err := k.accountKeeper.AddressCodec().BytesToString(authority)
-	if err != nil {
-		return nil, errors.Wrap(err, "failed to encode authority address")
+	owner, err := k.Keeper.Owner.Get(ctx)
+
+	return &types.QueryOwnerResponse{Owner: owner}, err
+}
+
+func (k queryServer) PendingOwner(ctx context.Context, req *types.QueryPendingOwner) (*types.QueryPendingOwnerResponse, error) {
+	if req == nil {
+		return nil, errors.ErrInvalidRequest
 	}
 
-	pendingAddress := ""
-	pendingAuthority, err := k.PendingAuthority.Get(ctx)
-	if err == nil {
-		pendingAddress, err = k.accountKeeper.AddressCodec().BytesToString(pendingAuthority)
-		if err != nil {
-			return nil, errors.Wrap(err, "failed to encode pending authority address")
-		}
-	}
+	pendingOwner, _ := k.Keeper.PendingOwner.Get(ctx)
 
-	return &types.QueryAddressResponse{Address: address, PendingAddress: pendingAddress}, nil
+	return &types.QueryPendingOwnerResponse{PendingOwner: pendingOwner}, nil
 }

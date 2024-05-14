@@ -11,6 +11,8 @@ import (
 
 var _ paramstypes.ParamSet = &Params{}
 
+var AuthorityKey = []byte("authority")
+
 // Params is the legacy ParamAuthority interface.
 // https://github.com/strangelove-ventures/paramauthority/blob/v1.1.0/x/params/types/proposal/genesis.pb.go#L71-L74
 type Params struct {

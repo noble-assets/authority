@@ -1,13 +1,9 @@
 package keeper
 
 import (
-	"bytes"
-	"context"
-
 	"cosmossdk.io/collections"
 	"cosmossdk.io/core/event"
 	"cosmossdk.io/core/store"
-	"cosmossdk.io/errors"
 	"cosmossdk.io/log"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/codec"
@@ -20,9 +16,9 @@ type Keeper struct {
 	storeService store.KVStoreService
 	eventService event.Service
 
-	Schema           collections.Schema
-	Authority        collections.Item[[]byte]
-	PendingAuthority collections.Item[[]byte]
+	Schema       collections.Schema
+	Owner        collections.Item[string]
+	PendingOwner collections.Item[string]
 
 	router        baseapp.MessageRouter
 	accountKeeper types.AccountKeeper
@@ -44,8 +40,8 @@ func NewKeeper(
 		storeService: storeService,
 		eventService: eventService,
 
-		Authority:        collections.NewItem(builder, types.AuthorityKey, "authority", collections.BytesValue),
-		PendingAuthority: collections.NewItem(builder, types.PendingAuthorityKey, "pending_authority", collections.BytesValue),
+		Owner:        collections.NewItem(builder, types.OwnerKey, "owner", collections.StringValue),
+		PendingOwner: collections.NewItem(builder, types.PendingOwnerKey, "pending_owner", collections.StringValue),
 
 		router:        router,
 		accountKeeper: accountKeeper,
@@ -58,23 +54,4 @@ func NewKeeper(
 
 	keeper.Schema = schema
 	return keeper
-}
-
-// EnsureAuthoritySigner is helper function that checks that the signer of a
-// message is the current authority.
-func (k *Keeper) EnsureAuthoritySigner(ctx context.Context, signerAddress string) ([]byte, error) {
-	authority, err := k.Authority.Get(ctx)
-	if err != nil {
-		return nil, errors.Wrap(err, "unable to retrieve authority from state")
-	}
-	signer, err := k.accountKeeper.AddressCodec().StringToBytes(signerAddress)
-	if err != nil {
-		return nil, errors.Wrap(err, "failed to decode signer address")
-	}
-	if !bytes.Equal(signer, authority) {
-		address, _ := k.accountKeeper.AddressCodec().BytesToString(authority)
-		return nil, errors.Wrapf(types.ErrInvalidAuthority, "expected %s, got %s", address, signerAddress)
-	}
-
-	return authority, nil
 }

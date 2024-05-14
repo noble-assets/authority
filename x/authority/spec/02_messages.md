@@ -23,7 +23,7 @@ body:
   messages:
   - '@type': /noble.authority.v1.MsgExecute
     messages: [...]
-    signer: noble1authority
+    signer: noble1owner
   non_critical_extension_options: []
   timeout_height: "0"
 signatures: []
@@ -35,7 +35,7 @@ signatures: []
 
 ### Requirements
 
-- Signer must be the current underlying [`authority`](./01_state.md#authority).
+- Signer must be the current [`owner`](./01_state.md#owner).
 
 ### State Changes
 
@@ -47,11 +47,11 @@ However, the executed messages may contain state changes.
 
 This message emits no events.
 
-## Transfer Authority
+## Transfer Ownership
 
-`noble.authority.v1.MsgTransferAuthority`
+`noble.authority.v1.MsgTransferOwnership`
 
-A message that initiates a transfer of the underlying authority of this module.
+A message that initiates an ownership transfer of this module.
 
 ```shell
 auth_info:
@@ -66,9 +66,9 @@ body:
   extension_options: []
   memo: ""
   messages:
-  - '@type': /noble.authority.v1.MsgTransferAuthority
-    new_authority: noble1demo
-    signer: noble1authority
+  - '@type': /noble.authority.v1.MsgTransferOwnership
+    new_owner: noble1owner
+    signer: noble1signer
   non_critical_extension_options: []
   timeout_height: "0"
 signatures: []
@@ -76,25 +76,25 @@ signatures: []
 
 ### Arguments
 
-- `new_authority` — The Noble address to transfer underlying authority to.
+- `new_owner` — The Noble address to transfer ownership to.
 
 ### Requirements
 
-- Signer must be the current underlying [`authority`](./01_state.md#authority).
+- Signer must be the current [`owner`](./01_state.md#owner).
 
 ### State Changes
 
-- [`pending_authority`](./01_state.md#pending-authority)
+- [`pending_owner`](./01_state.md#pending-owner)
 
 ### Events Emitted
 
-This message emits no events.
+- [`noble.authority.v1.OwnershipTransferStarted`](./03_events.md#ownershiptransferstarted)
 
-## Accept Authority
+## Accept Ownership
 
-`noble.authority.v1.MsgAcceptAuthority`
+`noble.authority.v1.MsgAcceptOwnership`
 
-A message that finalizes a transfer of the underlying authority of this module.
+A message that finalizes an ownership transfer of this module.
 
 ```shell
 auth_info:
@@ -109,7 +109,7 @@ body:
   extension_options: []
   memo: ""
   messages:
-  - '@type': /noble.authority.v1.MsgAcceptAuthority
+  - '@type': /noble.authority.v1.MsgAcceptOwnership
     signer: noble1signer
   non_critical_extension_options: []
   timeout_height: "0"
@@ -122,13 +122,13 @@ This message takes no arguments.
 
 ### Requirements
 
-- Signer must be the current underlying [`pending_authority`](./01_state.md#pending-authority).
+- Signer must be the current [`pending_owner`](./01_state.md#pending-owner).
 
 ### State Changes
 
-- [`authority`](./01_state.md#authority)
-- [`pending_authority`](./01_state.md#pending-authority)
+- [`owner`](./01_state.md#owner)
+- [`pending_authority`](./01_state.md#pending-owner)
 
 ### Events Emitted
 
-This message emits no events.
+- [`noble.authority.v1.OwnershipTransferred`](./03_events.md#ownershiptransferred)
