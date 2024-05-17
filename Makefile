@@ -1,5 +1,14 @@
-.PHONY: proto-format proto-lint proto-gen format lint test-unit
-all: proto-all format lint test
+.PHONY: proto-format proto-lint proto-gen format lint test-unit build
+all: proto-all format lint test build
+
+###############################################################################
+###                                  Build                                  ###
+###############################################################################
+
+build:
+	@echo "🤖 Building simd..."
+	@cd simapp && make build 1> /dev/null
+	@echo "✅ Completed build!"
 
 ###############################################################################
 ###                          Formatting & Linting                           ###
