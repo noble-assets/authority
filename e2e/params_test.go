@@ -16,7 +16,7 @@ func TestParameterUpdate(t *testing.T) {
 	t.Parallel()
 
 	var wrapper Wrapper
-	ctx := Suite(t, &wrapper)
+	ctx, _, _ := Suite(t, &wrapper, false)
 	validator := wrapper.chain.Validators[0]
 
 	EnsureParams(t, wrapper, ctx, 0)

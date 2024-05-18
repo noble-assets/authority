@@ -25,7 +25,12 @@ import (
 	consensuskeeper "github.com/cosmos/cosmos-sdk/x/consensus/keeper"
 	"github.com/cosmos/cosmos-sdk/x/genutil"
 	genutiltypes "github.com/cosmos/cosmos-sdk/x/genutil/types"
+	paramskeeper "github.com/cosmos/cosmos-sdk/x/params/keeper"
+	paramstypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	stakingkeeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
+	capabilitykeeper "github.com/cosmos/ibc-go/modules/capability/keeper"
+	transferkeeper "github.com/cosmos/ibc-go/v8/modules/apps/transfer/keeper"
+	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
 
 	authoritykeeper "github.com/noble-assets/authority/x/authority/keeper"
 
@@ -35,6 +40,7 @@ import (
 	_ "github.com/cosmos/cosmos-sdk/x/auth/tx/config" // import for side effects
 	_ "github.com/cosmos/cosmos-sdk/x/bank"           // import for side effects
 	_ "github.com/cosmos/cosmos-sdk/x/consensus"      // import for side effects
+	_ "github.com/cosmos/cosmos-sdk/x/params"         // import for side effects
 	_ "github.com/cosmos/cosmos-sdk/x/staking"        // import for side effects
 	_ "github.com/noble-assets/authority/x/authority" // import for side effects
 )
@@ -63,8 +69,15 @@ type SimApp struct {
 	AccountKeeper   authkeeper.AccountKeeper
 	BankKeeper      bankkeeper.Keeper
 	ConsensusKeeper consensuskeeper.Keeper
+	ParamsKeeper    paramskeeper.Keeper
 	StakingKeeper   *stakingkeeper.Keeper
 	UpgradeKeeper   *upgradekeeper.Keeper
+	// IBC Modules
+	CapabilityKeeper     *capabilitykeeper.Keeper
+	IBCKeeper            *ibckeeper.Keeper
+	ScopedIBCKeeper      capabilitykeeper.ScopedKeeper
+	TransferKeeper       transferkeeper.Keeper
+	ScopedTransferKeeper capabilitykeeper.ScopedKeeper
 	// Custom Modules
 	AuthorityKeeper *authoritykeeper.Keeper
 }
@@ -122,6 +135,7 @@ func NewSimApp(
 		&app.AccountKeeper,
 		&app.BankKeeper,
 		&app.ConsensusKeeper,
+		&app.ParamsKeeper,
 		&app.StakingKeeper,
 		&app.UpgradeKeeper,
 		// Custom Modules
@@ -131,6 +145,10 @@ func NewSimApp(
 	}
 
 	app.App = appBuilder.Build(db, traceStore, baseAppOptions...)
+
+	if err := app.RegisterIBCModules(); err != nil {
+		panic(err)
+	}
 
 	if err := app.RegisterStreamingServices(appOpts, app.kvStoreKeys()); err != nil {
 		return nil, err
@@ -159,6 +177,11 @@ func (app *SimApp) GetKey(storeKey string) *storetypes.KVStoreKey {
 func (app *SimApp) GetMemKey(memKey string) *storetypes.MemoryStoreKey {
 	key, _ := app.UnsafeFindStoreKey(memKey).(*storetypes.MemoryStoreKey)
 	return key
+}
+
+func (app *SimApp) GetSubspace(moduleName string) paramstypes.Subspace {
+	subspace, _ := app.ParamsKeeper.GetSubspace(moduleName)
+	return subspace
 }
 
 func (app *SimApp) kvStoreKeys() map[string]*storetypes.KVStoreKey {

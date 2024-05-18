@@ -6,6 +6,7 @@ import (
 	"cosmossdk.io/client/v2/autocli"
 	clientv2keyring "cosmossdk.io/client/v2/autocli/keyring"
 	"cosmossdk.io/core/address"
+	"cosmossdk.io/core/appmodule"
 	"cosmossdk.io/depinject"
 	"cosmossdk.io/log"
 	cmtcfg "github.com/cometbft/cometbft/config"
@@ -21,6 +22,14 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/auth/tx"
 	txmodule "github.com/cosmos/cosmos-sdk/x/auth/tx/config"
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
+	"github.com/cosmos/ibc-go/modules/capability"
+	capabilitytypes "github.com/cosmos/ibc-go/modules/capability/types"
+	"github.com/cosmos/ibc-go/v8/modules/apps/transfer"
+	transfertypes "github.com/cosmos/ibc-go/v8/modules/apps/transfer/types"
+	ibc "github.com/cosmos/ibc-go/v8/modules/core"
+	ibcexported "github.com/cosmos/ibc-go/v8/modules/core/exported"
+	soloclient "github.com/cosmos/ibc-go/v8/modules/light-clients/06-solomachine"
+	tmclient "github.com/cosmos/ibc-go/v8/modules/light-clients/07-tendermint"
 	"github.com/noble-assets/authority/simapp"
 	"github.com/spf13/cobra"
 )
@@ -93,6 +102,22 @@ func NewRootCmd() *cobra.Command {
 
 			return server.InterceptConfigsPreRunHandler(cmd, serverconfig.DefaultConfigTemplate, srvCfg, cmtcfg.DefaultConfig())
 		},
+	}
+
+	// Since the IBC modules don't support dependency injection, we need to
+	// manually register the modules on the client side.
+	// This needs to be removed after IBC supports App Wiring.
+	modules := map[string]appmodule.AppModule{
+		capabilitytypes.ModuleName: capability.AppModule{},
+		ibcexported.ModuleName:     ibc.AppModule{},
+		transfertypes.ModuleName:   transfer.AppModule{},
+		tmclient.ModuleName:        tmclient.AppModule{},
+		soloclient.ModuleName:      soloclient.AppModule{},
+	}
+	for name, mod := range modules {
+		moduleBasicManager[name] = module.CoreAppModuleBasicAdaptor(name, mod)
+		moduleBasicManager[name].RegisterInterfaces(clientCtx.InterfaceRegistry)
+		autoCliOpts.Modules[name] = mod
 	}
 
 	initRootCmd(rootCmd, clientCtx.TxConfig, moduleBasicManager)

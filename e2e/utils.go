@@ -14,6 +14,7 @@ import (
 	"github.com/strangelove-ventures/interchaintest/v8"
 	"github.com/strangelove-ventures/interchaintest/v8/chain/cosmos"
 	"github.com/strangelove-ventures/interchaintest/v8/ibc"
+	"github.com/strangelove-ventures/interchaintest/v8/relayer/rly"
 	"github.com/strangelove-ventures/interchaintest/v8/testreporter"
 	"github.com/stretchr/testify/require"
 	"go.uber.org/zap/zaptest"
@@ -21,21 +22,22 @@ import (
 
 type Wrapper struct {
 	chain *cosmos.CosmosChain
+	gaia  *cosmos.CosmosChain
 
 	owner        ibc.Wallet
 	pendingOwner ibc.Wallet
 }
 
-func Suite(t *testing.T, wrapper *Wrapper) (ctx context.Context) {
+func Suite(t *testing.T, wrapper *Wrapper, ibcEnabled bool) (ctx context.Context, execReporter *testreporter.RelayerExecReporter, relayer *rly.CosmosRelayer) {
 	ctx = context.Background()
 	logger := zaptest.NewLogger(t)
 	reporter := testreporter.NewNopReporter()
-	execReporter := reporter.RelayerExecReporter(t)
+	execReporter = reporter.RelayerExecReporter(t)
 	client, network := interchaintest.DockerSetup(t)
 
 	numValidators, numFullNodes := 1, 0
 
-	factory := interchaintest.NewBuiltinChainFactory(logger, []*interchaintest.ChainSpec{
+	specs := []*interchaintest.ChainSpec{
 		{
 			Name:          "authority",
 			Version:       "local",
@@ -92,7 +94,19 @@ func Suite(t *testing.T, wrapper *Wrapper) (ctx context.Context) {
 				},
 			},
 		},
-	})
+	}
+	if ibcEnabled {
+		specs = append(specs, &interchaintest.ChainSpec{
+			Name:          "gaia",
+			Version:       "latest",
+			NumValidators: &numValidators,
+			NumFullNodes:  &numFullNodes,
+			ChainConfig: ibc.ChainConfig{
+				ChainID: "cosmoshub-4",
+			},
+		})
+	}
+	factory := interchaintest.NewBuiltinChainFactory(logger, specs)
 
 	chains, err := factory.Chains(t.Name())
 	require.NoError(t, err)
@@ -101,10 +115,30 @@ func Suite(t *testing.T, wrapper *Wrapper) (ctx context.Context) {
 	wrapper.chain = noble
 
 	interchain := interchaintest.NewInterchain().AddChain(noble)
+	if ibcEnabled {
+		relayer = interchaintest.NewBuiltinRelayerFactory(
+			ibc.CosmosRly,
+			logger,
+		).Build(t, client, network).(*rly.CosmosRelayer)
+
+		gaia := chains[1].(*cosmos.CosmosChain)
+		wrapper.gaia = gaia
+
+		interchain = interchain.
+			AddChain(gaia).
+			AddRelayer(relayer, "relayer").
+			AddLink(interchaintest.InterchainLink{
+				Chain1:  noble,
+				Chain2:  gaia,
+				Relayer: relayer,
+				Path:    "transfer",
+			})
+	}
 	require.NoError(t, interchain.Build(ctx, execReporter, interchaintest.InterchainBuildOptions{
-		TestName:  t.Name(),
-		Client:    client,
-		NetworkID: network,
+		TestName:         t.Name(),
+		Client:           client,
+		NetworkID:        network,
+		SkipPathCreation: true,
 	}))
 
 	t.Cleanup(func() {
