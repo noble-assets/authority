@@ -1,0 +1,6 @@
+- name: noble-authority-simd
+  dockerfile: cosmos
+  build-dir: simapp
+  build-target: make build
+  binaries:
+    - simapp/build/simd
