@@ -1,6 +1,6 @@
 module github.com/noble-assets/authority
 
-go 1.22
+go 1.22.2
 
 require (
 	cosmossdk.io/api v0.7.4
