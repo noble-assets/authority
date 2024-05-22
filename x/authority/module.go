@@ -33,6 +33,7 @@ const ConsensusVersion = 1
 var (
 	_ module.AppModuleBasic      = AppModule{}
 	_ appmodule.AppModule        = AppModule{}
+	_ appmodule.HasBeginBlocker  = AppModule{}
 	_ module.HasConsensusVersion = AppModule{}
 	_ module.HasGenesis          = AppModule{}
 	_ module.HasServices         = AppModule{}
@@ -95,6 +96,10 @@ func NewAppModule(keeper *keeper.Keeper, accountKeeper types.AccountKeeper) AppM
 func (AppModule) IsOnePerModuleType() {}
 
 func (AppModule) IsAppModule() {}
+
+func (m AppModule) BeginBlock(ctx context.Context) error {
+	return m.keeper.BeginBlock(ctx)
+}
 
 func (AppModule) ConsensusVersion() uint64 { return ConsensusVersion }
 
@@ -178,6 +183,7 @@ type ModuleInputs struct {
 
 	Router        baseapp.MessageRouter
 	AccountKeeper types.AccountKeeper
+	BankKeeper    types.BankKeeper
 }
 
 type ModuleOutputs struct {
@@ -195,6 +201,7 @@ func ProvideModule(in ModuleInputs) ModuleOutputs {
 		in.EventService,
 		in.Router,
 		in.AccountKeeper,
+		in.BankKeeper,
 	)
 	m := NewAppModule(k, in.AccountKeeper)
 

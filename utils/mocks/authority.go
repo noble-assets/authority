@@ -22,6 +22,10 @@ import (
 )
 
 func AuthorityKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
+	return AuthorityKeeperWithBank(t, BankKeeper{})
+}
+
+func AuthorityKeeperWithBank(t testing.TB, bank types.BankKeeper) (*keeper.Keeper, sdk.Context) {
 	logger := log.NewNopLogger()
 
 	key := storetypes.NewKVStoreKey(types.ModuleName)
@@ -40,6 +44,7 @@ func AuthorityKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
 		runtime.ProvideEventService(),
 		router,
 		AccountKeeper{},
+		bank,
 	), wrapper.Ctx
 }
 

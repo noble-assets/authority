@@ -93,7 +93,7 @@ func TestTransferOwnership(t *testing.T) {
 	owner := utils.TestAccount()
 	require.NoError(t, k.Owner.Set(ctx, owner.Address))
 
-	// ACT: Attempt to tranfer ownership with invalid signer.
+	// ACT: Attempt to transfer ownership with invalid signer.
 	_, err := server.TransferOwnership(ctx, &types.MsgTransferOwnership{
 		Signer: utils.TestAccount().Address,
 	})
