@@ -98,7 +98,7 @@ func Suite(t *testing.T, wrapper *Wrapper, ibcEnabled bool) (ctx context.Context
 	if ibcEnabled {
 		specs = append(specs, &interchaintest.ChainSpec{
 			Name:          "gaia",
-			Version:       "latest",
+			Version:       "v16.0.0",
 			NumValidators: &numValidators,
 			NumFullNodes:  &numFullNodes,
 			ChainConfig: ibc.ChainConfig{
