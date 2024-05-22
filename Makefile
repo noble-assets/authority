@@ -1,5 +1,14 @@
-.PHONY: proto-format proto-lint proto-gen format lint test-unit
-all: proto-all format lint test
+.PHONY: proto-format proto-lint proto-gen format lint test-unit build local-image test-e2e
+all: proto-all format lint test-unit build local-image test-e2e
+
+###############################################################################
+###                                  Build                                  ###
+###############################################################################
+
+build:
+	@echo "🤖 Building simd..."
+	@cd simapp && make build 1> /dev/null
+	@echo "✅ Completed build!"
 
 ###############################################################################
 ###                          Formatting & Linting                           ###
@@ -49,9 +58,21 @@ proto-lint:
 ###                                 Testing                                 ###
 ###############################################################################
 
-test: test-unit
+local-image:
+ifeq (,$(shell which heighliner))
+	@echo heighliner not found. https://github.com/strangelove-ventures/heighliner
+else
+	@echo "🤖 Building image..."
+	@heighliner build --chain noble-authority-simd --local 1> /dev/null
+	@echo "✅ Completed build!"
+endif
 
 test-unit:
 	@echo "🤖 Running unit tests..."
 	@go test -cover -coverprofile=coverage.out -race -v ./x/authority/keeper/...
 	@echo "✅ Completed unit tests!"
+
+test-e2e:
+	@echo "🤖 Running e2e tests..."
+	@cd e2e && go test -timeout 15m -race -v ./...
+	@echo "✅ Completed e2e tests!"
