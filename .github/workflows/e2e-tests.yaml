@@ -2,7 +2,7 @@ name: End to End Tests
 
 on:
   # pull_request:
-  push:
+  push: 
 
 env:
   TAR_PATH: docker-image.tar
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build Docker Image
-        uses: noble-assets/heighliner-build-action@d409c7b0dc2acc05a8218caad581bffae654c953
+        uses: strangelove-ventures/heighliner-build-action@v1.0.2
         with:
           registry: "" # empty registry, image only shared for e2e testing
           tag: local # emulate local environment for consistency in interchaintest cases
