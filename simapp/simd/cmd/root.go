@@ -1,3 +1,9 @@
+// Copyright 2024 NASD Inc.
+//
+// Use of this source code is governed by a BSL-style
+// license that can be found in the LICENSE file or at
+// https://mariadb.com/bsl11.
+
 package cmd
 
 import (
@@ -96,6 +102,7 @@ func NewRootCmd() *cobra.Command {
 				return err
 			}
 
+			// overwrite the minimum gas price from the app configuration
 			srvCfg := serverconfig.DefaultConfig()
 			srvCfg.MinGasPrices = "0.1uusdc"
 			srvCfg.API.Enable = true

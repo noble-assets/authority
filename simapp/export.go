@@ -1,3 +1,9 @@
+// Copyright 2024 NASD Inc.
+//
+// Use of this source code is governed by a BSL-style
+// license that can be found in the LICENSE file or at
+// https://mariadb.com/bsl11.
+
 package simapp
 
 import (
@@ -6,7 +12,6 @@ import (
 
 	tmproto "github.com/cometbft/cometbft/proto/tendermint/types"
 	servertypes "github.com/cosmos/cosmos-sdk/server/types"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/staking"
 )
 
@@ -14,7 +19,7 @@ import (
 func (app *SimApp) ExportAppStateAndValidators(
 	forZeroHeight bool,
 	jailAllowedAddrs []string,
-	_ []string,
+	modulesToExport []string,
 ) (servertypes.ExportedApp, error) {
 	// as if they could withdraw from the start of the next block
 	ctx := app.NewContextLegacy(true, tmproto.Header{Height: app.LastBlockHeight()})
@@ -23,8 +28,7 @@ func (app *SimApp) ExportAppStateAndValidators(
 	// CometBFT will start InitChain.
 	height := app.LastBlockHeight() + 1
 	if forZeroHeight {
-		height = 0
-		app.prepForZeroHeightGenesis(ctx, jailAllowedAddrs)
+		panic("zero height genesis is unsupported")
 	}
 
 	genState, err := app.ModuleManager.ExportGenesis(ctx, app.appCodec)
@@ -44,10 +48,4 @@ func (app *SimApp) ExportAppStateAndValidators(
 		Height:          height,
 		ConsensusParams: app.BaseApp.GetConsensusParams(ctx),
 	}, err
-}
-
-// prepare for fresh start at zero height
-// NOTE zero height genesis is a temporary feature, which will be deprecated in favour of export at a block height
-func (app *SimApp) prepForZeroHeightGenesis(_ sdk.Context, _ []string) {
-	panic("unimplemented")
 }

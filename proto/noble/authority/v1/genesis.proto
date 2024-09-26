@@ -4,7 +4,7 @@ package noble.authority.v1;
 
 import "cosmos_proto/cosmos.proto";
 
-option go_package = "github.com/noble-assets/authority/x/authority/types";
+option go_package = "github.com/noble-assets/authority/types";
 
 message GenesisState {
   string owner = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];

@@ -1,3 +1,9 @@
+// Copyright 2024 NASD Inc.
+//
+// Use of this source code is governed by a BSL-style
+// license that can be found in the LICENSE file or at
+// https://mariadb.com/bsl11.
+
 package mocks
 
 import (
@@ -5,10 +11,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth/codec"
-	"github.com/noble-assets/authority/x/authority/types"
+	"github.com/noble-assets/authority/types"
 )
-
-var cdc = codec.NewBech32Codec("noble")
 
 var _ types.BankKeeper = BankKeeper{}
 
@@ -17,7 +21,7 @@ type BankKeeper struct {
 }
 
 func (k BankKeeper) GetAllBalances(_ context.Context, bz sdk.AccAddress) sdk.Coins {
-	address, _ := cdc.BytesToString(bz)
+	address, _ := codec.NewBech32Codec("noble").BytesToString(bz)
 	return k.Balances[address]
 }
 

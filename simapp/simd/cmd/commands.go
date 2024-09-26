@@ -1,3 +1,9 @@
+// Copyright 2024 NASD Inc.
+//
+// Use of this source code is governed by a BSL-style
+// license that can be found in the LICENSE file or at
+// https://mariadb.com/bsl11.
+
 package cmd
 
 import (
@@ -6,7 +12,6 @@ import (
 
 	"cosmossdk.io/log"
 	confixcmd "cosmossdk.io/tools/confix/cmd"
-
 	dbm "github.com/cosmos/cosmos-db"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/debug"

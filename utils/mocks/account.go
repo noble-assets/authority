@@ -1,3 +1,9 @@
+// Copyright 2024 NASD Inc.
+//
+// Use of this source code is governed by a BSL-style
+// license that can be found in the LICENSE file or at
+// https://mariadb.com/bsl11.
+
 package mocks
 
 import (
@@ -5,7 +11,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth/codec"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	"github.com/noble-assets/authority/x/authority/types"
+	"github.com/noble-assets/authority/types"
 )
 
 var _ types.AccountKeeper = AccountKeeper{}

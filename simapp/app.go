@@ -1,3 +1,9 @@
+// Copyright 2024 NASD Inc.
+//
+// Use of this source code is governed by a BSL-style
+// license that can be found in the LICENSE file or at
+// https://mariadb.com/bsl11.
+
 package simapp
 
 import (
@@ -10,8 +16,6 @@ import (
 	"cosmossdk.io/depinject"
 	"cosmossdk.io/log"
 	storetypes "cosmossdk.io/store/types"
-	upgradekeeper "cosmossdk.io/x/upgrade/keeper"
-
 	dbm "github.com/cosmos/cosmos-db"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/client"
@@ -20,6 +24,18 @@ import (
 	"github.com/cosmos/cosmos-sdk/runtime"
 	servertypes "github.com/cosmos/cosmos-sdk/server/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
+
+	_ "cosmossdk.io/x/upgrade"
+	_ "github.com/cosmos/cosmos-sdk/x/auth"
+	_ "github.com/cosmos/cosmos-sdk/x/auth/tx/config"
+	_ "github.com/cosmos/cosmos-sdk/x/bank"
+	_ "github.com/cosmos/cosmos-sdk/x/consensus"
+	_ "github.com/cosmos/cosmos-sdk/x/params"
+	_ "github.com/cosmos/cosmos-sdk/x/staking"
+	_ "github.com/noble-assets/authority"
+
+	// Cosmos Modules
+	upgradekeeper "cosmossdk.io/x/upgrade/keeper"
 	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 	consensuskeeper "github.com/cosmos/cosmos-sdk/x/consensus/keeper"
@@ -28,21 +44,12 @@ import (
 	paramskeeper "github.com/cosmos/cosmos-sdk/x/params/keeper"
 	paramstypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	stakingkeeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
+	// IBC Modules
 	capabilitykeeper "github.com/cosmos/ibc-go/modules/capability/keeper"
 	transferkeeper "github.com/cosmos/ibc-go/v8/modules/apps/transfer/keeper"
 	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
-
-	authoritykeeper "github.com/noble-assets/authority/x/authority/keeper"
-
-	_ "cosmossdk.io/api/cosmos/tx/config/v1"          // import for side effects
-	_ "cosmossdk.io/x/upgrade"                        // import for side effects
-	_ "github.com/cosmos/cosmos-sdk/x/auth"           // import for side effects
-	_ "github.com/cosmos/cosmos-sdk/x/auth/tx/config" // import for side effects
-	_ "github.com/cosmos/cosmos-sdk/x/bank"           // import for side effects
-	_ "github.com/cosmos/cosmos-sdk/x/consensus"      // import for side effects
-	_ "github.com/cosmos/cosmos-sdk/x/params"         // import for side effects
-	_ "github.com/cosmos/cosmos-sdk/x/staking"        // import for side effects
-	_ "github.com/noble-assets/authority/x/authority" // import for side effects
+	// Custom Modules
+	authoritykeeper "github.com/noble-assets/authority/keeper"
 )
 
 var DefaultNodeHome string
@@ -65,7 +72,7 @@ type SimApp struct {
 	txConfig          client.TxConfig
 	interfaceRegistry codectypes.InterfaceRegistry
 
-	// Cosmos SDK Modules
+	// Cosmos Modules
 	AccountKeeper   authkeeper.AccountKeeper
 	BankKeeper      bankkeeper.Keeper
 	ConsensusKeeper consensuskeeper.Keeper
@@ -131,7 +138,7 @@ func NewSimApp(
 		&app.legacyAmino,
 		&app.txConfig,
 		&app.interfaceRegistry,
-		// Cosmos SDK Modules
+		// Cosmos Modules
 		&app.AccountKeeper,
 		&app.BankKeeper,
 		&app.ConsensusKeeper,
@@ -146,7 +153,7 @@ func NewSimApp(
 
 	app.App = appBuilder.Build(db, traceStore, baseAppOptions...)
 
-	if err := app.RegisterIBCModules(); err != nil {
+	if err := app.RegisterLegacyModules(); err != nil {
 		panic(err)
 	}
 

@@ -4,4 +4,4 @@
 
 This repository includes the `x/authority` Cosmos SDK module implementation.
 
-For more information, refer to the modules [spec](../x/authority/spec) files.
+For more information, refer to the modules [spec](../spec) files.

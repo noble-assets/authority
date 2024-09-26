@@ -1,9 +1,12 @@
+// Copyright 2024 NASD Inc.
+//
+// Use of this source code is governed by a BSL-style
+// license that can be found in the LICENSE file or at
+// https://mariadb.com/bsl11.
+
 package mocks
 
 import (
-	"testing"
-
-	"cosmossdk.io/log"
 	storetypes "cosmossdk.io/store/types"
 	"cosmossdk.io/x/upgrade"
 	upgradetypes "cosmossdk.io/x/upgrade/types"
@@ -17,20 +20,17 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	moduletestutil "github.com/cosmos/cosmos-sdk/types/module/testutil"
 	"github.com/cosmos/cosmos-sdk/x/auth/tx"
-	"github.com/noble-assets/authority/x/authority/keeper"
-	"github.com/noble-assets/authority/x/authority/types"
+	"github.com/noble-assets/authority/keeper"
+	"github.com/noble-assets/authority/types"
 )
 
-func AuthorityKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
-	return AuthorityKeeperWithBank(t, BankKeeper{})
+func AuthorityKeeper() (*keeper.Keeper, sdk.Context) {
+	return AuthorityKeeperWithBank(BankKeeper{})
 }
 
-func AuthorityKeeperWithBank(t testing.TB, bank types.BankKeeper) (*keeper.Keeper, sdk.Context) {
-	logger := log.NewNopLogger()
-
+func AuthorityKeeperWithBank(bank types.BankKeeper) (*keeper.Keeper, sdk.Context) {
 	key := storetypes.NewKVStoreKey(types.ModuleName)
 	tkey := storetypes.NewTransientStoreKey("transient_authority")
-	wrapper := testutil.DefaultContextWithDB(t, key, tkey)
 
 	cfg := MakeTestEncodingConfig("noble", upgrade.AppModuleBasic{})
 	router := baseapp.NewMsgServiceRouter()
@@ -39,13 +39,12 @@ func AuthorityKeeperWithBank(t testing.TB, bank types.BankKeeper) (*keeper.Keepe
 
 	return keeper.NewKeeper(
 		cfg.Codec,
-		logger,
 		runtime.NewKVStoreService(key),
 		runtime.ProvideEventService(),
 		router,
 		AccountKeeper{},
 		bank,
-	), wrapper.Ctx
+	), testutil.DefaultContext(key, tkey)
 }
 
 // MakeTestEncodingConfig is a modified testutil.MakeTestEncodingConfig that

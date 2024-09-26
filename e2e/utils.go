@@ -1,3 +1,9 @@
+// Copyright 2024 NASD Inc.
+//
+// Use of this source code is governed by a BSL-style
+// license that can be found in the LICENSE file or at
+// https://mariadb.com/bsl11.
+
 package e2e
 
 import (
@@ -10,7 +16,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	consensustypes "github.com/cosmos/cosmos-sdk/x/consensus/types"
 	"github.com/cosmos/gogoproto/jsonpb"
-	"github.com/noble-assets/authority/x/authority/types"
+	"github.com/noble-assets/authority/types"
 	"github.com/strangelove-ventures/interchaintest/v8"
 	"github.com/strangelove-ventures/interchaintest/v8/chain/cosmos"
 	"github.com/strangelove-ventures/interchaintest/v8/ibc"
@@ -61,7 +67,7 @@ func Suite(t *testing.T, wrapper *Wrapper, ibcEnabled bool) (ctx context.Context
 				GasAdjustment:  5,
 				TrustingPeriod: "504h",
 				NoHostMount:    false,
-				PreGenesis: func(cfg ibc.ChainConfig) (err error) {
+				PreGenesis: func(cfg ibc.Chain) (err error) {
 					validator := wrapper.chain.Validators[0]
 					coins := sdk.NewCoins(sdk.NewInt64Coin("uusdc", 2_500_000))
 
