@@ -10,7 +10,6 @@ import (
 	"context"
 
 	"cosmossdk.io/core/address"
-	upgradetypes "cosmossdk.io/x/upgrade/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
@@ -22,8 +21,4 @@ type AccountKeeper interface {
 type BankKeeper interface {
 	GetAllBalances(ctx context.Context, addr sdk.AccAddress) sdk.Coins
 	SendCoins(ctx context.Context, fromAddr, toAddr sdk.AccAddress, amt sdk.Coins) error
-}
-
-type UpgradeKeeper interface {
-	ScheduleUpgrade(ctx context.Context, plan upgradetypes.Plan) error
 }

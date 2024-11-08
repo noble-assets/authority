@@ -11,7 +11,6 @@ import (
 	"context"
 
 	"cosmossdk.io/errors"
-	upgradetypes "cosmossdk.io/x/upgrade/types"
 	abcitypes "github.com/cometbft/cometbft/abci/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/noble-assets/authority/types"
@@ -126,20 +125,6 @@ func (k msgServer) AcceptOwnership(ctx context.Context, msg *types.MsgAcceptOwne
 		PreviousOwner: owner,
 		NewOwner:      msg.Signer,
 	})
-}
-
-func (k msgServer) SoftwareUpgrade(ctx context.Context, msg *upgradetypes.MsgSoftwareUpgrade) (*upgradetypes.MsgSoftwareUpgradeResponse, error) {
-	owner, _ := k.Owner.Get(ctx)
-	if msg.Authority != owner {
-		return nil, errors.Wrapf(types.ErrInvalidOwner, "expected %s, got %s", owner, msg.Authority)
-	}
-
-	err := k.upgradeKeeper.ScheduleUpgrade(ctx, msg.Plan)
-	if err != nil {
-		return nil, err
-	}
-
-	return &upgradetypes.MsgSoftwareUpgradeResponse{}, nil
 }
 
 //

@@ -75,8 +75,8 @@ func NewCmdSubmitUpgrade() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "software-upgrade <name> [--upgrade-height <height>] [--upgrade-info <info>] [flags]",
 		Args:  cobra.ExactArgs(1),
-		Short: "Submit a software upgrade proposal",
-		Long: "Submit a software upgrade along with an initial deposit.\n" +
+		Short: "Schedule a software upgrade on chain",
+		Long: "Schedule a software upgrade on chain.\n" +
 			"Please specify a unique name and height for the upgrade to take effect.\n" +
 			"You may include info to reference a binary download link, in a format compatible with: https://docs.cosmos.network/main/build/tooling/cosmovisor",
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -117,16 +117,16 @@ func NewCmdSubmitUpgrade() *cobra.Command {
 				}
 			}
 
-			msgs := []sdk.Msg{
-				&upgradetypes.MsgSoftwareUpgrade{
-					// AUTHORITY MODULE SPECIFIC
-					// set to from address, check in message server
-					Authority: clientCtx.FromAddress.String(),
-					Plan:      p,
-				},
-			}
+			msgExecute := types.NewMsgExecute(
+				clientCtx.FromAddress.String(),
+				[]sdk.Msg{
+					&upgradetypes.MsgSoftwareUpgrade{
+						Authority: types.ModuleAddress.String(),
+						Plan:      p,
+					},
+				})
 
-			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msgs...)
+			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msgExecute)
 		},
 	}
 
