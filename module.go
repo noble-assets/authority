@@ -187,6 +187,7 @@ type ModuleInputs struct {
 	Router        baseapp.MessageRouter
 	AccountKeeper types.AccountKeeper
 	BankKeeper    types.BankKeeper
+	UpgradeKeeper types.UpgradeKeeper
 }
 
 type ModuleOutputs struct {
@@ -204,6 +205,7 @@ func ProvideModule(in ModuleInputs) ModuleOutputs {
 		in.Router,
 		in.AccountKeeper,
 		in.BankKeeper,
+		in.UpgradeKeeper,
 	)
 	m := NewAppModule(k, in.AccountKeeper)
 

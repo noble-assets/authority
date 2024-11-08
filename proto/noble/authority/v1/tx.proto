@@ -4,6 +4,7 @@ package noble.authority.v1;
 
 import "amino/amino.proto";
 import "cosmos/msg/v1/msg.proto";
+import "cosmos/upgrade/v1beta1/tx.proto";
 import "cosmos_proto/cosmos.proto";
 import "gogoproto/gogo.proto";
 import "google/protobuf/any.proto";
@@ -17,6 +18,8 @@ service Msg {
 
   rpc TransferOwnership(MsgTransferOwnership) returns (MsgTransferOwnershipResponse);
   rpc AcceptOwnership(MsgAcceptOwnership) returns (MsgAcceptOwnershipResponse);
+
+  rpc SoftwareUpgrade(cosmos.upgrade.v1beta1.MsgSoftwareUpgrade) returns (cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse);
 }
 
 //

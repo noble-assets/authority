@@ -7,6 +7,7 @@
 package types
 
 import (
+	upgradetypes "cosmossdk.io/x/upgrade/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -17,6 +18,7 @@ func RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgExecute{}, "noble/Execute", nil)
 	cdc.RegisterConcrete(&MsgTransferOwnership{}, "noble/TransferOwnership", nil)
 	cdc.RegisterConcrete(&MsgAcceptOwnership{}, "noble/AcceptOwnership", nil)
+	cdc.RegisterConcrete(&upgradetypes.MsgSoftwareUpgrade{}, "noble/SoftwareUpgrade", nil)
 }
 
 func RegisterInterfaces(registry codectypes.InterfaceRegistry) {
@@ -24,6 +26,7 @@ func RegisterInterfaces(registry codectypes.InterfaceRegistry) {
 		&MsgExecute{},
 		&MsgTransferOwnership{},
 		&MsgAcceptOwnership{},
+		&upgradetypes.MsgSoftwareUpgrade{},
 	)
 
 	msgservice.RegisterMsgServiceDesc(registry, &_Msg_serviceDesc)

@@ -8,6 +8,7 @@ package authorityv1
 
 import (
 	context "context"
+	v1beta1 "cosmossdk.io/api/cosmos/upgrade/v1beta1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -22,6 +23,7 @@ const (
 	Msg_Execute_FullMethodName           = "/noble.authority.v1.Msg/Execute"
 	Msg_TransferOwnership_FullMethodName = "/noble.authority.v1.Msg/TransferOwnership"
 	Msg_AcceptOwnership_FullMethodName   = "/noble.authority.v1.Msg/AcceptOwnership"
+	Msg_SoftwareUpgrade_FullMethodName   = "/noble.authority.v1.Msg/SoftwareUpgrade"
 )
 
 // MsgClient is the client API for Msg service.
@@ -31,6 +33,7 @@ type MsgClient interface {
 	Execute(ctx context.Context, in *MsgExecute, opts ...grpc.CallOption) (*MsgExecuteResponse, error)
 	TransferOwnership(ctx context.Context, in *MsgTransferOwnership, opts ...grpc.CallOption) (*MsgTransferOwnershipResponse, error)
 	AcceptOwnership(ctx context.Context, in *MsgAcceptOwnership, opts ...grpc.CallOption) (*MsgAcceptOwnershipResponse, error)
+	SoftwareUpgrade(ctx context.Context, in *v1beta1.MsgSoftwareUpgrade, opts ...grpc.CallOption) (*v1beta1.MsgSoftwareUpgradeResponse, error)
 }
 
 type msgClient struct {
@@ -71,6 +74,16 @@ func (c *msgClient) AcceptOwnership(ctx context.Context, in *MsgAcceptOwnership,
 	return out, nil
 }
 
+func (c *msgClient) SoftwareUpgrade(ctx context.Context, in *v1beta1.MsgSoftwareUpgrade, opts ...grpc.CallOption) (*v1beta1.MsgSoftwareUpgradeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1beta1.MsgSoftwareUpgradeResponse)
+	err := c.cc.Invoke(ctx, Msg_SoftwareUpgrade_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility.
@@ -78,6 +91,7 @@ type MsgServer interface {
 	Execute(context.Context, *MsgExecute) (*MsgExecuteResponse, error)
 	TransferOwnership(context.Context, *MsgTransferOwnership) (*MsgTransferOwnershipResponse, error)
 	AcceptOwnership(context.Context, *MsgAcceptOwnership) (*MsgAcceptOwnershipResponse, error)
+	SoftwareUpgrade(context.Context, *v1beta1.MsgSoftwareUpgrade) (*v1beta1.MsgSoftwareUpgradeResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -96,6 +110,9 @@ func (UnimplementedMsgServer) TransferOwnership(context.Context, *MsgTransferOwn
 }
 func (UnimplementedMsgServer) AcceptOwnership(context.Context, *MsgAcceptOwnership) (*MsgAcceptOwnershipResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AcceptOwnership not implemented")
+}
+func (UnimplementedMsgServer) SoftwareUpgrade(context.Context, *v1beta1.MsgSoftwareUpgrade) (*v1beta1.MsgSoftwareUpgradeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SoftwareUpgrade not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 func (UnimplementedMsgServer) testEmbeddedByValue()             {}
@@ -172,6 +189,24 @@ func _Msg_AcceptOwnership_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_SoftwareUpgrade_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1beta1.MsgSoftwareUpgrade)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).SoftwareUpgrade(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_SoftwareUpgrade_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).SoftwareUpgrade(ctx, req.(*v1beta1.MsgSoftwareUpgrade))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -190,6 +225,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AcceptOwnership",
 			Handler:    _Msg_AcceptOwnership_Handler,
+		},
+		{
+			MethodName: "SoftwareUpgrade",
+			Handler:    _Msg_SoftwareUpgrade_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

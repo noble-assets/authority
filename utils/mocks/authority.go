@@ -9,6 +9,7 @@ package mocks
 import (
 	storetypes "cosmossdk.io/store/types"
 	"cosmossdk.io/x/upgrade"
+	upgradekeeper "cosmossdk.io/x/upgrade/keeper"
 	upgradetypes "cosmossdk.io/x/upgrade/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/codec"
@@ -29,7 +30,12 @@ func AuthorityKeeper() (*keeper.Keeper, sdk.Context) {
 }
 
 func AuthorityKeeperWithBank(bank types.BankKeeper) (*keeper.Keeper, sdk.Context) {
-	key := storetypes.NewKVStoreKey(types.ModuleName)
+	keys := storetypes.NewKVStoreKeys(
+		types.ModuleName,
+		upgradetypes.StoreKey,
+	)
+
+	// key := storetypes.NewKVStoreKey(types.ModuleName)
 	tkey := storetypes.NewTransientStoreKey("transient_authority")
 
 	cfg := MakeTestEncodingConfig("noble", upgrade.AppModuleBasic{})
@@ -39,12 +45,13 @@ func AuthorityKeeperWithBank(bank types.BankKeeper) (*keeper.Keeper, sdk.Context
 
 	return keeper.NewKeeper(
 		cfg.Codec,
-		runtime.NewKVStoreService(key),
+		runtime.NewKVStoreService(keys[types.ModuleName]),
 		runtime.ProvideEventService(),
 		router,
 		AccountKeeper{},
 		bank,
-	), testutil.DefaultContext(key, tkey)
+		upgradekeeper.Keeper{},
+	), testutil.DefaultContext(keys[types.ModuleName], tkey)
 }
 
 // MakeTestEncodingConfig is a modified testutil.MakeTestEncodingConfig that

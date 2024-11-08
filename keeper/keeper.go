@@ -27,6 +27,7 @@ type Keeper struct {
 	router        baseapp.MessageRouter
 	accountKeeper types.AccountKeeper
 	bankKeeper    types.BankKeeper
+	upgradeKeeper types.UpgradeKeeper
 }
 
 func NewKeeper(
@@ -36,6 +37,7 @@ func NewKeeper(
 	router baseapp.MessageRouter,
 	accountKeeper types.AccountKeeper,
 	bankKeeper types.BankKeeper,
+	upgradeKeeper types.UpgradeKeeper,
 ) *Keeper {
 	builder := collections.NewSchemaBuilder(storeService)
 
@@ -50,6 +52,7 @@ func NewKeeper(
 		router:        router,
 		accountKeeper: accountKeeper,
 		bankKeeper:    bankKeeper,
+		upgradeKeeper: upgradeKeeper,
 	}
 
 	schema, err := builder.Build()
