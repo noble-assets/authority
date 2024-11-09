@@ -23,7 +23,7 @@ func TestBeginBlocker(t *testing.T) {
 	t.Parallel()
 
 	var wrapper Wrapper
-	ctx, _, _ := Suite(t, &wrapper, false)
+	ctx, _, _, _ := Suite(t, &wrapper, false)
 	validator := wrapper.chain.Validators[0]
 
 	oldBalance, err := wrapper.chain.BankQueryAllBalances(ctx, wrapper.owner.FormattedAddress())
