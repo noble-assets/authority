@@ -8,8 +8,6 @@ package cli
 
 import (
 	"fmt"
-	"os"
-	"path/filepath"
 
 	"cosmossdk.io/x/upgrade/plan"
 	upgradetypes "cosmossdk.io/x/upgrade/types"
@@ -18,6 +16,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authclient "github.com/cosmos/cosmos-sdk/x/auth/client"
+	clienttypes "github.com/cosmos/ibc-go/v8/modules/core/02-client/types"
 	"github.com/noble-assets/authority/types"
 	"github.com/spf13/cobra"
 )
@@ -38,6 +37,7 @@ func GetTxCmd() *cobra.Command {
 
 	cmd.AddCommand(NewCmdExecute())
 	cmd.AddCommand(NewCmdSubmitUpgrade())
+	cmd.AddCommand(newSubmitRecoverClientCmd())
 
 	return cmd
 }
@@ -69,7 +69,8 @@ func NewCmdExecute() *cobra.Command {
 	return cmd
 }
 
-// NewCmdSubmitUpgrade has been adapted from the SDK's NewCmdSubmitUpgradeProposal
+// NewCmdSubmitUpgrade schedule an on-chain software upgrade.
+// This command has been adapted from the SDK's `NewCmdSubmitUpgradeProposal`.
 // https://github.com/cosmos/cosmos-sdk/blob/x/upgrade/v0.1.4/x/upgrade/client/cli/tx.go#L47
 func NewCmdSubmitUpgrade() *cobra.Command {
 	cmd := &cobra.Command{
@@ -141,14 +142,40 @@ func NewCmdSubmitUpgrade() *cobra.Command {
 	return cmd
 }
 
-// getDefaultDaemonName gets the default name to use for the daemon.
-// If a DAEMON_NAME env var is set, that is used.
-// Otherwise, the last part of the currently running executable is used.
-func getDefaultDaemonName() string {
-	// DAEMON_NAME is specifically used here to correspond with the Cosmovisor setup env vars.
-	name := os.Getenv("DAEMON_NAME")
-	if len(name) == 0 {
-		_, name = filepath.Split(os.Args[0])
+// newSubmitRecoverClientCmd defines the command to recover an IBC light client.
+// This command has been adapted from ibc-go's `newSubmitRecoverClientProposalCmd`.
+// https://github.com/cosmos/ibc-go/blob/v8.5.2/modules/core/02-client/client/cli/tx.go#L249
+func newSubmitRecoverClientCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "recover-client [subject-client-id] [substitute-client-id] [flags]",
+		Args:  cobra.ExactArgs(2),
+		Short: "recover an IBC client",
+		Long: `recover an IBC client
+		Please specify a subject client identifier you want to recover
+		Please specify the substitute client the subject client will be recovered to.`,
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx, err := client.GetClientTxContext(cmd)
+			if err != nil {
+				return err
+			}
+
+			subjectClientID, substituteClientID := args[0], args[1]
+
+			authority := types.ModuleAddress.String()
+
+			msg := clienttypes.NewMsgRecoverClient(authority, subjectClientID, substituteClientID)
+
+			if err = msg.ValidateBasic(); err != nil {
+				return fmt.Errorf("error validating %T: %w", clienttypes.MsgRecoverClient{}, err)
+			}
+
+			msgExecute := types.NewMsgExecute(clientCtx.FromAddress.String(), []sdk.Msg{msg})
+
+			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msgExecute)
+		},
 	}
-	return name
+
+	flags.AddTxFlagsToCmd(cmd)
+
+	return cmd
 }
