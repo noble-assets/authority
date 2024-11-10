@@ -8,29 +8,41 @@ package e2e
 
 import (
 	_ "embed"
-	"path"
 	"testing"
 
+	"cosmossdk.io/math"
+	"github.com/strangelove-ventures/interchaintest/v8"
 	"github.com/stretchr/testify/require"
 )
-
-//go:embed upgrade.json
-var Upgrade []byte
 
 // TestScheduleUpgrade tests the module's ability to schedule an upgrade on-chain.
 func TestScheduleUpgrade(t *testing.T) {
 	t.Parallel()
 
 	var wrapper Wrapper
-	ctx, _, _ := Suite(t, &wrapper, false)
+	ctx, _, _, _ := Suite(t, &wrapper, false)
 	validator := wrapper.chain.Validators[0]
+
+	notAuthorized := interchaintest.GetAndFundTestUsers(t, ctx, "wallet", math.NewInt(100000), wrapper.chain)[0]
 
 	EnsureUpgrade(t, wrapper, ctx, "", 0)
 
-	require.NoError(t, validator.WriteFile(ctx, Upgrade, "upgrade.json"))
+	cmd := []string{"authority", "software-upgrade", "v2", "--upgrade-height", "50",
+		"--chain-id", wrapper.chain.Config().ChainID, "--no-validate"}
+
+	// broadcast from un-authorized account
 	_, err := validator.ExecTx(
-		ctx, wrapper.owner.KeyName(),
-		"authority", "execute", path.Join(validator.HomeDir(), "upgrade.json"),
+		ctx,
+		notAuthorized.KeyName(),
+		cmd...,
+	)
+	require.ErrorContains(t, err, "signer is not authority")
+
+	// broadcast from authorized authority account
+	_, err = validator.ExecTx(
+		ctx,
+		wrapper.owner.KeyName(),
+		cmd...,
 	)
 	require.NoError(t, err)
 

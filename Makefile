@@ -67,7 +67,7 @@ ifeq (,$(shell which heighliner))
 	@echo heighliner not found. https://github.com/strangelove-ventures/heighliner
 else
 	@echo "🤖 Building image..."
-	@heighliner build --chain noble-authority-simd --local 1> /dev/null
+	@heighliner build --file ./e2e/chains.yaml --chain noble-authority-simd --local
 	@echo "✅ Completed build!"
 endif
 
