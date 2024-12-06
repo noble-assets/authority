@@ -18,11 +18,12 @@ import (
 var Params []byte
 
 // TestParameterUpdate tests the module's ability to modify module parameters.
+// This test uses the "execute" command to test broadcasting arbitrary messages.
 func TestParameterUpdate(t *testing.T) {
 	t.Parallel()
 
 	var wrapper Wrapper
-	ctx, _, _ := Suite(t, &wrapper, false)
+	ctx, _, _, _ := Suite(t, &wrapper, false)
 	validator := wrapper.chain.Validators[0]
 
 	EnsureParams(t, wrapper, ctx, 0)

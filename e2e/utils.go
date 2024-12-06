@@ -23,6 +23,7 @@ import (
 	"github.com/strangelove-ventures/interchaintest/v8/relayer/rly"
 	"github.com/strangelove-ventures/interchaintest/v8/testreporter"
 	"github.com/stretchr/testify/require"
+	"go.uber.org/zap"
 	"go.uber.org/zap/zaptest"
 )
 
@@ -34,9 +35,9 @@ type Wrapper struct {
 	pendingOwner ibc.Wallet
 }
 
-func Suite(t *testing.T, wrapper *Wrapper, ibcEnabled bool) (ctx context.Context, execReporter *testreporter.RelayerExecReporter, relayer *rly.CosmosRelayer) {
+func Suite(t *testing.T, wrapper *Wrapper, ibcEnabled bool) (ctx context.Context, logger *zap.Logger, execReporter *testreporter.RelayerExecReporter, relayer *rly.CosmosRelayer) {
 	ctx = context.Background()
-	logger := zaptest.NewLogger(t)
+	logger = zaptest.NewLogger(t)
 	reporter := testreporter.NewNopReporter()
 	execReporter = reporter.RelayerExecReporter(t)
 	client, network := interchaintest.DockerSetup(t)
