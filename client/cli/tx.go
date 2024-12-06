@@ -36,8 +36,8 @@ func GetTxCmd() *cobra.Command {
 	}
 
 	cmd.AddCommand(NewCmdExecute())
-	cmd.AddCommand(NewCmdSubmitUpgrade())
-	cmd.AddCommand(newSubmitRecoverClientCmd())
+	cmd.AddCommand(NewCmdSoftwareUpgrade())
+	cmd.AddCommand(NewCmdRecoverClient())
 
 	return cmd
 }
@@ -73,7 +73,7 @@ func NewCmdExecute() *cobra.Command {
 //
 // This command has been adapted from the Cosmos SDK implementation.
 // https://github.com/cosmos/cosmos-sdk/blob/x/upgrade/v0.1.4/x/upgrade/client/cli/tx.go#L46-L133
-func NewCmdSubmitUpgrade() *cobra.Command {
+func NewCmdSoftwareUpgrade() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "software-upgrade <name> [--upgrade-height <height>] [--upgrade-info <info>] [flags]",
 		Args:  cobra.ExactArgs(1),
@@ -147,7 +147,7 @@ func NewCmdSubmitUpgrade() *cobra.Command {
 //
 // This command has been adapted from the IBC-Go implementation.
 // https://github.com/cosmos/ibc-go/blob/v8.5.2/modules/core/02-client/client/cli/tx.go#L248-L303
-func newSubmitRecoverClientCmd() *cobra.Command {
+func NewCmdRecoverClient() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "recover-client [subject-client-id] [substitute-client-id] [flags]",
 		Args:  cobra.ExactArgs(2),
