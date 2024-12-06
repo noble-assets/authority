@@ -69,17 +69,18 @@ func NewCmdExecute() *cobra.Command {
 	return cmd
 }
 
-// NewCmdSubmitUpgrade schedule an on-chain software upgrade.
-// This command has been adapted from the SDK's `NewCmdSubmitUpgradeProposal`.
-// https://github.com/cosmos/cosmos-sdk/blob/x/upgrade/v0.1.4/x/upgrade/client/cli/tx.go#L47
+// NewCmdSoftwareUpgrade is a helper for scheduling a software upgrade.
+//
+// This command has been adapted from the Cosmos SDK implementation.
+// https://github.com/cosmos/cosmos-sdk/blob/x/upgrade/v0.1.4/x/upgrade/client/cli/tx.go#L46-L133
 func NewCmdSubmitUpgrade() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "software-upgrade <name> [--upgrade-height <height>] [--upgrade-info <info>] [flags]",
 		Args:  cobra.ExactArgs(1),
-		Short: "Schedule a software upgrade on chain",
-		Long: "Schedule a software upgrade on chain.\n" +
-			"Please specify a unique name and height for the upgrade to take effect.\n" +
-			"You may include info to reference a binary download link, in a format compatible with: https://docs.cosmos.network/main/build/tooling/cosmovisor",
+		Short: "Helper for scheduling a software upgrade",
+		Long: "Helper for scheduling a software upgrade.\n\n" +
+			"You can additionally include upgrade info via a flag to reference pre-built binaries, documentation, etc.\n" +
+			"https://docs.cosmos.network/main/build/tooling/cosmovisor",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -142,17 +143,15 @@ func NewCmdSubmitUpgrade() *cobra.Command {
 	return cmd
 }
 
-// newSubmitRecoverClientCmd defines the command to recover an IBC light client.
-// This command has been adapted from ibc-go's `newSubmitRecoverClientProposalCmd`.
-// https://github.com/cosmos/ibc-go/blob/v8.5.2/modules/core/02-client/client/cli/tx.go#L249
+// NewCmdRecoverClient is a helper for recovering an expired client.
+//
+// This command has been adapted from the IBC-Go implementation.
+// https://github.com/cosmos/ibc-go/blob/v8.5.2/modules/core/02-client/client/cli/tx.go#L248-L303
 func newSubmitRecoverClientCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "recover-client [subject-client-id] [substitute-client-id] [flags]",
 		Args:  cobra.ExactArgs(2),
-		Short: "recover an IBC client",
-		Long: `recover an IBC client
-		Please specify a subject client identifier you want to recover
-		Please specify the substitute client the subject client will be recovered to.`,
+		Short: "Helper for recovering an expired client",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
