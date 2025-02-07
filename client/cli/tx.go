@@ -37,6 +37,7 @@ func GetTxCmd() *cobra.Command {
 
 	cmd.AddCommand(NewCmdExecute())
 	cmd.AddCommand(NewCmdSoftwareUpgrade())
+	cmd.AddCommand(NewCmdCancelSoftwareUpgrade())
 	cmd.AddCommand(NewCmdRecoverClient())
 
 	return cmd
@@ -137,6 +138,38 @@ func NewCmdSoftwareUpgrade() *cobra.Command {
 	cmd.Flags().Bool(FlagNoValidate, false, "Skip validation of the upgrade info (dangerous!)")
 	cmd.Flags().Bool(FlagNoChecksumRequired, false, "Skip requirement of checksums for binaries in the upgrade info")
 	cmd.Flags().String(FlagDaemonName, getDefaultDaemonName(), "The name of the executable being upgraded (for upgrade-info validation). Default is the DAEMON_NAME env var if set, or else this executable")
+
+	flags.AddTxFlagsToCmd(cmd)
+
+	return cmd
+}
+
+// NewCmdCancelSoftwareUpgrade is a helper for cancelling a scheduled software upgrade.
+//
+// This command has been adapted from the Cosmos SDK implementation.
+// https://github.com/cosmos/cosmos-sdk/blob/x/upgrade/v0.1.4/x/upgrade/client/cli/tx.go#L135-L182
+func NewCmdCancelSoftwareUpgrade() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "cancel-software-upgrade [flags]",
+		Args:  cobra.NoArgs,
+		Short: "Helper for cancelling a scheduled software upgrade",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx, err := client.GetClientTxContext(cmd)
+			if err != nil {
+				return err
+			}
+
+			msgExecute := types.NewMsgExecute(
+				clientCtx.FromAddress.String(),
+				[]sdk.Msg{
+					&upgradetypes.MsgCancelUpgrade{
+						Authority: types.ModuleAddress.String(),
+					},
+				})
+
+			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msgExecute)
+		},
+	}
 
 	flags.AddTxFlagsToCmd(cmd)
 
