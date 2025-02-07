@@ -144,7 +144,7 @@ func NewCmdSoftwareUpgrade() *cobra.Command {
 	return cmd
 }
 
-// NewCmdCancelSoftwareUpgrade is a helper for cancelling a scheduled software upgrade.
+// NewCmdCancelSoftwareUpgrade is a helper for cancelling the currently scheduled software upgrade.
 //
 // This command has been adapted from the Cosmos SDK implementation.
 // https://github.com/cosmos/cosmos-sdk/blob/x/upgrade/v0.1.4/x/upgrade/client/cli/tx.go#L135-L182
@@ -152,7 +152,7 @@ func NewCmdCancelSoftwareUpgrade() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "cancel-software-upgrade [flags]",
 		Args:  cobra.NoArgs,
-		Short: "Helper for cancelling a scheduled software upgrade",
+		Short: "Helper for cancelling the currently scheduled software upgrade",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
