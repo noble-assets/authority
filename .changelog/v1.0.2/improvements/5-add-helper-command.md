@@ -1,0 +1,1 @@
+- Add helper command for broadcasting a cancel software upgrade message. ([#5](https://github.com/noble-assets/authority/pull/5))
