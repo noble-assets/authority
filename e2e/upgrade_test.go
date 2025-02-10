@@ -15,8 +15,8 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// TestScheduleUpgrade tests the module's ability to schedule an upgrade on-chain.
-func TestScheduleUpgrade(t *testing.T) {
+// TestScheduleAndCancelUpgrade tests the module's ability to schedule and cancel an upgrade on-chain.
+func TestScheduleAndCancelUpgrade(t *testing.T) {
 	t.Parallel()
 
 	var wrapper Wrapper
@@ -27,8 +27,7 @@ func TestScheduleUpgrade(t *testing.T) {
 
 	EnsureUpgrade(t, wrapper, ctx, "", 0)
 
-	cmd := []string{"authority", "software-upgrade", "v2", "--upgrade-height", "50",
-		"--chain-id", wrapper.chain.Config().ChainID, "--no-validate"}
+	cmd := []string{"authority", "software-upgrade", "v2", "--upgrade-height", "50", "--no-validate"}
 
 	// broadcast from un-authorized account
 	_, err := validator.ExecTx(
@@ -47,4 +46,24 @@ func TestScheduleUpgrade(t *testing.T) {
 	require.NoError(t, err)
 
 	EnsureUpgrade(t, wrapper, ctx, "v2", 50)
+
+	cmd = []string{"authority", "cancel-software-upgrade"}
+
+	// broadcast from un-authorized account
+	_, err = validator.ExecTx(
+		ctx,
+		notAuthorized.KeyName(),
+		cmd...,
+	)
+	require.ErrorContains(t, err, "signer is not authority")
+
+	// broadcast from authorized authority account
+	_, err = validator.ExecTx(
+		ctx,
+		wrapper.owner.KeyName(),
+		cmd...,
+	)
+	require.NoError(t, err)
+
+	EnsureUpgrade(t, wrapper, ctx, "", 0)
 }
