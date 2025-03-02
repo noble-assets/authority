@@ -1,1 +1,1 @@
-- Implement the `UnpackInterfacesMessage` expected by the Cosmos SDK codec. ([#7](https://github.com/noble-assets/authority/pull/7))
+- Implement the `UnpackInterfacesMessage` interface expected by the Cosmos SDK codec. ([#7](https://github.com/noble-assets/authority/pull/7))
