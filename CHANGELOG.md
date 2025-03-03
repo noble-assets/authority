@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## v1.0.3
+
+*Mar 3, 2025*
+
+This is a non-consensus breaking patch release to the v1 line.
+
+### BUG FIXES
+
+- Implement the `UnpackInterfacesMessage` interface expected by the Cosmos SDK codec. ([#7](https://github.com/noble-assets/authority/pull/7))
+
 ## v1.0.2
 
 *Feb 10, 2025*

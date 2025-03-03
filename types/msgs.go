@@ -22,9 +22,12 @@ package types
 
 import (
 	"github.com/cosmos/cosmos-sdk/codec"
+	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/tx"
 )
+
+var _ codectypes.UnpackInterfacesMessage = &MsgExecute{}
 
 func NewMsgExecute(signer string, msgs []sdk.Msg) *MsgExecute {
 	rawMsgs, err := tx.SetMsgs(msgs)
@@ -52,4 +55,16 @@ func (exec *MsgExecute) GetMessages(cdc codec.Codec) ([]sdk.Msg, error) {
 	}
 
 	return msgs, nil
+}
+
+func (exec *MsgExecute) UnpackInterfaces(unpacker codectypes.AnyUnpacker) error {
+	for _, msgAny := range exec.Messages {
+		var msg sdk.Msg
+		err := unpacker.UnpackAny(msgAny, &msg)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
