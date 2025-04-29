@@ -57,6 +57,9 @@ func GetTxCmd() *cobra.Command {
 	cmd.AddCommand(NewCmdCancelSoftwareUpgrade())
 	cmd.AddCommand(NewCmdRecoverClient())
 	cmd.AddCommand(NewCmdAddRateLimit())
+	cmd.AddCommand(NewCmdUpdateRateLimit())
+	cmd.AddCommand(NewCmdRemoveRateLimit())
+	cmd.AddCommand(NewCmdResetRateLimit())
 
 	return cmd
 }
@@ -87,6 +90,10 @@ func NewCmdExecute() *cobra.Command {
 
 	return cmd
 }
+
+/////////////////////////////
+//    Software Upgrades    //
+/////////////////////////////
 
 // NewCmdSoftwareUpgrade is a helper for scheduling a software upgrade.
 //
@@ -194,6 +201,10 @@ func NewCmdCancelSoftwareUpgrade() *cobra.Command {
 	return cmd
 }
 
+///////////////////////////////
+//    IBC Client Recovery    //
+///////////////////////////////
+
 // NewCmdRecoverClient is a helper for recovering an expired client.
 //
 // This command has been adapted from the IBC-Go implementation.
@@ -230,14 +241,17 @@ func NewCmdRecoverClient() *cobra.Command {
 	return cmd
 }
 
+///////////////////////////
+//    IBC Rate Limits    //
+///////////////////////////
+
 // NewCmdAddRateLimit is a helper for adding a new rate limit to a denom.
 func NewCmdAddRateLimit() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "add-rate-limit [denom] [channel-id] [max-percent-send] [max-percent-receive] [duration-hours] [flags]",
-		Short:   "Add a new rate limit to a denom",
+		Short:   "Add a new rate limit to a denom.",
 		Args:    cobra.ExactArgs(5),
-		Long:    ``,
-		Example: "",
+		Example: "simd tx authority add-rate-limit utoken channel-0 10 10 24",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -262,6 +276,120 @@ func NewCmdAddRateLimit() *cobra.Command {
 			}
 
 			msg := ratelimittypes.NewMsgAddRateLimit(denom, channelID, maxPercentSendInt, maxPercentReceiveInt, durationInt)
+			msg.Authority = types.ModuleAddress.String()
+
+			if err = msg.ValidateBasic(); err != nil {
+				return fmt.Errorf("error validating %T: %w", msg, err)
+			}
+
+			msgExecute := types.NewMsgExecute(clientCtx.FromAddress.String(), []sdk.Msg{msg})
+
+			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msgExecute)
+		},
+	}
+
+	flags.AddTxFlagsToCmd(cmd)
+
+	return cmd
+}
+
+// NewCmdUpdateRateLimit is a helper to update an already rate limited to a denom.
+func NewCmdUpdateRateLimit() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:     "update-rate-limit [denom] [channel-id] [max-percent-send] [max-percent-receive] [duration-hours] [flags]",
+		Short:   "Update an already rate limited denom.",
+		Args:    cobra.ExactArgs(5),
+		Example: "simd tx authority update-rate-limit utoken channel-0 10 10 24",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx, err := client.GetClientTxContext(cmd)
+			if err != nil {
+				return err
+			}
+
+			denom, channelID, maxPercentSend, maxPercentReceive, duration := args[0], args[1], args[2], args[3], args[4]
+
+			maxPercentSendInt, ok := math.NewIntFromString(maxPercentSend)
+			if !ok {
+				return fmt.Errorf("invalid max percent send: %s", maxPercentSend)
+			}
+
+			maxPercentReceiveInt, ok := math.NewIntFromString(maxPercentReceive)
+			if !ok {
+				return fmt.Errorf("invalid max percent receive: %s", maxPercentReceive)
+			}
+
+			durationInt, err := strconv.ParseUint(duration, 10, 64)
+			if err != nil {
+				return fmt.Errorf("invalid duration: %s, err : %w", duration, err)
+			}
+
+			msg := ratelimittypes.NewMsgUpdateRateLimit(denom, channelID, maxPercentSendInt, maxPercentReceiveInt, durationInt)
+			msg.Authority = types.ModuleAddress.String()
+
+			if err = msg.ValidateBasic(); err != nil {
+				return fmt.Errorf("error validating %T: %w", msg, err)
+			}
+
+			msgExecute := types.NewMsgExecute(clientCtx.FromAddress.String(), []sdk.Msg{msg})
+
+			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msgExecute)
+		},
+	}
+
+	flags.AddTxFlagsToCmd(cmd)
+
+	return cmd
+}
+
+// NewCmdRemoveRateLimit is a helper to remove the rate limit from a denom.
+func NewCmdRemoveRateLimit() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:     "remove-rate-limit [denom] [channel-id] [flags]",
+		Short:   "Remove a rate limit from a denom.",
+		Args:    cobra.ExactArgs(2),
+		Example: "simd tx authority remove-rate-limit utoken channel-0",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx, err := client.GetClientTxContext(cmd)
+			if err != nil {
+				return err
+			}
+
+			denom, channelID := args[0], args[1]
+
+			msg := ratelimittypes.NewMsgRemoveRateLimit(denom, channelID)
+			msg.Authority = types.ModuleAddress.String()
+
+			if err = msg.ValidateBasic(); err != nil {
+				return fmt.Errorf("error validating %T: %w", msg, err)
+			}
+
+			msgExecute := types.NewMsgExecute(clientCtx.FromAddress.String(), []sdk.Msg{msg})
+
+			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msgExecute)
+		},
+	}
+
+	flags.AddTxFlagsToCmd(cmd)
+
+	return cmd
+}
+
+// NewCmdResetRateLimit is a helper to reset the rate limit for a denom.
+func NewCmdResetRateLimit() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:     "reset-rate-limit [denom] [channel-id] [flags]",
+		Short:   "Reset a rate limit for a denom.",
+		Args:    cobra.ExactArgs(2),
+		Example: "simd tx authority reset-rate-limit utoken channel-0",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx, err := client.GetClientTxContext(cmd)
+			if err != nil {
+				return err
+			}
+
+			denom, channelID := args[0], args[1]
+
+			msg := ratelimittypes.NewMsgResetRateLimit(denom, channelID)
 			msg.Authority = types.ModuleAddress.String()
 
 			if err = msg.ValidateBasic(); err != nil {
