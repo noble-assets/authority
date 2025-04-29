@@ -1,0 +1,1 @@
+- Adds cli for rate limit commands. ([#8](https://github.com/noble-assets/authority/pull/8))
