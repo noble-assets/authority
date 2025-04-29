@@ -293,7 +293,7 @@ func NewCmdAddRateLimit() *cobra.Command {
 	return cmd
 }
 
-// NewCmdUpdateRateLimit is a helper to update an already rate limited to a denom.
+// NewCmdUpdateRateLimit is a helper for updating parameters of an existing rate-limited denom.
 func NewCmdUpdateRateLimit() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "update-rate-limit [denom] [channel-id] [max-percent-send] [max-percent-receive] [duration-hours] [flags]",
