@@ -22,7 +22,9 @@ package cli
 
 import (
 	"fmt"
+	"strconv"
 
+	"cosmossdk.io/math"
 	"cosmossdk.io/x/upgrade/plan"
 	upgradetypes "cosmossdk.io/x/upgrade/types"
 	"github.com/cosmos/cosmos-sdk/client"
@@ -30,6 +32,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authclient "github.com/cosmos/cosmos-sdk/x/auth/client"
+	ratelimittypes "github.com/cosmos/ibc-apps/modules/rate-limiting/v8/types"
 	clienttypes "github.com/cosmos/ibc-go/v8/modules/core/02-client/types"
 	"github.com/noble-assets/authority/types"
 	"github.com/spf13/cobra"
@@ -53,6 +56,7 @@ func GetTxCmd() *cobra.Command {
 	cmd.AddCommand(NewCmdSoftwareUpgrade())
 	cmd.AddCommand(NewCmdCancelSoftwareUpgrade())
 	cmd.AddCommand(NewCmdRecoverClient())
+	cmd.AddCommand(NewCmdAddRateLimit())
 
 	return cmd
 }
@@ -213,6 +217,55 @@ func NewCmdRecoverClient() *cobra.Command {
 
 			if err = msg.ValidateBasic(); err != nil {
 				return fmt.Errorf("error validating %T: %w", clienttypes.MsgRecoverClient{}, err)
+			}
+
+			msgExecute := types.NewMsgExecute(clientCtx.FromAddress.String(), []sdk.Msg{msg})
+
+			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msgExecute)
+		},
+	}
+
+	flags.AddTxFlagsToCmd(cmd)
+
+	return cmd
+}
+
+// NewCmdAddRateLimit is a helper for adding a new rate limit to a denom.
+func NewCmdAddRateLimit() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:     "add-rate-limit [denom] [channel-id] [max-percent-send] [max-percent-receive] [duration-hours] [flags]",
+		Short:   "Add a new rate limit to a denom",
+		Args:    cobra.ExactArgs(5),
+		Long:    ``,
+		Example: "",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			clientCtx, err := client.GetClientTxContext(cmd)
+			if err != nil {
+				return err
+			}
+
+			denom, channelID, maxPercentSend, maxPercentReceive, duration := args[0], args[1], args[2], args[3], args[4]
+
+			maxPercentSendInt, ok := math.NewIntFromString(maxPercentSend)
+			if !ok {
+				return fmt.Errorf("invalid max percent send: %s", maxPercentSend)
+			}
+
+			maxPercentReceiveInt, ok := math.NewIntFromString(maxPercentReceive)
+			if !ok {
+				return fmt.Errorf("invalid max percent receive: %s", maxPercentReceive)
+			}
+
+			durationInt, err := strconv.ParseUint(duration, 10, 64)
+			if err != nil {
+				return fmt.Errorf("invalid duration: %s, err : %w", duration, err)
+			}
+
+			msg := ratelimittypes.NewMsgAddRateLimit(denom, channelID, maxPercentSendInt, maxPercentReceiveInt, durationInt)
+			msg.Authority = types.ModuleAddress.String()
+
+			if err = msg.ValidateBasic(); err != nil {
+				return fmt.Errorf("error validating %T: %w", msg, err)
 			}
 
 			msgExecute := types.NewMsgExecute(clientCtx.FromAddress.String(), []sdk.Msg{msg})
