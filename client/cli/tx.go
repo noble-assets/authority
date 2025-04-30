@@ -251,7 +251,7 @@ func NewCmdAddRateLimit() *cobra.Command {
 		Use:     "add-rate-limit [denom] [channel-id] [max-percent-send] [max-percent-receive] [duration-hours] [flags]",
 		Short:   "Add a new rate limit to a denom.",
 		Args:    cobra.ExactArgs(5),
-		Example: "simd tx authority add-rate-limit utoken channel-0 10 10 24",
+		Example: "nobled tx authority add-rate-limit utoken channel-0 10 10 24",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -299,7 +299,7 @@ func NewCmdUpdateRateLimit() *cobra.Command {
 		Use:     "update-rate-limit [denom] [channel-id] [max-percent-send] [max-percent-receive] [duration-hours] [flags]",
 		Short:   "Update an already rate limited denom.",
 		Args:    cobra.ExactArgs(5),
-		Example: "simd tx authority update-rate-limit utoken channel-0 10 10 24",
+		Example: "nobled tx authority update-rate-limit utoken channel-0 10 10 24",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -347,7 +347,7 @@ func NewCmdRemoveRateLimit() *cobra.Command {
 		Use:     "remove-rate-limit [denom] [channel-id] [flags]",
 		Short:   "Remove a rate limit from a denom.",
 		Args:    cobra.ExactArgs(2),
-		Example: "simd tx authority remove-rate-limit utoken channel-0",
+		Example: "nobled tx authority remove-rate-limit utoken channel-0",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -380,7 +380,7 @@ func NewCmdResetRateLimit() *cobra.Command {
 		Use:     "reset-rate-limit [denom] [channel-id] [flags]",
 		Short:   "Reset a rate limit for a denom.",
 		Args:    cobra.ExactArgs(2),
-		Example: "simd tx authority reset-rate-limit utoken channel-0",
+		Example: "nobled tx authority reset-rate-limit utoken channel-0",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
