@@ -1,0 +1,1 @@
+- Add helper commands for adding, adjusting, and removing IBC rate limits. ([#8](https://github.com/noble-assets/authority/pull/8))

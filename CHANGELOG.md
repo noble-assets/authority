@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## v1.0.4
+
+*Apr 30, 2025*
+
+This is a non-consensus breaking patch release to the v1 line.
+
+### IMPROVEMENTS
+
+- Add helper commands for adding, adjusting, and removing IBC rate limits. ([#8](https://github.com/noble-assets/authority/pull/8))
+
 ## v1.0.3
 
 *Mar 3, 2025*
